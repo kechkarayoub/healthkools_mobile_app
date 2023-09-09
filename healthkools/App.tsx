@@ -25,6 +25,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+//import { REACT_APP_URL_WS } from '@env';
+
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
@@ -88,7 +90,6 @@ function App(): JSX.Element {
           </Section>
           <Section title="Learn More">
             Read the docs to discover what to do next:mmm
-            {process.env.REACT_APP_URL_WS}
           </Section>
           <LearnMoreLinks />
         </View>

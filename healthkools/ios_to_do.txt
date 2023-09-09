@@ -1,0 +1,3 @@
+Execute this:
+cd /ios
+pod install
