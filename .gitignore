@@ -79,3 +79,14 @@ ios/Podfile.lock
 .env
 
 yarn.lock
+/healthkools/ios/Podfile.lock
+/healthkools/ios/healthkools.xcworkspace/contents.xcworkspacedata
+# Xcode
+*.xcworkspace/
+xcuserdata/
+# Ruby on Rails
+/healthkools/vendor/
+/healthkools/bundle/
+/healthkools/.ruby-version
+/healthkools/vendor/*
+/healthkools/Gemfile.lock
