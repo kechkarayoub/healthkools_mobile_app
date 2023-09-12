@@ -6,6 +6,7 @@ module.exports = {
       "path": ".env",
       "safe": false,
       "allowUndefined": true
-    }]
+    }],
+    ['module-resolver', { root: ['.'] }]
   ]
 };
