@@ -193,8 +193,8 @@ class CustomPhoneNumber extends React.Component {
         <View style={[styles.codeNumberContainerStyle, form_error ? styles.errorStyleCodeNumberContainer : {}]} >
           <View style={styles.buttonCodeContainerStyle} >
             <CustomTouchableOpacityWithIcon  onPress={() => this.openSelectCountry()}
-              text={selected_country ? selected_country.phone_code_str : ''} style={styles.buttonCodeStyle}
-              textStyle={styles.buttonSelectCountryStyle} is_not_button={true}
+              text={selected_country ? selected_country.phone_code_str || "" : ''} style={styles.buttonCodeStyle}
+              textStyle={styles.buttonSelectCountryStyle}
               icon_name="caret-down" test_id={country_select_test_id}
             />
           </View>

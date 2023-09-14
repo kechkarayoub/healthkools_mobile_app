@@ -54,10 +54,10 @@ class AppInit extends Component{
                   RNI18nManager.forceRTL(isLocaleRTL);
                   // RN won't set the layout direction if we
                   // don't restart the app's JavaScript.
-                  if(reload){
-                    // Trigger a reload of the app (similar to Expo updates)
-                    DevSettings.reload();
-                  }
+                  // if(reload){
+                  //   // Trigger a reload of the app (similar to Expo updates)
+                  //   DevSettings.reload();
+                  // }
               }
               i18n.services.pluralResolver.addRule('pl', {
                 numbers: [1, 2, 3],
