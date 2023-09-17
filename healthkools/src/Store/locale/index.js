@@ -73,9 +73,9 @@ export const set = async (key, value) => {
 }
 
 export const get = async (key, callback) => {
-  try {   
+  try {
       await EncryptedStorage.getItem(key).then(value => {
-        if(!value && key == "locale_language"){
+        if(!value && key == "current_language"){
           var value = "fr";
           let locale_language = getLocales()[0];
           var locale_splited = locale_language && locale_language.languageTag && locale_language.languageTag.split("-")[0];

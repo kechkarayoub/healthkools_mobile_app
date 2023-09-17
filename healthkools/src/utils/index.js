@@ -29,7 +29,7 @@ export const get_time_format = (moment_obj) => {
   return moment_obj.format("HH:mm");
 };
 export const get_current_languages = async (callback) => {
-  await get('currentlanguage', cl => {
+  await get('current_language', cl => {
     callback(cl);
   });
 };

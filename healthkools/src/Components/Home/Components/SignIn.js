@@ -46,7 +46,7 @@ class SignIn extends React.Component {
       current_language = "ar"
     }
     Alert.alert("Alert", "current_language "+this.props.current_language);
-    set("currentlanguage", current_language);
+    set("current_language", current_language);
     const action = { type: "CHANGE_LANGUAGE", value: current_language }
     this.props.dispatch(action);
   }
