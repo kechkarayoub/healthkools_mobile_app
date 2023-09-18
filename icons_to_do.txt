@@ -1,0 +1,59 @@
+In React Native, you can set the app icon (also known as the launcher icon) for your mobile
+application on both Android and iOS platforms. App icons are the first visual impression your users have of
+your app, so it's essential to create attractive and recognizable icons. Here's how you can set the app icon
+for both platforms:
+
+    Android:
+
+        1) Generate Icon Assets:
+
+            Create icon assets for various screen densities (mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi). These
+icons should be square PNG images and should follow Android's icon size guidelines. You can use tools like
+Android Asset Studio (https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html) to generate these
+assets in the required sizes.
+        2) Place Icons in the Right Directories:
+
+            Place each generated icon in the corresponding directory inside the android/app/src/main/res
+folder. For example:
+                mipmap-mdpi for mdpi
+                mipmap-hdpi for hdpi
+                mipmap-xhdpi for xhdpi
+                mipmap-xxhdpi for xxhdpi
+                mipmap-xxxhdpi for xxxhdpi
+            3) Configure the Icon in AndroidManifest.xml:
+
+                Open the android/app/src/main/AndroidManifest.xml file.
+                Find the <application> tag and add or update the android:icon attribute to reference the
+app's launcher icon. For example:
+
+                    <application
+                      android:name=".MainApplication"
+                      android:icon="@mipmap/ic_launcher"
+                      ...
+                Replace "@mipmap/ic_launcher" with the actual resource name of your launcher icon.
+            4) Build the App:
+
+                After making these changes, rebuild your Android app using the React Native build commands (e.g., react-native run-android).
+    iOS:
+
+        1) Generate Icon Assets:
+
+            Create icon assets for iOS in various sizes. You can use a graphic design tool like Adobe
+Photoshop or Sketch to create icons of the appropriate dimensions.
+            Common iOS icon sizes include 1024x1024 pixels (App Store icon) and multiple sizes for the device
+home screen (e.g., 180x180, 120x120, etc.).
+        2) Add Icons to Xcode:
+
+            Open your project in Xcode.
+            In the Project Navigator, find the "Images.xcassets" folder.
+            Inside "Images.xcassets," you will see an "AppIcon" asset catalog. Drag and drop your app icons
+into the appropriate slots in the catalog for different device sizes.
+        3) Update Info.plist:
+
+            In Xcode, open your project's Info.plist file.
+            Look for the "CFBundleIconName" key and set it to the name of the icon asset (e.g., "AppIcon").
+        4) Build the App:
+
+            After adding the icons and updating the Info.plist, you can build and run your iOS app using
+Xcode or the command line (react-native run-ios).
+
