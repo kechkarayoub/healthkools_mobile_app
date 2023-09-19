@@ -75,8 +75,18 @@ class AppInit extends Component{
   render(){
     return (
       <I18nextProvider i18n={i18n}>
-        <SafeAreaView  style={{ backgroundColor: COLORS.default_color, flex: 1, paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight }}>
+        <SafeAreaView  style={{ backgroundColor: COLORS.default_color, flex: 1 }}>
           <View style={styles.container}>
+            {Platform.OS === 'android' && (
+              <View
+                style={{
+                  height: StatusBar.currentHeight,
+                  backgroundColor: COLORS.default_color,
+                }}
+              >
+                <StatusBar barStyle="dark-content" translucent backgroundColor="transparent" />
+              </View>
+            )}
             <Home />
           </View>
         </SafeAreaView>
