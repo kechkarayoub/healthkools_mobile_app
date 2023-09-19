@@ -150,9 +150,11 @@ const styles = StyleSheet.create({
       height: 20,
     },
     style: {
-      borderColor: 'transparent',
+      borderColor: COLORS.default_color,
       borderRadius: 0,
       borderBottomColor: COLORS.default_color,
+      borderLeftWidth: 0,
+      borderRightWidth: 0,
     },
     dropDownContainerStyle: {
       borderColor: COLORS.default_color,
