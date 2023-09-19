@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, View, I18nManager as RNI18nManager, StatusBar,  Platform } from 'react-native';
+import { Text, SafeAreaView, StyleSheet, View, I18nManager as RNI18nManager, StatusBar,  Platform } from 'react-native';
 import Home from 'src/Components/Home';
 import i18n from 'src/i18n';
 import { DevSettings } from 'react-native';
@@ -75,20 +75,11 @@ class AppInit extends Component{
   render(){
     return (
       <I18nextProvider i18n={i18n}>
-        <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
-          {Platform.OS === 'android' && (
-            <View
-              style={{
-                height: StatusBar.currentHeight,
-                backgroundColor: COLORS.default_color,
-              }}
-            >
-              <StatusBar barStyle="dark-content" translucent backgroundColor="transparent" />
-            </View>
-          )}
-          <Home />
-        </View>
+        <SafeAreaView  style={{ backgroundColor: COLORS.default_color, flex: 1, paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight }}>
+          <View style={styles.container}>
+            <Home />
+          </View>
+        </SafeAreaView>
       </I18nextProvider>
     );
   }
