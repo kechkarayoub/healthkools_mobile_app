@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, View, I18nManager as RNI18nManager } from 'react-native';
+import { StyleSheet, View, I18nManager as RNI18nManager, StatusBar,  Platform } from 'react-native';
 import Home from 'src/Components/Home';
 import i18n from 'src/i18n';
 import { DevSettings } from 'react-native';
@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import {get_current_languages} from 'src/utils'
 import { I18nextProvider } from 'react-i18next';
 import PropTypes from 'prop-types';
+import {COLORS} from "src/variables/colors";
 class AppInit extends Component{
   constructor(props) {
     super(props);
@@ -75,6 +76,17 @@ class AppInit extends Component{
     return (
       <I18nextProvider i18n={i18n}>
         <View style={styles.container}>
+          {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
+          {Platform.OS === 'android' && (
+            <View
+              style={{
+                height: StatusBar.currentHeight,
+                backgroundColor: COLORS.default_color,
+              }}
+            >
+              <StatusBar barStyle="dark-content" translucent backgroundColor="transparent" />
+            </View>
+          )}
           <Home />
         </View>
       </I18nextProvider>

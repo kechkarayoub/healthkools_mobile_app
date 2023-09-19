@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     home: {
       backgroundColor: COLORS.default_color,
       flex: 1,
-      paddingTop: StatusBar.currentHeight,
+      //paddingTop: StatusBar.currentHeight,
     },
 });
 export default Home;
