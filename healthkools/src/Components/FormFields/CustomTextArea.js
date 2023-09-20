@@ -50,7 +50,7 @@ class CustomTextArea extends React.Component {
     style: null,
     test_id: '',
     type_input: '',
-    underlineColorAndroid: '',
+    underlineColorAndroid: 'transparent',
     value: '',
   }
   static getDerivedStateFromProps(props, state) {
