@@ -78,6 +78,7 @@ ios/Podfile.lock
 
 .env
 
+/healthkools/coverage
 yarn.lock
 /healthkools/ios/Podfile.lock
 /healthkools/ios/healthkools.xcworkspace/contents.xcworkspacedata
