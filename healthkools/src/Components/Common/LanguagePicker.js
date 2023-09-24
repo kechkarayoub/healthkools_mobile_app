@@ -31,6 +31,7 @@ class LanguagePicker extends React.Component {
         },
       ],
       current_language: props.current_language,
+      list_mode: props.list_mode,
       open: false,
       test_id: props.test_id,
     };
@@ -61,12 +62,14 @@ class LanguagePicker extends React.Component {
   static propTypes = {
     current_language: PropTypes.string,
     dispatch: PropTypes.func,
+    list_mode: PropTypes.string,
     test_id: PropTypes.string,
   }
 
   static defaultProps = {
     current_language: "fr",
     dispatch: () => {},
+    list_mode: "FLATLIST",
     test_id: 'test_id',
   }
 
@@ -126,12 +129,13 @@ class LanguagePicker extends React.Component {
     }));
   }
   render() {
-    const { open, current_language, items, test_id } = this.state;
+    const { open, current_language, items, list_mode, test_id } = this.state;
     return(
       <DropDownPicker
         dropDownContainerStyle={styles.dropDownContainerStyle}
         items={items}
         open={open}
+        listMode={list_mode}
         selectedItemContainerStyle={styles.selectedItemContainerStyle}
         selectedItemLabelStyle={styles.selectedItemLabelStyle}
         setOpen={this.setOpen}

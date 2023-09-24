@@ -6,6 +6,6 @@ module.exports = {
   transformIgnorePatterns: [
     'node_modules/(?!(react-native|react-native-vector-icons|@react-native))/',
   ],
-  collectCoverage: true,
+  // collectCoverage: true,
   collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}', '!src/**/*.d.ts'],
 };

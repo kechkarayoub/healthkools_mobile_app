@@ -14,6 +14,7 @@ class CustomCountriesSelect extends React.Component {
       disabled: props.disabled,
       form_error: props.form_error,
       icon_url: props.icon_url,
+      list_mode: props.list_mode,
       placeholder: props.placeholder,
       open: false,
       type_select: props.type_select,
@@ -31,6 +32,7 @@ class CustomCountriesSelect extends React.Component {
       PropTypes.object
     ]),
     iconStyle: PropTypes.object,
+    list_mode: PropTypes.string,
     onSelect: PropTypes.func,
     placeholder: PropTypes.string,
     test_id: PropTypes.string,
@@ -44,6 +46,7 @@ class CustomCountriesSelect extends React.Component {
     form_error: "",
     icon_url: null,
     iconStyle: null,
+    list_mode: "MODAL",
     onSelect: () => {},
     placeholder: "",
     test_id: 'country_select_test_id',
@@ -85,7 +88,7 @@ class CustomCountriesSelect extends React.Component {
   }
   setOpen = (open)=> {
     this.setState({
-      open: open,
+      open: !this.props.disabled && open,
     });
   }
 
@@ -99,7 +102,7 @@ class CustomCountriesSelect extends React.Component {
     }
   }
   render() {
-    const {current_language, icon_url, disabled, form_error, open, placeholder,
+    const {current_language, icon_url, disabled, form_error, list_mode, open, placeholder,
       countries_options, test_id, value} = this.state;
     return(
       <View style={[styles.selectContainer, form_error ? styles.errorStyle : {}]}>
@@ -108,7 +111,7 @@ class CustomCountriesSelect extends React.Component {
           dropDownContainerStyle={styles.dropDownContainerStyle}
           items={countries_options}
           language={current_language}
-          listMode="MODAL"
+          listMode={list_mode}
           open={open}
           disabled={disabled}
           testID={test_id}
@@ -117,7 +120,7 @@ class CustomCountriesSelect extends React.Component {
           placeholderStyle={styles.placeholder}
           selectedItemLabelStyle={styles.selectedItemLabelStyle}
           selectedItemContainerStyle={styles.selectedItemContainerStyle}
-          setOpen={this.setOpen}
+          setOpen={(open_) => this.setOpen(open_)}
           style={styles.style}
           value={value}
           setValue={this.setValue}
