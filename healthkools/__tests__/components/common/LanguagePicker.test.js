@@ -13,7 +13,7 @@ jest.mock('react-native-localize', () => ({
   getLocales: jest.fn(() => [{ countryCode: 'FR', languageTag: 'fr-FR' }]),
 }));
 const current_language = "fr";
-set("currentlanguage", current_language);
+set("current_language", current_language);
 i18n.init(current_language).then(() => {})
 .catch((error) => {});
 beforeAll(() => {
@@ -80,20 +80,20 @@ describe('LanguagePicker component', () => {
     expect(drop_down_pickers_by_text_ar).toHaveLength(0);
     drop_down_pickers_by_text_fr = screen.queryAllByText('Français');
     expect(drop_down_pickers_by_text_fr).toHaveLength(0);
-    // var new_stored_language = "";
-    // var while_cond = true;
-    // var cond = true;
-    // while(while_cond){
-    //   if(cond){
-    //     cond = false;
-    //     await get_current_languages(c_l => {
-    //       new_stored_language = c_l;
-    //       while_cond = false;
-    //     });
-    //     while_cond = false;
-    //   }
-    // }
-    // expect(new_stored_language).toBe("en");
+    var new_stored_language = "";
+    var while_cond = true;
+    var cond = true;
+    while(while_cond){
+      if(cond){
+        cond = false;
+        await get_current_languages(c_l => {
+          new_stored_language = c_l;
+          while_cond = false;
+        });
+        while_cond = false;
+      }
+    }
+    expect(new_stored_language).toBe("en");
       //screen.debug()
 
   });

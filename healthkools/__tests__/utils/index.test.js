@@ -45,18 +45,18 @@ describe('Test get_current_languages', () => {
         current_language = cl;
       })
     });
-    expect(current_language).toBe(undefined);
+    expect(current_language).toBe("fr");
   });
-  // test('Should render stored language', async () => {
-  //   var current_language;
-  //   set("currentlanguage", "ar");
-  //   await act(async () => {
-  //     get_current_languages((cl) => {
-  //       current_language = cl;
-  //     })
-  //   });
-  //   expect(current_language).toBe("ar");
-  // });
+  test('Should render stored language', async () => {
+    var current_language;
+    set("current_language", "ar");
+    await act(async () => {
+      get_current_languages((cl) => {
+        current_language = cl;
+      })
+    });
+    expect(current_language).toBe("ar");
+  });
 });
 describe('Test get_local_number_from_international', () => {
   test('Should render null if null', async () => {

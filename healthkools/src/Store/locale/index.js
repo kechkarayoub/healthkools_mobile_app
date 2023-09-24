@@ -91,7 +91,7 @@ export const get = async (key, callback) => {
   
   } catch (error) {
       // There was an error on the native side
-      console.log(error.code); 
+      console.log(error); 
   }
 }
 
