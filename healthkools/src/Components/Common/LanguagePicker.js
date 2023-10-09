@@ -104,7 +104,7 @@ class LanguagePicker extends React.Component {
     }
   }
   handleChangeLanguage = new_language => {
-    if(new_language !== this.props.current_language){
+    if(new_language !== this.state.current_language){
       set("current_language", new_language);
       // Dispatch an action to change current languages in global state
       const action = { type: "CHANGE_LANGUAGE", value: new_language };

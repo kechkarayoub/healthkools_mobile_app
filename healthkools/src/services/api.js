@@ -1,8 +1,9 @@
 import axios from "axios";
 import { set, get, clear } from "src/Store/locale";
+import Config from 'react-native-config';
 
 
-const instance = axios.create({ baseURL: process.env.REACT_APP_URL_BACKEND });
+const instance = axios.create({ baseURL: Config.REACT_APP_URL_BACKEND });
 
 const mapAuthError = message => {
   if (message.error === "not_activated") {

@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     margin: 'auto',
     textAlign: 'center',
     textTransform: 'uppercase',
-    verticalAlign: 'center',
+    verticalAlign: 'middle',
     width: 110,
   },
 });

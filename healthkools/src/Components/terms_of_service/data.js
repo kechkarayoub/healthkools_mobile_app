@@ -1,5 +1,7 @@
 import { get } from "src/Store/locale";
-const code_mode = process.env.REACT_APP_CODE_MODE;
+import Config from 'react-native-config';
+
+const code_mode = Config.REACT_APP_CODE_MODE;
 export const get_data = () => {
     return {
         company_address: "",

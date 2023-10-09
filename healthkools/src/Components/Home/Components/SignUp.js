@@ -20,6 +20,8 @@ import {COLORS} from "src/variables/colors";
 import {icons, logos} from "src/_ressources";
 import {PhoneNumberFormat, PhoneNumberUtil} from 'google-libphonenumber';
 import { get_random_color} from "src/utils/index";
+import Config from 'react-native-config';
+
 const phoneUtil = PhoneNumberUtil.getInstance();
 class SignUp extends React.Component {
   constructor(props) {
@@ -75,7 +77,7 @@ class SignUp extends React.Component {
   getGeoInfo = () => {
     if(this.geo_info_api_done){
       this.geo_info_api_done = false;
-      const api_key = process.env.REACT_APP_GEOLOCATION_DB_API_KEY;
+      const api_key = Config.REACT_APP_GEOLOCATION_DB_API_KEY;
       get_geo_info(api_key).then(res => {
         this.geo_info_api_done = true;
         var selected_country = res.country_code && get_contry_by_code(res.country_code);
