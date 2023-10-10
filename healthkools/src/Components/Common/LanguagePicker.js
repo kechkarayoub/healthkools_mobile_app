@@ -16,17 +16,17 @@ class LanguagePicker extends React.Component {
       items: [
         {
           value: "ar",
-          label: t("Arabic"),
+          label: t("Arabic") || "Arabe",
           icon: () => <Image source={flags.flag_ar} style={styles.iconStyle} />,
         },
         {
           value: "en",
-          label: t("English"),
+          label: t("English") || "Anglais",
           icon: () => <Image source={flags.flag_en} style={styles.iconStyle} />,
         },
         {
           value: "fr",
-          label: t("French"),
+          label: t("French") || "Français",
           icon: () => <Image source={flags.flag_fr} style={styles.iconStyle} />,
         },
       ],
@@ -44,13 +44,13 @@ class LanguagePicker extends React.Component {
         this.setState({
           items: this.state.items.map(item => {
             if(item.value === "ar"){
-              item.label = t("Arabic");
+              item.label = t("Arabic") || "Arabe";
             }
             else if(item.value === "en"){
-              item.label = t("English");
+              item.label = t("English") || "Anglais";
             }
             else if(item.value === "fr"){
-              item.label = t("French");
+              item.label = t("French") || "Français";
             }
             return item;
           }),
@@ -90,13 +90,13 @@ class LanguagePicker extends React.Component {
       this.setState({
         items: this.state.items.map(item => {
           if(item.value === "ar"){
-            item.label = t("Arabic");
+            item.label = t("Arabic") || "Arabe";
           }
           else if(item.value === "en"){
-            item.label = t("English");
+            item.label = t("English") || "Anglais";
           }
           else if(item.value === "fr"){
-            item.label = t("French");
+            item.label = t("French") || "Français";
           }
           return item;
         }),
