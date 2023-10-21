@@ -5,35 +5,12 @@
  * @format
  */
 
-import React, {Component} from 'react';
-
-
-//import Store from 'src/Store/configureStore'
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import { Provider } from 'react-redux'
-import Store from 'src/Store/configureStore'
 import AppInit from 'src/AppInit'
-//import { enableScreens } from 'react-native-screens';
-//enableScreens();
-
-//import { REACT_APP_URL_WS } from '@env';
-
+import React, {Component} from 'react';
+import Store from 'src/Store/configureStore'
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { Provider } from 'react-redux'
+import { Text, useColorScheme, View } from 'react-native';
 
 function Section({children, title}) {
   const isDarkMode = useColorScheme() === 'dark';
@@ -66,8 +43,10 @@ class App extends Component{
     super(props);
     this.state = { isI18nInitialized: false };
   }
+  
   componentDidMount() {
   }
+
   render(){
     return (
       <Provider store={Store}>
@@ -76,6 +55,5 @@ class App extends Component{
     );
   }
 }
-
 
 export default App;

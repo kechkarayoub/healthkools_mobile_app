@@ -1,14 +1,14 @@
-import React from 'react';
-import { StyleSheet, View, Alert, ImageBackground } from 'react-native';
 import CustomInputText from 'src/Components/FormFields/CustomInputText';
 import CustomTouchableOpacity from 'src/Components/FormFields/CustomTouchableOpacity';
-// import {set_locale, t} from 'src/i18n'
 import PropTypes from 'prop-types';
+import React from 'react';
+import { Alert, ImageBackground, StyleSheet, View } from 'react-native';
+import { COLORS } from "src/variables/colors";
 import { connect } from 'react-redux'
-import {set} from 'src/Store/locale';
-import {t} from 'src/i18n';
-import {COLORS} from "src/variables/colors";
-import {icons, logos} from "src/_ressources";
+import { icons, logos } from "src/_ressources";
+import { set } from 'src/Store/locale';
+import { t } from 'src/i18n';
+
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
@@ -31,6 +31,7 @@ class SignIn extends React.Component {
   //     navigation: PropTypes.object,
   //   };
   // }
+
   onClickListener = (viewId) => {
     var current_language = "en";
     // if("restore_password" == viewId){
@@ -50,6 +51,7 @@ class SignIn extends React.Component {
     const action = { type: "CHANGE_LANGUAGE", value: current_language }
     this.props.dispatch(action);
   }
+
   render() {
     const username_or_email = this.state.username_or_email, password = this.state.password, current_language = this.state.current_language;
     return (
@@ -78,35 +80,37 @@ class SignIn extends React.Component {
     )
   }
 }
+
 const styles = StyleSheet.create({
-    body: {
-      alignItems: 'center',
-      backgroundColor: COLORS.default_color,
-      flex: 1,
-      justifyContent: 'center',
+  background: {
+    height: '100%',
+    opacity: 0.2,
+    position: 'absolute',
+    top: 0,
+    width: '100%',
+  },
+  body: {
+    alignItems: 'center',
+    backgroundColor: COLORS.default_color,
+    flex: 1,
+    justifyContent: 'center',
+  },
+  loginButton: {
+    backgroundColor: "#00b5ec",
+    elevation: 19, // works on android
+    shadowColor: "#808080",
+    shadowOffset: {
+      height: 9,
+      width: 0,
     },
-    loginButton: {
-      backgroundColor: "#00b5ec",
-      elevation: 19, // works on android
-      shadowColor: "#808080",
-      shadowOffset: {
-        height: 9,
-        width: 0,
-      },
-      shadowOpacity: 0.50,
-      shadowRadius: 12.35,
-    },
-    background: {
-      height: '100%',
-      opacity: 0.2,
-      position: 'absolute',
-      top: 0,
-      width: '100%',
-    },
+    shadowOpacity: 0.50,
+    shadowRadius: 12.35,
+  },
 });
 const mapStateToProps = (state) => {
   return {
     current_language: state.current_language
   }
 }
+
 export default connect(mapStateToProps)(SignIn);

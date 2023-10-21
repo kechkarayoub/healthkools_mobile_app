@@ -1,12 +1,14 @@
 // import {supported_languages} from 'src/config/global';
-import {get} from 'src/Store/locale';
-import {PhoneNumberFormat, PhoneNumberUtil} from 'google-libphonenumber';
+import { get } from 'src/Store/locale';
+import { PhoneNumberUtil } from 'google-libphonenumber';
 const phoneUtil = PhoneNumberUtil.getInstance();
 
 export const COLORS = ["#f36422", "#ffee02", "#f070a9", "#00adef", "#7cc142", "#d02b49"];
+
 export const get_date_format = (moment_obj) => {
   return moment_obj.format("DD/MM/YYYY");
 };
+
 export const line_return = (nbr_line_return) => {
   try{
     nbr_line_return = parseInt(nbr_line_return) || 1;
@@ -22,17 +24,21 @@ export const line_return = (nbr_line_return) => {
   }
   return res;
 };
+
 export const get_datetime_format = (moment_obj) => {
   return moment_obj.format("DD/MM/YYYY HH:mm");
 };
+
 export const get_time_format = (moment_obj) => {
   return moment_obj.format("HH:mm");
 };
+
 export const get_current_languages = async (callback) => {
   await get('current_language', cl => {
     callback(cl);
   });
 };
+
 export const get_local_number_from_international = (international_number) => {
   var international_number_ = international_number;
   if(international_number && international_number.charAt(0) !== "0" && international_number.charAt(0) !== "+"){
@@ -52,6 +58,7 @@ export const get_local_number_from_international = (international_number) => {
     return international_number;
   }
 };
+
 export const get_country_phone_code_from_number = (international_number) => {
   var international_number_ = international_number;
   if(international_number && international_number.charAt(0) !== "0" && international_number.charAt(0) !== "+"){
@@ -73,7 +80,6 @@ export const get_country_phone_code_from_number = (international_number) => {
   }
 };
 
-
 export const get_random_color = () => {
   return COLORS[Math.floor(Math.random() * COLORS.length)];
-}
+};

@@ -1,7 +1,4 @@
-import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react-native';
-import {get_contry_by_code, get_contries_select_options, get_countries} from 'src/utils/countries_list';
-const current_language = "en";
+import { get_countries, get_contries_select_options, get_contry_by_code } from 'src/utils/countries_list';
 
 
 describe('Test get_countries', () => {

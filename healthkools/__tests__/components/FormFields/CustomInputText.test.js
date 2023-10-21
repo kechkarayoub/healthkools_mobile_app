@@ -1,6 +1,6 @@
-import React from "react";
-import { render, screen, fireEvent, waitFor } from '@testing-library/react-native';
 import CustomInputText from 'src/Components/FormFields/CustomInputText';
+import React from "react";
+import { fireEvent, render, screen, waitFor } from '@testing-library/react-native';
 const current_language = "en";
 
 describe('CustomInputText component', () => {

@@ -1,11 +1,11 @@
-import {COLORS, get_country_phone_code_from_number, get_current_languages, get_date_format, 
-  get_datetime_format, get_local_number_from_international, get_random_color, get_time_format} from 'src/utils/index';
-import {set} from 'src/Store/locale';
-
-import { act, render, screen, fireEvent, waitFor } from '@testing-library/react-native';
 import moment from "moment";
+import { COLORS, get_country_phone_code_from_number, get_current_languages, get_date_format, 
+  get_datetime_format, get_local_number_from_international, get_random_color, get_time_format } from 'src/utils/index';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { set } from 'src/Store/locale';
+
 jest.mock('react-native-localize', () => ({
-  // Mock the methods or properties you need for testing
+  // Mock getLocales for testing
   getLocales: jest.fn(() => [{ countryCode: 'FR', languageTag: 'fr-FR' }]),
 }));
 
@@ -23,6 +23,7 @@ describe('Test get_date_format', () => {
     expect(date_format).toBe(moment().format("DD/MM/YYYY"));
   });
 });
+
 describe('Test get_datetime_format', () => {
   test('Should render correct string', async () => {
     var moment_obj = moment();
@@ -30,6 +31,7 @@ describe('Test get_datetime_format', () => {
     expect(date_format).toBe(moment_obj.format("DD/MM/YYYY HH:mm"));
   });
 });
+
 describe('Test get_time_format', () => {
   test('Should render correct string', async () => {
     var moment_obj = moment();
@@ -37,6 +39,7 @@ describe('Test get_time_format', () => {
     expect(date_format).toBe(moment_obj.format("HH:mm"));
   });
 });
+
 describe('Test get_current_languages', () => {
   test('Should render default stored language', async () => {
     var current_language;
@@ -58,6 +61,7 @@ describe('Test get_current_languages', () => {
     expect(current_language).toBe("ar");
   });
 });
+
 describe('Test get_local_number_from_international', () => {
   test('Should render null if null', async () => {
     var local_number = get_local_number_from_international(null);
@@ -76,6 +80,7 @@ describe('Test get_local_number_from_international', () => {
     expect(local_number).toBe("1212");
   });
 });
+
 describe('Test get_country_phone_code_from_number', () => {
   test('Should render phone code', async () => {
     var local_number = get_country_phone_code_from_number(null);

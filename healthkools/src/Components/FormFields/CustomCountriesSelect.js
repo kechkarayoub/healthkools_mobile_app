@@ -1,10 +1,11 @@
-import React from 'react';
-import { StyleSheet, View, Image } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import ErrorComponent from "src/Components/Common/ErrorComponent";
-import {get_contries_select_options} from "src/utils/countries_list";
 import PropTypes from 'prop-types';
-import {COLORS} from "src/variables/colors";
+import React from 'react';
+import { COLORS } from "src/variables/colors";
+import { get_contries_select_options } from "src/utils/countries_list";
+import { Image, StyleSheet, View } from 'react-native';
+
 class CustomCountriesSelect extends React.Component {
   constructor(props) {
     super(props);
@@ -17,8 +18,8 @@ class CustomCountriesSelect extends React.Component {
       list_mode: props.list_mode,
       placeholder: props.placeholder,
       open: false,
-      type_select: props.type_select,
       test_id: props.test_id,
+      type_select: props.type_select,
       value: props.value,
     };
   }
@@ -102,28 +103,29 @@ class CustomCountriesSelect extends React.Component {
     }
   }
   render() {
-    const {current_language, icon_url, disabled, form_error, list_mode, open, placeholder,
-      countries_options, test_id, value} = this.state;
+    const {
+      countries_options, current_language, disabled, form_error, icon_url, list_mode, open, placeholder, test_id, value,
+    } = this.state;
     return(
       <View style={[styles.selectContainer, form_error ? styles.errorStyle : {}]}>
         <DropDownPicker
           containerStyle={[styles.containerStyle]}
+          disabled={disabled}
           dropDownContainerStyle={styles.dropDownContainerStyle}
           items={countries_options}
           language={current_language}
           listMode={list_mode}
           open={open}
-          disabled={disabled}
           testID={test_id}
-          searchable={true}
           placeholder={placeholder}
           placeholderStyle={styles.placeholder}
+          searchable={true}
           selectedItemLabelStyle={styles.selectedItemLabelStyle}
           selectedItemContainerStyle={styles.selectedItemContainerStyle}
           setOpen={(open_) => this.setOpen(open_)}
+          setValue={this.setValue}
           style={styles.style}
           value={value}
-          setValue={this.setValue}
         />
         {icon_url &&
           <Image style={[styles.inputIcon, this.props.iconStyle]} source={icon_url}/>
@@ -135,37 +137,12 @@ class CustomCountriesSelect extends React.Component {
     )
   }
 }
+
 const styles = StyleSheet.create({
     // iconStyle: {
     //   width: 36,
     //   height: 20,
     // },
-    errorStyle: {
-      height: 60,
-      paddingBottom: 10,
-    },
-    selectContainer: {
-      alignItems:'center',
-      backgroundColor: '#FFFFFF',
-      borderRadius: 30,
-      height: 50,
-      marginBottom: 20,
-      display: 'flex',
-      flexDirection: 'row',
-      width:300,
-      justifyContent: 'space-between',
-      elevation: 300, // works on android
-      zIndex: 300, // works on ios
-    },
-    style: {
-      elevation: 30, // works on android
-      borderColor: '#FFFFFF',
-      borderRadius:30,
-      zIndex: 30, // works on ios
-      shadowOffset:{  width: 0,  height: 0,  },
-      shadowColor: 'transparent',
-      shadowOpacity: 0,
-    },
     containerStyle: {
       backgroundColor: '#FFFFFF',
       borderColor: '#FFFFFF',
@@ -173,33 +150,60 @@ const styles = StyleSheet.create({
       borderRadius: 30,
       elevation: 300, // works on android
       marginRight: 0,
-      zIndex: 300, // works on ios
-      width: 255,
-      shadowOffset:{  width: 0,  height: 0,  },
       shadowColor: 'transparent',
+      shadowOffset:{ width: 0, height: 0, },
       shadowOpacity: 0,
+      width: 255,
+      zIndex: 300, // works on ios
     },
     dropDownContainerStyle: {
       borderColor: COLORS.default_color,
       elevation: 300, // works on android
       zIndex: 300, // works on ios
     },
-    selectedItemLabelStyle: {
-      color: COLORS.default_color,
-      fontWeight: "bold",
-    },
-    selectedItemContainerStyle: {
+    errorStyle: {
+      height: 60,
+      paddingBottom: 10,
     },
     inputIcon:{
-      height:30,
+      height: 30,
       justifyContent: 'center',
-      marginRight:15,
-      width:30,
+      marginRight: 15,
+      width: 30,
     },
     placeholder: {
       color: "grey",
       opacity: 0.8,
       paddingLeft: 5,
     },
+    selectContainer: {
+      alignItems: 'center',
+      backgroundColor: '#FFFFFF',
+      borderRadius: 30,
+      display: 'flex',
+      elevation: 300, // works on android
+      flexDirection: 'row',
+      height: 50,
+      justifyContent: 'space-between',
+      marginBottom: 20,
+      width: 300,
+      zIndex: 300, // works on ios
+    },
+    selectedItemContainerStyle: {
+    },
+    selectedItemLabelStyle: {
+      color: COLORS.default_color,
+      fontWeight: "bold",
+    },
+    style: {
+      borderColor: '#FFFFFF',
+      borderRadius: 30,
+      elevation: 30, // works on android
+      shadowColor: 'transparent',
+      shadowOffset:{ width: 0, height: 0, },
+      shadowOpacity: 0,
+      zIndex: 30, // works on ios
+    },
 });
+
 export default CustomCountriesSelect;

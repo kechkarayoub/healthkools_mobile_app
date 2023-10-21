@@ -1,4 +1,5 @@
 import * as Localization from 'react-native-localize';
+
 const languageDetector = {
     type: 'languageDetector',
     async: true,
@@ -11,4 +12,5 @@ const languageDetector = {
     init: () => { },
     cacheUserLanguage: () => { },
 };
+
 export default languageDetector;

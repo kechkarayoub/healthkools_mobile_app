@@ -1,11 +1,11 @@
-import { get } from "src/Store/locale";
 import Config from 'react-native-config';
+import { get } from "src/Store/locale";
 
 const code_mode = Config.REACT_APP_CODE_MODE;
 export const get_data = () => {
     return {
-        company_address: "",
         cndp_declaration_number: "",
+        company_address: "",
         company_capital: "",
         company_legal_status: "",
         company_name: "",

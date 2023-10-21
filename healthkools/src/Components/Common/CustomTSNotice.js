@@ -1,29 +1,29 @@
-import React from 'react';
-import { StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Text, Alert, View, Linking } from 'react-native';
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types';
-import {t} from 'src/i18n';
-import {get_terms_service_notice, get_terms_of_services_articles} from 'src/Components/terms_of_service/terms_of_service';
-import {get_data_use_policy_articles} from 'src/Components/terms_of_service/data_use_policy';
-import {get_cookies_policy_articles} from 'src/Components/terms_of_service/cookies_policy';
-import Overlay from 'react-native-modal-overlay';
 import CloseButton from 'src/Components/Common/CloseButton';
-import {COLORS} from "src/variables/colors";
+import Overlay from 'react-native-modal-overlay';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { COLORS } from "src/variables/colors";
+import { connect } from 'react-redux'
+import { get_cookies_policy_articles } from 'src/Components/terms_of_service/cookies_policy';
 import { get_data } from "src/Components/terms_of_service/data";
+import { get_data_use_policy_articles } from 'src/Components/terms_of_service/data_use_policy';
+import { get_terms_service_notice, get_terms_of_services_articles } from 'src/Components/terms_of_service/terms_of_service';
+import { Linking, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { t } from 'src/i18n';
 
 class CustomTSNotice extends React.Component {
   constructor(props) {
     super(props);
     this.data = get_data();
     this.state = {
+      cookies_policy_articles: get_cookies_policy_articles(this.data, (url) => this.handleOpenUrl(url)),
       current_language: props.current_language,
+      data_use_policy_articles: get_data_use_policy_articles(this.data, (url) => this.handleOpenUrl(url)),
       open_cookie_policy: false,
       open_data_use_policy: false,
       open_terms_of_service: false,
       registration_label: props.registration_label,
       terms_of_services_articles: get_terms_of_services_articles(this.data, (url) => this.handleOpenUrl(url)),
-      data_use_policy_articles: get_data_use_policy_articles(this.data, (url) => this.handleOpenUrl(url)),
-      cookies_policy_articles: get_cookies_policy_articles(this.data, (url) => this.handleOpenUrl(url)),
     };
   }
   static getDerivedStateFromProps(props, state) {
@@ -55,9 +55,9 @@ class CustomTSNotice extends React.Component {
   }
   static propTypes = {
     current_language: PropTypes.string,
-    registration_label: PropTypes.string,
     is_not_button: PropTypes.bool,
     onPress: PropTypes.func,
+    registration_label: PropTypes.string,
     style: PropTypes.object,
     test_id: PropTypes.string,
     text: PropTypes.string,
@@ -68,9 +68,9 @@ class CustomTSNotice extends React.Component {
   }
   static defaultProps = {
     current_language: "en",
-    registration_label: "Sign up",
     is_not_button: false,
     onPress: () => {},
+    registration_label: "Sign up",
     style: null,
     test_id: '',
     text: '',
@@ -80,6 +80,7 @@ class CustomTSNotice extends React.Component {
   handleOpenUrl = async (url) => {
     await Linking.openURL(decodeURIComponent(url));
   }
+
   handleItemClicked = clicked_item => {
     this.setState({
       open_cookie_policy: clicked_item === "cookie_policy",
@@ -87,6 +88,7 @@ class CustomTSNotice extends React.Component {
       open_terms_of_service: clicked_item === "terms_of_service",
     });
   }
+
   closeOverlay = () => {
     this.setState({
       open_cookie_policy: false,
@@ -220,7 +222,7 @@ class CustomTSNotice extends React.Component {
     </View>
   }
   render() {
-    const {registration_label, current_language, open_cookie_policy, open_data_use_policy, open_terms_of_service} = this.state;
+    const { current_language, open_cookie_policy, open_data_use_policy, open_terms_of_service, registration_label } = this.state;
     var terms_service_notice = get_terms_service_notice({registration_label: registration_label})
     return (
       <>
@@ -257,71 +259,63 @@ class CustomTSNotice extends React.Component {
     )
   }
 }
+
 const styles = StyleSheet.create({
   articleStyle: {},
-  TSContainerStyle: {
-    marginBottom: 15,
-  },
-  TSOverlayContainerStyle: {
-    height: '93%',
-    padding: 5,
-  },
-  TSContentContainerStyle:{
-    flexGrow: 1,
-   },
   articleTitleStyle: {
-    justifyContent: 'flex-start',
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'flex-start',
     marginBottom: 5,
     marginTop: 25,
   },
   articleTitleNumberStyle: {
-    fontWeight: "bold",
+    color: COLORS.default_color,
     fontSize: 15,
-    color: COLORS.default_color,
-  },
-  paragraphStyle: {},
-  paragraphContentStyle: {
-  },
-  paragraphListItemsContentStyle: {},
-  paragraphSubListItemsContentStyle: {},
-  paragraphItemStyle: {},
-  titleStyle: {
-    justifyContent: 'center',
-    textAlign: "center",
     fontWeight: "bold",
-    fontSize: 17,
-    color: COLORS.default_color,
+  },
+  buttonText:{
+    color:"white",
+    fontWeight:'bold',
+    lineHeight: 20,
+    textAlign: 'justify',
+  },
+  cotainer: {
+    alignItems: 'flex-end',
+    backgroundColor: 'transparent',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginBottom: 20,
+    textAlign: 'justify',
+    width: 300,
+  },
+  CountryItemNameStyle: {
+    marginLeft: 5,
     marginTop: 5,
-    height: 45,
+  },
+  CountryItemStyle: {
+    flexDirection: 'row'
+  },
+  iconCloseStyle: {
+    height: 50,
+    width: 50,
   },
   overlayContainer: {
     backgroundColor: 'white',
     height: '100%',
     width: '100%',
   },
+  paragraphContentStyle: {
+  },
+  paragraphItemStyle: {},
+  paragraphListItemsContentStyle: {},
+  paragraphStyle: {},
+  paragraphSubListItemsContentStyle: {},
   phoneInputContainerStyle: {
     alignItems: 'flex-start',
     borderRadius:30,
     flex: 1,
     justifyContent: 'center',
-  },
-  titleCloseContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    marginBottom: 10,
-    paddingRight: 25,
-    width: '100%',
-  },
-  titleContainerStyle: {
-    borderBottomColor: 'white',
-    borderTopColor: 'white',
-    color: 'black',
-    height: 35,
-    marginBottom: 10,
-    marginTop: 0,
-    width: '100%',
   },
   searchBarInputStyle: {
     color: 'black',
@@ -342,33 +336,43 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
   },
-  iconCloseStyle: {
-    height: 50,
-    width: 50,
-  },
-  CountryItemStyle: {
-    flexDirection: 'row'
-  },
-  CountryItemNameStyle: {
-    marginLeft: 5,
-    marginTop: 5,
-  },
-  cotainer: {
-    alignItems: 'flex-end',
-    backgroundColor: 'transparent',
+  titleCloseContainer: {
+    display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'flex-end',
-    marginBottom: 20,
-    textAlign: 'justify',
-    width: 300,
+    marginBottom: 10,
+    paddingRight: 25,
+    width: '100%',
   },
-  buttonText:{
-    color:"white",
-    fontWeight:'bold',
-    lineHeight: 20,
-    textAlign: 'justify',
+  titleContainerStyle: {
+    borderBottomColor: 'white',
+    borderTopColor: 'white',
+    color: 'black',
+    height: 35,
+    marginBottom: 10,
+    marginTop: 0,
+    width: '100%',
+  },
+  titleStyle: {
+    color: COLORS.default_color,
+    fontWeight: "bold",
+    fontSize: 17,
+    height: 45,
+    justifyContent: 'center',
+    marginTop: 5,
+    textAlign: "center",
+  },
+  TSContainerStyle: {
+    marginBottom: 15,
+  },
+  TSContentContainerStyle:{
+    flexGrow: 1,
+  },
+  TSOverlayContainerStyle: {
+    height: '93%',
+    padding: 5,
   }
 });
+
 const mapStateToProps = (state) => {
   return {
     current_language: state.current_language,

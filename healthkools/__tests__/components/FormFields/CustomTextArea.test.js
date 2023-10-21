@@ -1,6 +1,7 @@
-import React from "react";
-import { render, screen, fireEvent, waitFor } from '@testing-library/react-native';
 import CustomTextArea from 'src/Components/FormFields/CustomTextArea';
+import React from "react";
+import { fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+
 const current_language = "en";
 
 describe('CustomTextArea component', () => {
@@ -27,7 +28,6 @@ describe('CustomTextArea component', () => {
     const components_errors_by_text = screen.queryAllByText('form_error');
     expect(components_errors_by_text).toHaveLength(1);
     // screen.debug()
-
   });
   test('Should contains props data 2', async () => {
     render(
@@ -42,7 +42,6 @@ describe('CustomTextArea component', () => {
     expect(textarea_by_test_id.props.value).toBe("value_test");
     // console.log(textarea_by_test_id.props)
     // screen.debug()
-
   });
   test('Should value change', async () => {
     render(
@@ -80,7 +79,6 @@ describe('CustomTextArea component', () => {
     // if onSelect exists in props, value will be changed by the props.value not by setState function
     textarea_by_test_id = screen.queryByTestId('test_id');
     expect(textarea_by_test_id.props.value).toBe("value_test");
-
     // screen.debug()
   });
 });

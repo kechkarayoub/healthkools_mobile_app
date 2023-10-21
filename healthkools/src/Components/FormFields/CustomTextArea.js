@@ -1,7 +1,7 @@
-import React from 'react';
-import { StyleSheet, View, TextInput, Image } from 'react-native';
 import ErrorComponent from "src/Components/Common/ErrorComponent";
 import PropTypes from 'prop-types';
+import React from 'react';
+import { Image, StyleSheet, TextInput, View } from 'react-native';
 
 class CustomTextArea extends React.Component {
   constructor(props) {
@@ -38,6 +38,7 @@ class CustomTextArea extends React.Component {
     underlineColorAndroid: PropTypes.string,
     value: PropTypes.string,
   }
+
   static defaultProps = {
     current_language: 'en',
     form_error: "",
@@ -53,6 +54,7 @@ class CustomTextArea extends React.Component {
     underlineColorAndroid: 'transparent',
     value: '',
   }
+
   static getDerivedStateFromProps(props, state) {
     var new_state = {};
     var return_new_state = false;
@@ -75,13 +77,14 @@ class CustomTextArea extends React.Component {
     return return_new_state ? new_state : null;
   }
   render() {
-    const {icon_url, form_error, placeholder, secureTextEntry, test_id, underlineColorAndroid, value, multiline, numberOfLines} = this.state;
+    const { 
+      form_error, icon_url, multiline, numberOfLines, placeholder, secureTextEntry, test_id, underlineColorAndroid, value 
+    } = this.state;
     return (
       <View style={[styles.textAreaContainer, form_error ? styles.errorStyle : {}]}>
         <TextInput
           multiline={multiline}
           numberOfLines={numberOfLines}
-          placeholder={placeholder}
           onChangeText={(value) => {
             if(this.props.onChangeText){
               this.props.onChangeText(value);
@@ -90,6 +93,7 @@ class CustomTextArea extends React.Component {
               this.setState({value: value})
             }
           }}
+          placeholder={placeholder}
           secureTextEntry={secureTextEntry}
           style={[styles.textArea, this.props.style || {}]}
           testID={test_id}
@@ -106,10 +110,23 @@ class CustomTextArea extends React.Component {
     )
   }
 }
+
 const styles = StyleSheet.create({
   errorStyle: {
     height: 60,
     paddingBottom: 10,
+  },
+  inputIcon:{
+    height: 30,
+    justifyContent: 'center',
+    marginRight: 15,
+    width: 30,
+  },
+  textArea:{
+    flex: 1,
+    height: 45,
+    marginLeft: 16,
+    padding: 5,
   },
   textAreaContainer: {
     alignItems: 'center',
@@ -117,11 +134,11 @@ const styles = StyleSheet.create({
     borderBottomColor: '#F5FCFF',
     borderBottomWidth: 0,
     borderRadius: 30,
-    elevation: 5, // works on android
     display: 'flex',
+    elevation: 5, // works on android
     flexDirection: 'row',
-    marginBottom: 20,
     height: 45,
+    marginBottom: 20,
     shadowColor: "#808080",
     shadowOffset: {
       width: 0,
@@ -131,17 +148,6 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     width: 300,
   },
-  textArea:{
-    flex: 1,
-    height: 45,
-    marginLeft: 16,
-    padding: 5,
-  },
-  inputIcon:{
-    height: 30,
-    justifyContent: 'center',
-    marginRight: 15,
-    width: 30,
-  },
 });
+
 export default CustomTextArea;

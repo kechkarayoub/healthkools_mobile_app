@@ -1,7 +1,7 @@
 import React from 'react';
-import {StyleSheet, Text} from 'react-native';
-
 import PropTypes from 'prop-types';
+import { StyleSheet, Text } from 'react-native';
+
 
 class ErrorComponent extends React.Component {
   constructor(props) {
@@ -23,6 +23,7 @@ class ErrorComponent extends React.Component {
     style: null,
     test_id: "",
   }
+
   static getDerivedStateFromProps(props, state) {
     var new_state = {};
     var return_new_state = false;
@@ -32,6 +33,7 @@ class ErrorComponent extends React.Component {
     }
     return return_new_state ? new_state : null;
   }
+
   render() {
     const {error, test_id} = this.state;
     return(
@@ -43,19 +45,21 @@ class ErrorComponent extends React.Component {
     )
   }
 }
+
 const styles = StyleSheet.create({
   errorStyle:{
-    color: "red",
-    width: '100%',
-    position: 'absolute',
-    left: 0,
     bottom: 0,
+    color: "red",
     elevation: 300, // works on android
-    zIndex: 300, // works on ios
+    left: 0,
+    paddingBottom: 4,
     paddingLeft: 10,
     paddingRight: 10,
-    paddingBottom: 4,
-    textAlign: 'center'
+    position: 'absolute',
+    textAlign: 'center',
+    width: '100%',
+    zIndex: 300, // works on ios
   },
 });
+
 export default ErrorComponent;

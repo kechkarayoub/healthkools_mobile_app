@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, Image } from 'react-native';
-import {logos} from 'src/images';
+import { Image, StyleSheet, View } from 'react-native';
+import { logos } from 'src/images';
 
 class Footer extends React.Component {
     render() {
@@ -11,6 +11,7 @@ class Footer extends React.Component {
         )
     }
 }
+
 const styles = StyleSheet.create({
     footer: {
       alignItems: 'center',
@@ -24,4 +25,5 @@ const styles = StyleSheet.create({
       maxWidth: 150,
     }
 });
+
 export default Footer;

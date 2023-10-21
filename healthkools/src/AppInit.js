@@ -1,13 +1,13 @@
-import React, {Component} from 'react';
-import { Text, SafeAreaView, StyleSheet, View, I18nManager as RNI18nManager, StatusBar,  Platform } from 'react-native';
 import Home from 'src/Components/Home';
 import i18n from 'src/i18n';
-import { DevSettings } from 'react-native';
-import { connect } from 'react-redux'
-import {get_current_languages} from 'src/utils'
-import { I18nextProvider } from 'react-i18next';
 import PropTypes from 'prop-types';
-import {COLORS} from "src/variables/colors";
+import React, {Component} from 'react';
+import { COLORS } from "src/variables/colors";
+import { connect } from 'react-redux'
+import { get_current_languages } from 'src/utils'
+import { I18nManager as RNI18nManager, Platform, SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
+import { I18nextProvider } from 'react-i18next';
+
 class AppInit extends Component{
   constructor(props) {
     super(props);
@@ -105,4 +105,5 @@ const mapStateToProps = (state) => {
     current_language: state.current_language
   }
 }
+
 export default connect(mapStateToProps)(AppInit);

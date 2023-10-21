@@ -1,11 +1,11 @@
-import React from 'react';
-import { StyleSheet, View, TextInput, Image } from 'react-native';
+import CustomTouchableOpacity from "src/Components/FormFields/CustomTouchableOpacity";
 import DateTimePicker from "react-native-modal-datetime-picker";
 import ErrorComponent from "src/Components/Common/ErrorComponent";
-import CustomTouchableOpacity from "src/Components/FormFields/CustomTouchableOpacity";
-import {get_date_format} from "src/utils/index";
-import PropTypes from 'prop-types';
 import moment from 'moment';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { get_date_format } from "src/utils/index";
+import { Image, StyleSheet, View } from 'react-native';
 
 class CustomDatePicker extends React.Component {
   constructor(props) {
@@ -27,6 +27,7 @@ class CustomDatePicker extends React.Component {
       value: props.value || null,
     }
   }
+
   static propTypes = {
     containerStyle: PropTypes.object,
     current_language: PropTypes.string,
@@ -61,6 +62,7 @@ class CustomDatePicker extends React.Component {
       PropTypes.object,
     ]),
   }
+
   static defaultProps = {
     containerStyle: null,
     current_language: 'en',
@@ -80,6 +82,7 @@ class CustomDatePicker extends React.Component {
     type_date: '',
     value: null,
   }
+
   static getDerivedStateFromProps(props, state) {
     var new_state = {};
     var return_new_state = false;
@@ -110,6 +113,7 @@ class CustomDatePicker extends React.Component {
     }
     return return_new_state ? new_state : null;
   }
+
   handleDateTimeChange = (date) => {
     if(!date){
       this.setState({
@@ -128,9 +132,10 @@ class CustomDatePicker extends React.Component {
       }
     }
   }
+
   render() {
-    const {darkMode, icon_url, form_error, disabled, maximumDate, minimumDate,
-      minuteInterval, mode, open_datetime_picker, placeholder, test_id, value} = this.state;
+    const { darkMode, disabled, form_error, icon_url, maximumDate, minimumDate, minuteInterval, mode, open_datetime_picker, 
+      placeholder, test_id, value} = this.state;
 
     var value_str = value ? get_date_format(moment(value)) : placeholder;
     return (
@@ -151,43 +156,23 @@ class CustomDatePicker extends React.Component {
           <ErrorComponent error={form_error} />
         }
         <DateTimePicker
+          date={value || moment().toDate()}
           isDarkModeEnabled={darkMode}
           isVisible={open_datetime_picker}
-          onConfirm={(date) => this.handleDateTimeChange(date)}
-          onCancel={() => this.handleDateTimeChange()}
           maximumDate={maximumDate || undefined}
           minimumDate={minimumDate || undefined}
           minuteInterval={minuteInterval}
           mode={mode}
+          onConfirm={(date) => this.handleDateTimeChange(date)}
+          onCancel={() => this.handleDateTimeChange()}
           testID={test_id}
-          date={value || moment().toDate()}
         />
       </View>
     )
   }
 }
+
 const styles = StyleSheet.create({
-  dateTextContainerStyle: {
-    flex: 1,
-    marginBottom: 0,
-    justifyContent: 'flex-start',
-    paddingLeft: 20,
-  },
-  dateTimeStyle: {
-    color: 'black',
-    textAlign: 'left',
-  },
-  disabledStyle: {
-    opacity: 0.5,
-  },
-  placeholderStyle: {
-    color: "grey",
-    opacity: 0.8,
-  },
-  errorStyle: {
-    height: 60,
-    paddingBottom: 10,
-  },
   datePickerContainer: {
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
@@ -214,5 +199,27 @@ const styles = StyleSheet.create({
     marginRight: 15,
     width: 30,
   },
+  dateTextContainerStyle: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    marginBottom: 0,
+    paddingLeft: 20,
+  },
+  dateTimeStyle: {
+    color: 'black',
+    textAlign: 'left',
+  },
+  disabledStyle: {
+    opacity: 0.5,
+  },
+  errorStyle: {
+    height: 60,
+    paddingBottom: 10,
+  },
+  placeholderStyle: {
+    color: "grey",
+    opacity: 0.8,
+  },
 });
+
 export default CustomDatePicker;

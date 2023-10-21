@@ -1,9 +1,9 @@
-import React from 'react';
-import { StyleSheet, View, StatusBar } from 'react-native';
 import HomeStackNavigator from 'src/Components/Home/Navigation/HomeStackNavigator';
 import LanguagePicker from 'src/Components/Common/LanguagePicker';
 import PropTypes from 'prop-types';
-import {COLORS} from "src/variables/colors";
+import React from 'react';
+import { COLORS } from "src/variables/colors";
+import { StatusBar, StyleSheet, View } from 'react-native';
 
 class Home extends React.Component {
   constructor(props) {
@@ -17,15 +17,17 @@ class Home extends React.Component {
   //       t: PropTypes.func
   //   };
   // }
+
   render() {
-      return (
-          <View style={styles.home}>
-            <LanguagePicker />
-            <HomeStackNavigator t={this.props.t}/>
-          </View>
-      )
+    return (
+      <View style={styles.home}>
+        <LanguagePicker />
+        <HomeStackNavigator t={this.props.t}/>
+      </View>
+    )
   }
 }
+
 const styles = StyleSheet.create({
     home: {
       backgroundColor: COLORS.default_color,
@@ -33,4 +35,5 @@ const styles = StyleSheet.create({
       //paddingTop: StatusBar.currentHeight,
     },
 });
+
 export default Home;

@@ -1,6 +1,6 @@
-import React from 'react';
-import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 import PropTypes from 'prop-types';
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 class CustomTouchableOpacity extends React.Component {
   constructor(props) {
@@ -17,6 +17,7 @@ class CustomTouchableOpacity extends React.Component {
       PropTypes.object,
     ]),
   }
+
   static defaultProps = {
     is_not_button: false,
     onPress: () => {},
@@ -25,12 +26,15 @@ class CustomTouchableOpacity extends React.Component {
     text: '',
     textStyle: null,
   }
+
   render() {
     return (
       <TouchableOpacity style={[this.props.is_not_button ? styles.notButtonCotainer : styles.buttonContainer, this.props.style || {}]}
         onPress={this.props.onPress} testID={this.props.test_id}
       >
-        <Text style={[this.props.is_not_button ? styles.notButtonText : styles.buttonText, this.props.textStyle || {}]}>{this.props.text}</Text>
+        <Text style={[this.props.is_not_button ? styles.notButtonText : styles.buttonText, this.props.textStyle || {}]}>
+          {this.props.text}
+        </Text>
       </TouchableOpacity>
     )
   }
@@ -46,6 +50,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     width: 300,
   },
+  buttonText: {
+    color: 'white',
+  },
   notButtonCotainer: {
     alignItems: 'flex-end',
     backgroundColor: 'transparent',
@@ -55,13 +62,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     width: 300,
   },
-  buttonText: {
-    color: 'white',
-  },
   notButtonText:{
     color:"white",
     fontWeight:'bold',
     height: 20,
   }
 });
+
 export default CustomTouchableOpacity;

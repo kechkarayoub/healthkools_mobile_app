@@ -1,11 +1,12 @@
-import React from "react";
-import { render, screen, fireEvent, waitFor, act } from '@testing-library/react-native';
 import CustomDatePicker from 'src/Components/FormFields/CustomDatePicker';
 import moment from 'moment';
-import {get_date_format} from "src/utils/index";
+import React from "react";
+import { act,fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { get_date_format } from "src/utils/index";
+
 const current_language = "en";
 jest.mock('react-native-localize', () => ({
-  // Mock the methods or properties you need for testing
+  // Mock getLocales for testing
   getLocales: jest.fn(() => [{ countryCode: 'US', languageTag: 'en-US' }]),
 }));
 
@@ -17,7 +18,6 @@ describe('CustomDatePicker component', () => {
     const components_errors_by_text = screen.queryAllByText('form_error');
     expect(components_errors_by_text).toHaveLength(0);
   });
-
   test('Should contains props data', async () => {
     render(
       <CustomDatePicker
@@ -37,7 +37,6 @@ describe('CustomDatePicker component', () => {
     expect(components_errors_by_text).toHaveLength(1);
     // screen.debug()
   });
-
   test('Should contains props data 2', async () => {
     render(
       <CustomDatePicker

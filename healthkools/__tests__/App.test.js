@@ -1,14 +1,10 @@
-/**
- * @format
- */
-
-import 'react-native';
-import React from 'react';
 import App from '../App';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react-native';
-import { Provider } from 'react-redux'
+import React from 'react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import 'react-native';
+
 jest.mock('react-native-localize', () => ({
-  // Mock the methods or properties you need for testing
+  // Mock getLocales for testing
   getLocales: jest.fn(() => [{ countryCode: 'FR', languageTag: 'fr-FR' }]),
 }));
 

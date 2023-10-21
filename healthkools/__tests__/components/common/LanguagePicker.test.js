@@ -1,24 +1,17 @@
-import React from "react";
-import { act, render, screen, fireEvent, waitFor } from '@testing-library/react-native';
 import LanguagePicker from 'src/Components/Common/LanguagePicker';
-import { Provider } from 'react-redux'
+import React from "react";
 import store from 'src/Store/configureStore'
-import {set} from 'src/Store/locale';
-import i18n from 'src/i18n';
-import {get_current_languages} from 'src/utils'
-import renderer from 'react-test-renderer';
-import { I18nextProvider } from 'react-i18next';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { get_current_languages} from 'src/utils'
+import { Provider } from 'react-redux'
+import { set } from 'src/Store/locale';
+
 jest.mock('react-native-localize', () => ({
-  // Mock the methods or properties you need for testing
+  // Mock the getLocales for testing
   getLocales: jest.fn(() => [{ countryCode: 'FR', languageTag: 'fr-FR' }]),
 }));
 const current_language = "fr";
 set("current_language", current_language);
-// i18n.init(current_language).then(() => {})
-// .catch((error) => {});
-// beforeAll(() => {
-//   }
-// );
 
 describe('LanguagePicker component', () => {
   test('Should render without crash', async () => {
@@ -31,7 +24,7 @@ describe('LanguagePicker component', () => {
   test('Should contains props data', async () => {
     render(
       <Provider store={store}>
-          <LanguagePicker current_language={current_language} test_id='test_id' />
+        <LanguagePicker current_language={current_language} test_id='test_id' />
       </Provider>
     );
     //screen.debug()
@@ -50,7 +43,7 @@ describe('LanguagePicker component', () => {
       <Provider store={store}>
         <LanguagePicker 
           current_language={current_language} test_id='test_id' 
-          list_mode="FLATLIST"  // Default list_mode value ('FLATLIST') trigger an error
+          list_mode="FLATLIST"
         />
       </Provider>
     );
@@ -95,6 +88,5 @@ describe('LanguagePicker component', () => {
       }
     }
     expect(new_stored_language).toBe("en");
-
   });
 });

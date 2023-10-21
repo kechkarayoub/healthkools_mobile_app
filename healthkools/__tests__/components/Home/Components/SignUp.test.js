@@ -1,12 +1,14 @@
 import React from "react";
-import { render, screen, fireEvent, waitFor } from '@testing-library/react-native';
 import SignUp from 'src/Components/Home/Components/SignUp';
-import { Provider } from 'react-redux'
 import Store from 'src/Store/configureStore'
+import { Provider } from 'react-redux'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+
 jest.mock('react-native-localize', () => ({
-  // Mock the methods or properties you need for testing
+  // Mock getLocales for testing
   getLocales: jest.fn(() => [{ countryCode: 'FR', languageTag: 'fr-FR' }]),
 }));
+
 const current_language = "en";
 
 describe('SignUp component', () => {

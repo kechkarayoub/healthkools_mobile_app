@@ -1,7 +1,7 @@
-import React from 'react';
-import { StyleSheet, View, TextInput, Image } from 'react-native';
 import ErrorComponent from "src/Components/Common/ErrorComponent";
 import PropTypes from 'prop-types';
+import React from 'react';
+import { Image, StyleSheet, TextInput, View } from 'react-native';
 
 class CustomInputText extends React.Component {
   constructor(props) {
@@ -19,6 +19,7 @@ class CustomInputText extends React.Component {
       value: props.value,
     }
   }
+
   static propTypes = {
     containerStyle: PropTypes.object,
     current_language: PropTypes.string,
@@ -41,6 +42,7 @@ class CustomInputText extends React.Component {
     underlineColorAndroid: PropTypes.string,
     value: PropTypes.string,
   }
+  
   static defaultProps = {
     containerStyle: null,
     current_language: 'en',
@@ -57,6 +59,7 @@ class CustomInputText extends React.Component {
     underlineColorAndroid: 'transparent',
     value: '',
   }
+
   static getDerivedStateFromProps(props, state) {
     var new_state = {};
     var return_new_state = false;
@@ -78,11 +81,13 @@ class CustomInputText extends React.Component {
     }
     return return_new_state ? new_state : null;
   }
+
   render() {
-    const {icon_url, form_error, keyboardType, placeholder, secureTextEntry, test_id, underlineColorAndroid, value} = this.state;
+    const { form_error, icon_url, keyboardType, placeholder, secureTextEntry, test_id, underlineColorAndroid, value } = this.state;
     return (
       <View style={[this.props.containerStyle || styles.inputContainer, form_error ? styles.errorStyle : {}]}>
         <TextInput
+          keyboardType={keyboardType}
           onChangeText={(value) => {
             if(this.props.onChangeText){
               this.props.onChangeText(value);
@@ -91,7 +96,6 @@ class CustomInputText extends React.Component {
               this.setState({value: value})
             }
           }}
-          keyboardType={keyboardType}
           placeholder={placeholder}
           secureTextEntry={secureTextEntry}
           style={[styles.inputs, this.props.style || {}]}
@@ -109,6 +113,7 @@ class CustomInputText extends React.Component {
     )
   }
 }
+
 const styles = StyleSheet.create({
   errorStyle: {
     height: 60,
@@ -134,17 +139,18 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     width: 300,
   },
-  inputs:{
-    borderBottomColor: '#FFFFFF',
-    flex: 1,
-    height:45,
-    marginLeft:16,
-  },
   inputIcon:{
     height: 30,
     justifyContent: 'center',
     marginRight: 15,
     width: 30,
   },
+  inputs:{
+    borderBottomColor: '#FFFFFF',
+    flex: 1,
+    height:45,
+    marginLeft:16,
+  },
 });
+
 export default CustomInputText;

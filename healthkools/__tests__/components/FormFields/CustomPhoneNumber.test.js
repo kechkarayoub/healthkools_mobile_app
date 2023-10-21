@@ -1,10 +1,12 @@
-import React from "react";
-import { render, screen, fireEvent, waitFor, act } from '@testing-library/react-native';
 import CustomPhoneNumber from 'src/Components/FormFields/CustomPhoneNumber';
+import React from "react";
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+
 jest.mock('react-native-localize', () => ({
-  // Mock the methods or properties you need for testing
+  // Mock getLocales for testing
   getLocales: jest.fn(() => [{ countryCode: 'US', languageTag: 'en-US' }]),
 }));
+
 const current_language = "en";
 
 describe('CustomPhoneNumber component', () => {
@@ -139,8 +141,6 @@ describe('CustomPhoneNumber component', () => {
     fireEvent(phone_input_by_test_id, 'onChangeText', "052222");
     phone_input_by_test_id = screen.queryByTestId('test_id');
     expect(phone_input_by_test_id.props.value).toBe("052222");
-
-
     // screen.debug()
   });
 
@@ -165,7 +165,6 @@ describe('CustomPhoneNumber component', () => {
     // if onSelect exists in props, value will be changed by the props.value not by setState function
     phone_input_by_test_id = screen.queryByTestId('test_id');
     expect(phone_input_by_test_id.props.value).toBe("0612");
-
     // screen.debug()
   });
 });

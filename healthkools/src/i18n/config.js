@@ -15,6 +15,7 @@
 //I18n.translations = {
 //  ar, en, fr
 //};
+
 export const resources = {
   ar: {
     translations: require('src/i18n/translations/ar/translations.json'),
@@ -26,7 +27,9 @@ export const resources = {
     translations: require('src/i18n/translations/fr/translations.json'),
   },
 };
+
 export const fallback = "en";
+
 export const supportedLocales = {
     en: {
         name: "English",
@@ -45,7 +48,9 @@ export const supportedLocales = {
         momentLocaleLoader: () => import('moment/locale/fr'),
     },
 };
+
 export const defaultNamespace = "translations";
+
 export const namespaces = [
     "translations",
 ];

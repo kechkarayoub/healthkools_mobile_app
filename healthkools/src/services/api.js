@@ -1,7 +1,6 @@
 import axios from "axios";
-import { set, get, clear } from "src/Store/locale";
 import Config from 'react-native-config';
-
+import { clear, get, set } from "src/Store/locale";
 
 const instance = axios.create({ baseURL: Config.REACT_APP_URL_BACKEND });
 
@@ -44,17 +43,20 @@ export const check_if_email_or_username_exists_api_get = (data) => {
   }
 };
 
-
-
-
-export const get_geo_info = (api_key) => {
-  return axios.get('https://geolocation-db.com/json/'+api_key)
-  .then(res => {
-    return res.data;
-  })
-  .catch(err => {
-    console.log(err);
-  });
+var feeds_languages_api_sent = false;
+export const feeds_languages_api_get = () => {
+  if(!feeds_languages_api_sent){
+    feeds_languages_api_sent = true;
+    return instance.get('/feeds_languages_api')
+    .then(res => {
+      feeds_languages_api_sent = false;
+      return res.data;
+    })
+    .catch(err => {
+      feeds_languages_api_sent = false;
+      console.log(err);
+    });
+  }
 };
 
 var general_information_api_sent = false;
@@ -76,22 +78,15 @@ export const general_information_api_get = () => {
   }
 };
 
-var feeds_languages_api_sent = false;
-export const feeds_languages_api_get = () => {
-  if(!feeds_languages_api_sent){
-    feeds_languages_api_sent = true;
-    return instance.get('/feeds_languages_api')
-    .then(res => {
-      feeds_languages_api_sent = false;
-      return res.data;
-    })
-    .catch(err => {
-      feeds_languages_api_sent = false;
-      console.log(err);
-    });
-  }
+export const get_geo_info = (api_key) => {
+  return axios.get('https://geolocation-db.com/json/'+api_key)
+  .then(res => {
+    return res.data;
+  })
+  .catch(err => {
+    console.log(err);
+  });
 };
-
 
 export const login = data => {
   return instance

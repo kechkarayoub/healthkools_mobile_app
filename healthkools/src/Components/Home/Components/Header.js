@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, Image } from 'react-native';
-import {logos} from 'src/images';
+import { Image, StyleSheet, View } from 'react-native';
+import { logos } from 'src/images';
 
 class Header extends React.Component {
     render() {
@@ -11,6 +11,7 @@ class Header extends React.Component {
         )
     }
 }
+
 const styles = StyleSheet.create({
     header: {
       alignItems: 'center',
@@ -23,4 +24,5 @@ const styles = StyleSheet.create({
       maxWidth: 150,
     }
 });
+
 export default Header;

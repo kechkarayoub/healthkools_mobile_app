@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, Text } from 'react-native';
-import {COLORS} from "src/variables/colors";
-import {line_return} from "src/utils";
-import {render_term_service_link, render_term_service_custom_item} from "src/Components/terms_of_service/utils";
+import { COLORS } from "src/variables/colors";
+import { line_return } from "src/utils";
+import { render_term_service_link } from "src/Components/terms_of_service/utils";
+import { StyleSheet, Text } from 'react-native';
 
 export const get_cookies_policy_articles = (data, handleOpenUrl) => {
     return {
@@ -392,64 +392,65 @@ export const get_cookies_policy_articles = (data, handleOpenUrl) => {
         ]
     };
 };
+
 const styles = StyleSheet.create({
-    articleTitleTextStyle: {
-      fontWeight: "bold",
-      fontSize: 15,
-      color: COLORS.default_color,
-    },
-    subTitleTextStyle: {
-      fontWeight: "bold",
-      fontSize: 13,
-      color: COLORS.black_color,
-    },
-    paragraphContentStyle: {
-      justifyContent: 'flex-start',
-      display: 'flex',
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      textAlign: 'justify',
-    },
-    paragraphTitleContentStyle: {
-      fontWeight: "bold",
-      fontSize: 13,
-      color: COLORS.secondary_color,
-    },
-    paragraphContentCustomStyle: {
-      marginTop: 10,
-      marginBottom: 5,
-    },
-    registrationLabelStyle: {
-      color: "#777",
-      marginLeft: 5,
-      marginRight: 5,
-        fontWeight: "bold",
-        fontSize: 15,
-    },
-    linkStyle: {
-      color: "#0d6efd",
-      marginLeft: 5,
-      marginRight: 5,
-        fontWeight: "bold",
-        fontSize: 15,
-    },
-    boldBlackStyle: {
-      color: "#000000",
-      marginLeft: 5,
-      marginRight: 5,
-        fontWeight: "bold",
-        fontSize: 15,
-    },
-    termStyle: {
-      color: "#004eff",
-      marginLeft: 5,
-      marginRight: 5,
-    },
-    customItemStyle: {
-      color: "#000000",
-      marginLeft: 5,
-      marginRight: 5,
-        fontWeight: "bold",
-        fontSize: 15,
-    },
-  });
+  articleTitleTextStyle: {
+    color: COLORS.default_color,
+    fontSize: 15,
+    fontWeight: "bold",
+  },
+  boldBlackStyle: {
+    color: "#000000",
+    fontSize: 15,
+    fontWeight: "bold",
+    marginLeft: 5,
+    marginRight: 5,
+  },
+  customItemStyle: {
+    color: "#000000",
+    fontSize: 15,
+    fontWeight: "bold",
+    marginLeft: 5,
+    marginRight: 5,
+  },
+  linkStyle: {
+    color: "#0d6efd",
+    fontSize: 15,
+    fontWeight: "bold",
+    marginLeft: 5,
+    marginRight: 5,
+  },
+  paragraphContentCustomStyle: {
+    marginBottom: 5,
+    marginTop: 10,
+  },
+  paragraphContentStyle: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'flex-start',
+    textAlign: 'justify',
+  },
+  paragraphTitleContentStyle: {
+    color: COLORS.secondary_color,
+    fontSize: 13,
+    fontWeight: "bold",
+  },
+  registrationLabelStyle: {
+    color: "#777",
+    marginLeft: 5,
+    marginRight: 5,
+    fontSize: 15,
+    fontWeight: "bold",
+  },
+  subTitleTextStyle: {
+    color: COLORS.black_color,
+    fontSize: 13,
+    fontWeight: "bold",
+  },
+  termStyle: {
+    color: "#004eff",
+    marginLeft: 5,
+    marginRight: 5,
+  },
+});

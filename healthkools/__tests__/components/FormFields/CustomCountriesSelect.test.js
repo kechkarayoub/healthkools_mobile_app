@@ -1,17 +1,16 @@
-import React from 'react';
-import { render, fireEvent, waitFor, screen  } from '@testing-library/react-native';
 import CustomCountriesSelect from 'src/Components/FormFields/CustomCountriesSelect';
-// Import the module containing the function you want to mock
-import {get_contries_select_options} from "src/utils/countries_list";
+import React from 'react';
+// Import the module containing the function I want to mock
+import { get_contries_select_options } from "src/utils/countries_list";
+import { render, fireEvent, waitFor, screen } from '@testing-library/react-native';
 
 // Use jest.mock to mock the function
 jest.mock('src/utils/countries_list');
 
 // Define the mock implementation of get_contries_select_options
 get_contries_select_options.mockImplementation((language) => {
-  // Your mock implementation here
-  // You can return whatever mock data you need for your test
-  // For example, if you want to mock it for English and French:
+  // Mock implementation here
+  // I can return whatever mock data you need for your test
   if (language === 'fr') {
     return [
       { label: 'Algerie', value: 'DZ', icon: () => <></> },
@@ -31,7 +30,7 @@ get_contries_select_options.mockImplementation((language) => {
 });
 
 describe('CustomCountriesSelect component', () => {
-  it('renders without crash', async () => {
+  it('Renders without crash', async () => {
     const { getByPlaceholderText } = render(
       <CustomCountriesSelect
         placeholder="Select a country"
@@ -39,14 +38,13 @@ describe('CustomCountriesSelect component', () => {
     );
   });
 
-  it('renders with a placeholder', async () => {
+  it('Renders with a placeholder', async () => {
     const { getByText } = render(
       <CustomCountriesSelect
         placeholder="Select a country"
         current_language="en"
       />
     );
-
     // Wait for the component to be fully rendered
     await waitFor(() => {
       const element = getByText('Select a country');
@@ -54,7 +52,7 @@ describe('CustomCountriesSelect component', () => {
     });
   });
 
-  it('renders with a value', async() => {
+  it('Renders with a value', async() => {
     const { getByText } = render(
       <CustomCountriesSelect
         value="US"
@@ -69,7 +67,7 @@ describe('CustomCountriesSelect component', () => {
     });
   });
 
-  it('calls onSelect when an option is selected', async () => {
+  it('Calls onSelect when an option is selected', async () => {
     const onSelectMock = jest.fn();
     const { getByTestId, getByText, queryByText } = render(
       <CustomCountriesSelect
@@ -97,7 +95,7 @@ describe('CustomCountriesSelect component', () => {
     
   });
 
-  it('disables the dropdown when disabled prop is true', async () => {
+  it('Disables the dropdown when disabled prop is true', async () => {
     const { getByTestId, queryByText } = render(
       <CustomCountriesSelect
         disabled={true}
@@ -114,13 +112,12 @@ describe('CustomCountriesSelect component', () => {
     });
   });
 
-  it('renders with a form error', () => {
+  it('Renders with a form error', () => {
     const { getByText } = render(
       <CustomCountriesSelect
         form_error="This field is required"
       />
     );
-
     const errorElement = getByText('This field is required');
     expect(errorElement).toBeTruthy();
   });

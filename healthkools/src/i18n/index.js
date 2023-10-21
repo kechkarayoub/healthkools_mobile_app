@@ -1,12 +1,9 @@
 import i18next from 'i18next';
-// import { I18nextProvider } from 'react-i18next';
-// import { Updates } from 'expo';
-import * as config from 'src/i18n/config';
 import date from 'src/i18n/date';
-// import languageDetector from 'src/i18n/language_detector';
-// import translationLoader from 'src/i18n/translation_loader';
 import { I18nManager as RNI18nManager } from 'react-native';
-import 'intl-pluralrules'
+import * as config from 'src/i18n/config';
+import 'intl-pluralrules';
+
 const i18n = {
     init: (currentlanguage) => {
         return new Promise((resolve, reject) => {
@@ -87,6 +84,7 @@ const i18n = {
         return map[key];
     }
 };
+
 export const set_locale = i18n.set_locale;
 export const t = i18n.t;
 export default i18n;

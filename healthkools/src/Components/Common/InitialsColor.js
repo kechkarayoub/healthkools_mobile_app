@@ -1,7 +1,6 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-
 import PropTypes from 'prop-types';
+import { StyleSheet, Text, View } from 'react-native';
 
 class InitialsColor extends React.Component {
   constructor(props) {
@@ -28,6 +27,7 @@ class InitialsColor extends React.Component {
     style: null,
     test_id: 'initials_color_test_id',
   }
+
   render() {
     var containerStyle = this.props.containerStyle || {};
     var style = this.props.style || {};
@@ -60,4 +60,5 @@ const styles = StyleSheet.create({
     width: 110,
   },
 });
+
 export default InitialsColor;

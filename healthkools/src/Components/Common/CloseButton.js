@@ -1,12 +1,12 @@
-import React from 'react';
-import {TouchableOpacity,StyleSheet, Text} from 'react-native';
-import { Stack, IconButton } from "@react-native-material/core";
 import Icon from "react-native-vector-icons/FontAwesome";
-
 import PropTypes from 'prop-types';
-import {COLORS} from "src/variables/colors";
-const BUTTON_SIZE = 25
-const BORDER_WIDTH = 1
+import React from 'react';
+import { COLORS } from "src/variables/colors";
+import { Stack, IconButton } from "@react-native-material/core";
+import { StyleSheet } from 'react-native';
+
+const BORDER_WIDTH = 1; // This variable will be used in styling
+const BUTTON_SIZE = 25; // This variable will be used in styling
 
 class CloseButton extends React.Component {
   constructor(props) {
@@ -34,6 +34,7 @@ class CloseButton extends React.Component {
     test_id: 'test_id',
     zIndex: 2,
   }
+
   render() {
     return(
       <Stack
@@ -53,6 +54,7 @@ class CloseButton extends React.Component {
     )
   }
 }
+
 const styles = StyleSheet.create({
   button:{
     alignItems: 'flex-end',

@@ -1,14 +1,15 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import PropTypes from 'prop-types';
+import React from 'react';
 import SignIn from 'src/Components/Home/Components/SignIn';
 import SignUp from 'src/Components/Home/Components/SignUp';
-import React from 'react';
-import { connect } from 'react-redux'
-
-import PropTypes from 'prop-types';
-import {t} from 'src/i18n';
+import { connect } from 'react-redux';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
 import { StyleSheet } from 'react-native';
+import { t } from 'src/i18n';
+
 const Stack = createNativeStackNavigator();
+
 class HomeStackNavigator extends React.Component  {
     constructor(props) {
       super(props);
@@ -24,6 +25,7 @@ class HomeStackNavigator extends React.Component  {
         }, 10);
       }
     }
+
     static getDerivedStateFromProps(props, state) {
       var new_state = {};
       var return_new_state = false;
@@ -33,6 +35,7 @@ class HomeStackNavigator extends React.Component  {
       }
       return return_new_state ? new_state : null;
     }
+
     componentDidUpdate(prevProps, prevState){
       var new_state = {}, set_state = false;
       if(prevState.current_language !== this.state.current_language){
@@ -44,6 +47,7 @@ class HomeStackNavigator extends React.Component  {
         this.setState(new_state);
       }
     }
+
     // static get propTypes() {
     //   return {
     //       current_language: PropTypes.string
@@ -58,6 +62,7 @@ class HomeStackNavigator extends React.Component  {
     // }
     // componentDidUpdate(prevProps, prevState){
     // }
+
     render() {
       return (
         <NavigationContainer style={styles.navigationStyle}>
@@ -73,14 +78,17 @@ class HomeStackNavigator extends React.Component  {
       )
     }
 }
+
 const styles = StyleSheet.create({
     navigationStyle: {
       flex: 1,
     },
 });
+
 const mapStateToProps = (state) => {
   return {
     current_language: state.current_language,
   }
 }
+
 export default connect(mapStateToProps)(HomeStackNavigator);

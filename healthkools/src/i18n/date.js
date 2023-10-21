@@ -1,5 +1,6 @@
 import moment from 'moment';
 import * as config from 'src/i18n/config';
+
 const date = {
     /**
      * Load library, setting its initial locale
@@ -28,4 +29,5 @@ const date = {
         return moment(date).format(format);
     }
 }
+
 export default date;

@@ -1,13 +1,12 @@
-import React from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { StyleSheet, Image } from 'react-native';
-import { connect } from 'react-redux'
-
-import {flags} from "src/_ressources";
 import PropTypes from 'prop-types';
-import {set} from 'src/Store/locale';
-import {t} from 'src/i18n';
-import {COLORS} from "src/variables/colors";
+import React from 'react';
+import { COLORS } from "src/variables/colors";
+import { connect } from 'react-redux'
+import { flags } from "src/_ressources";
+import { set } from 'src/Store/locale';
+import { StyleSheet, Image } from 'react-native';
+import { t } from 'src/i18n';
 
 class LanguagePicker extends React.Component {
   constructor(props) {
@@ -73,7 +72,6 @@ class LanguagePicker extends React.Component {
     test_id: 'test_id',
   }
 
-
   static getDerivedStateFromProps(props, state) {
     var new_state = {};
     var return_new_state = false;
@@ -83,6 +81,7 @@ class LanguagePicker extends React.Component {
     }
     return return_new_state ? new_state : null;
   }
+
   componentDidUpdate(prevProps, prevState){
     // if current_language is changed, we translating languages labels
     if(prevState.current_language !== this.state.current_language){
@@ -103,6 +102,7 @@ class LanguagePicker extends React.Component {
       });
     }
   }
+
   handleChangeLanguage = new_language => {
     if(new_language !== this.state.current_language){
       set("current_language", new_language);
@@ -111,6 +111,7 @@ class LanguagePicker extends React.Component {
       this.props.dispatch(action);
     }
   }
+
   setOpen = (open)=> {
     this.setState({
       open: open
@@ -128,19 +129,20 @@ class LanguagePicker extends React.Component {
       items: callback(state.items)
     }));
   }
+
   render() {
     const { open, current_language, items, list_mode, test_id } = this.state;
     return(
       <DropDownPicker
         dropDownContainerStyle={styles.dropDownContainerStyle}
         items={items}
-        open={open}
         listMode={list_mode}
+        open={open}
         selectedItemContainerStyle={styles.selectedItemContainerStyle}
         selectedItemLabelStyle={styles.selectedItemLabelStyle}
+        setItems={this.setItems}
         setOpen={this.setOpen}
         setValue={this.setValue}
-        setItems={this.setItems}
         style={styles.style}
         testID={test_id}
         value={current_language}
@@ -148,31 +150,34 @@ class LanguagePicker extends React.Component {
     )
   }
 }
+
 const styles = StyleSheet.create({
     iconStyle: {
-      width: 36,
       height: 20,
-    },
-    style: {
-      borderColor: COLORS.default_color,
-      borderRadius: 0,
-      borderBottomColor: COLORS.default_color,
-      borderLeftWidth: 0,
-      borderRightWidth: 0,
+      width: 36,
     },
     dropDownContainerStyle: {
       borderColor: COLORS.default_color,
+    },
+    selectedItemContainerStyle: {
     },
     selectedItemLabelStyle: {
       color: COLORS.default_color,
       fontWeight: "bold",
     },
-    selectedItemContainerStyle: {
+    style: {
+      borderBottomColor: COLORS.default_color,
+      borderColor: COLORS.default_color,
+      borderLeftWidth: 0,
+      borderRadius: 0,
+      borderRightWidth: 0,
     },
 });
+
 const mapStateToProps = (state) => {
   return {
     current_language: state.current_language,
   }
 }
+
 export default connect(mapStateToProps)(LanguagePicker);

@@ -1,4 +1,5 @@
 import * as config from 'src/i18n/config';
+
 const translationLoader = {
     type: 'backend',
     init: () => {},
@@ -10,4 +11,5 @@ const translationLoader = {
         callback(error, resource);
     },
 };
+
 export default translationLoader;

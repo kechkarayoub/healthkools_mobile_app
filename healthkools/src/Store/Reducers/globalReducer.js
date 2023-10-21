@@ -1,5 +1,6 @@
 import { getLocales } from "react-native-localize";
-import {supported_languages} from 'src/config/global';
+import { supported_languages } from 'src/config/global';
+
 let locale_language = getLocales()[0];
 var current_language = "fr";
 var locale_splited = locale_language && locale_language.languageTag && locale_language.languageTag.split("-")[0];
@@ -23,4 +24,5 @@ function gloabalReducer(state, action) {
     return state
   }
 }
+
 export default gloabalReducer;

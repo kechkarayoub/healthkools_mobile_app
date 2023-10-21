@@ -1,6 +1,6 @@
-import React from "react";
-import { render, screen, fireEvent, waitFor } from '@testing-library/react-native';
 import InitialsColor from 'src/Components/Common/InitialsColor';
+import React from "react";
+import { fireEvent, render, screen, waitFor } from '@testing-library/react-native';
 
 describe('InitialsColor component', () => {
   test('Should render without crash', async () => {
