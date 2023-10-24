@@ -44,6 +44,7 @@ class CustomTouchableOpacityWithIcon extends React.Component {
     )
   }
 }
+
 const styles = StyleSheet.create({
   containerStyle: {
     alignItems: 'center',

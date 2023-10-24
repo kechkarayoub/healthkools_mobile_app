@@ -76,6 +76,7 @@ class CustomTextArea extends React.Component {
     }
     return return_new_state ? new_state : null;
   }
+  
   render() {
     const { 
       form_error, icon_url, multiline, numberOfLines, placeholder, secureTextEntry, test_id, underlineColorAndroid, value 

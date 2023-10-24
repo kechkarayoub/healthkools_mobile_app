@@ -136,18 +136,18 @@ class CustomDatePicker extends React.Component {
   render() {
     const { darkMode, disabled, form_error, icon_url, maximumDate, minimumDate, minuteInterval, mode, open_datetime_picker, 
       placeholder, test_id, value} = this.state;
-
     var value_str = value ? get_date_format(moment(value)) : placeholder;
     return (
       <View style={[this.props.containerStyle || styles.datePickerContainer, form_error ? styles.errorStyle : {}]}>
         <CustomTouchableOpacity onPress={() => {
-          if(!disabled){
-            this.setState({open_datetime_picker: true});
-          }
-        }}
-          test_id={test_id + "_date_btn"}
+            if(!disabled){
+              this.setState({open_datetime_picker: true});
+            }
+          }}
           style={styles.dateTextContainerStyle}
-          text={value_str} textStyle={[value ? styles.dateTimeStyle : styles.placeholderStyle, disabled ? styles.disabledStyle : {}]}
+          test_id={test_id + "_date_btn"}
+          text={value_str} 
+          textStyle={[value ? styles.dateTimeStyle : styles.placeholderStyle, disabled ? styles.disabledStyle : {}]}
         />
         {icon_url &&
           <Image style={[styles.datePickerIcon, this.props.iconStyle]} source={icon_url}/>

@@ -51,9 +51,9 @@ class SignUp extends React.Component {
       valid_messages: {},
     }
     this.geo_info_api_done = true;
-    this.getGeoInfo();
+    this.get_geolocation_info();
     if(!t("Arabic")){
-      // Initialize t translation function) if it is not initistialised
+      // Initialize t translation function if it is not initistialised
       setTimeout(() => {
         this.setState({current_language: this.state.current_language});
       }, 10);
@@ -74,7 +74,8 @@ class SignUp extends React.Component {
     return return_new_state ? new_state : null;
   }
 
-  getGeoInfo = () => {
+  get_geolocation_info = () => {
+    // get country code & country phone code from geolocation db api
     if(this.geo_info_api_done){
       this.geo_info_api_done = false;
       const api_key = Config.REACT_APP_GEOLOCATION_DB_API_KEY;
@@ -365,6 +366,7 @@ class SignUp extends React.Component {
     )
   }
 }
+
 const styles = StyleSheet.create({
   background: {
     height: '100%',

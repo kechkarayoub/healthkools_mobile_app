@@ -131,7 +131,7 @@ class LanguagePicker extends React.Component {
   }
 
   render() {
-    const { open, current_language, items, list_mode, test_id } = this.state;
+    const { current_language, items, list_mode, open, test_id } = this.state;
     return(
       <DropDownPicker
         dropDownContainerStyle={styles.dropDownContainerStyle}

@@ -40,15 +40,18 @@ class CloseButton extends React.Component {
       <Stack
         alignItems={this.props.alignItems || "flex-end"}
         elevation={this.props.elevation || 2}
+        fill 
         justifyContent={this.props.justifyContent || "flex-end"}
         marginBottom={this.props.marginBottom || 15}
         marginRight={this.props.marginRight || -35}
+        spacing={4}
         zIndex={this.props.zIndex || 2}
-        fill spacing={4}
       >
-        <IconButton style={styles.button} onPress={this.props.onPress}
-          testID={this.props.test_id || 'test_id'}
+        <IconButton 
           icon={props => <Icon name="close" color={COLORS.default_color} size={BUTTON_SIZE/2} {...props} />}
+          onPress={this.props.onPress}
+          style={styles.button} 
+          testID={this.props.test_id || 'test_id'}
         />
       </Stack>
     )
@@ -65,4 +68,5 @@ const styles = StyleSheet.create({
     width: BUTTON_SIZE + BORDER_WIDTH,
   },
 });
+
 export default CloseButton;

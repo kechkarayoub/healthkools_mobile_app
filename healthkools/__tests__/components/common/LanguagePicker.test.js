@@ -2,7 +2,7 @@ import LanguagePicker from 'src/Components/Common/LanguagePicker';
 import React from "react";
 import store from 'src/Store/configureStore'
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
-import { get_current_languages} from 'src/utils'
+import { get_current_language } from 'src/utils'
 import { Provider } from 'react-redux'
 import { set } from 'src/Store/locale';
 
@@ -80,7 +80,7 @@ describe('LanguagePicker component', () => {
     while(while_cond){
       if(cond){
         cond = false;
-        await get_current_languages(c_l => {
+        await get_current_language(c_l => {
           new_stored_language = c_l;
           while_cond = false;
         });

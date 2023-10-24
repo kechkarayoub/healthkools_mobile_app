@@ -1,6 +1,7 @@
 import Flag from 'react-native-flags';
 import React from 'react';
 
+// List of countries
 export const countries = [
     {
         country_code: "AF",
@@ -2127,6 +2128,7 @@ export const countries = [
     },
 ];
 
+// Get countries ordered by current language
 export const get_countries = (current_language) => {
     var countries_ = countries.sort((a, b) => {
         return a.translations[current_language] < b.translations[current_language] ? -1 : 1;
@@ -2134,6 +2136,7 @@ export const get_countries = (current_language) => {
     return countries_;
 };
 
+// Get countries as select's options
 export const get_contries_select_options = (current_language) => {
     var countries_ = countries.sort((a, b) => {
         return a.translations[current_language] < b.translations[current_language] ? -1 : 1;
@@ -2149,6 +2152,7 @@ export const get_contries_select_options = (current_language) => {
     return countries_options;
 };
 
+// Get country by country code
 export const get_contry_by_code = (country_code) => {
     return countries.filter(country => {
         return country.country_code == country_code || country.phone_code_int == country_code || country.phone_code_str == country_code;

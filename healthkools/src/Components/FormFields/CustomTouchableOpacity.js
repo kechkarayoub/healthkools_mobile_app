@@ -39,6 +39,7 @@ class CustomTouchableOpacity extends React.Component {
     )
   }
 }
+
 const styles = StyleSheet.create({
   buttonContainer: {
     alignItems: 'center',

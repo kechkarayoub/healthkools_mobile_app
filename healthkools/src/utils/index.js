@@ -6,10 +6,20 @@ const phoneUtil = PhoneNumberUtil.getInstance();
 export const COLORS = ["#f36422", "#ffee02", "#f070a9", "#00adef", "#7cc142", "#d02b49"];
 
 export const get_date_format = (moment_obj) => {
+  // Function to format a moment object to a custom date string
+  // Params:
+  //  - moment_obj (object): A moment.js object representing a date
+  // Returns:
+  //  - (string): Formatted date string in the "DD/MM/YYYY" format
   return moment_obj.format("DD/MM/YYYY");
 };
 
 export const line_return = (nbr_line_return) => {
+  // Function to generate a string with a specified number of line breaks
+  // Params:
+  //  - nbr_line_return (number or string): Number of line breaks to generate
+  // Returns:
+  //  - (string): String with the specified number of line breaks ("\n")
   try{
     nbr_line_return = parseInt(nbr_line_return) || 1;
   }
@@ -26,20 +36,40 @@ export const line_return = (nbr_line_return) => {
 };
 
 export const get_datetime_format = (moment_obj) => {
+  // Function to format a moment object to a custom datetime string
+  // Params:
+  //  - moment_obj (object): A moment.js object representing a datetime
+  // Returns:
+  //  - (string): Formatted date string in the "DD/MM/YYYY HH:mm" format
   return moment_obj.format("DD/MM/YYYY HH:mm");
 };
 
 export const get_time_format = (moment_obj) => {
+  // Function to format a moment object to a custom datetime string
+  // Params:
+  //  - moment_obj (object): A moment.js object representing a datetime
+  // Returns:
+  //  - (string): Formatted date string in the "HH:mm" format
   return moment_obj.format("HH:mm");
 };
 
-export const get_current_languages = async (callback) => {
+export const get_current_language = async (callback) => {
+  // Async function to retrieve the current language from local storage
+  // Params:
+  // - callback (function): A callback function to handle the retrieved language
+  //   - Receives the current language as an argument
   await get('current_language', cl => {
     callback(cl);
   });
 };
 
 export const get_local_number_from_international = (international_number) => {
+  // Function to convert an international phone number to a local format
+  // Params:
+  //  - international_number (string): The international phone number to be converted
+  // Returns:
+  //  - (string): Converted local phone number or the original input if conversion fails
+
   var international_number_ = international_number;
   if(international_number && international_number.charAt(0) !== "0" && international_number.charAt(0) !== "+"){
     international_number_ = "+" + international_number_;
@@ -60,6 +90,12 @@ export const get_local_number_from_international = (international_number) => {
 };
 
 export const get_country_phone_code_from_number = (international_number) => {
+  // Function to extract the country phone code from an international phone number
+  // Params:
+  //  - international_number (string): The international phone number to extract the country code from
+  // Returns:
+  //  - (string): Extracted country phone code in the format "+{code}", or an empty string if extraction fails
+
   var international_number_ = international_number;
   if(international_number && international_number.charAt(0) !== "0" && international_number.charAt(0) !== "+"){
     international_number_ = "+" + international_number_;
@@ -81,5 +117,8 @@ export const get_country_phone_code_from_number = (international_number) => {
 };
 
 export const get_random_color = () => {
+  // Function to generate a random color from a predefined array of colors
+  // Returns:
+  //  - (string): A randomly selected color from the COLORS array
   return COLORS[Math.floor(Math.random() * COLORS.length)];
 };

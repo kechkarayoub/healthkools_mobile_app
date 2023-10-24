@@ -54,6 +54,7 @@ class CustomCountriesSelect extends React.Component {
     type_select: "",
     value: "",
   }
+
   static getDerivedStateFromProps(props, state) {
     var new_state = {};
     var return_new_state = false;
@@ -79,6 +80,7 @@ class CustomCountriesSelect extends React.Component {
     }
     return return_new_state ? new_state : null;
   }
+
   componentDidUpdate(prevProps, prevState){
     if(prevState.current_language !== this.state.current_language){
       this.setState({
@@ -87,6 +89,7 @@ class CustomCountriesSelect extends React.Component {
       });
     }
   }
+
   setOpen = (open)=> {
     this.setState({
       open: !this.props.disabled && open,
@@ -94,7 +97,7 @@ class CustomCountriesSelect extends React.Component {
   }
 
   setValue =(callback) => {
-    var new_val = callback()
+    var new_val = callback(); // callback() return selected value
     if(this.props.onSelect){
       this.props.onSelect(new_val);
     }
@@ -102,6 +105,7 @@ class CustomCountriesSelect extends React.Component {
       this.setState({value: new_val});
     }
   }
+  
   render() {
     const {
       countries_options, current_language, disabled, form_error, icon_url, list_mode, open, placeholder, test_id, value,

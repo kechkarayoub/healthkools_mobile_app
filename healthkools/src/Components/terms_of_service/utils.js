@@ -1,15 +1,13 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, Text } from 'react-native';
-import {COLORS} from "src/variables/colors";
-
+import { StyleSheet, Text } from 'react-native';
 
 export const render_term_service_link = (link_url, link_label, onOpen, style) => {
     return <Text style={[style || styles.linkStyle]} onPress={() => onOpen(link_url)}>{link_label}</Text>
 };
+
 export const render_term_service_custom_item = (label, style) => {
     return <Text style={[style || styles.boldBlackStyle]} >{label}</Text>
 };
-
 
 const styles = StyleSheet.create({
     linkStyle: {

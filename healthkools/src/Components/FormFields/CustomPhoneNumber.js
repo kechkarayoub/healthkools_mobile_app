@@ -256,6 +256,7 @@ class CustomPhoneNumber extends React.Component {
     )
   }
 }
+
 const styles = StyleSheet.create({
   buttonCodeContainerStyle: {
     display: 'flex',

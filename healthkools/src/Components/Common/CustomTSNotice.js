@@ -14,7 +14,7 @@ import { t } from 'src/i18n';
 class CustomTSNotice extends React.Component {
   constructor(props) {
     super(props);
-    this.data = get_data();
+    this.data = get_data();  // Site information
     this.state = {
       cookies_policy_articles: get_cookies_policy_articles(this.data, (url) => this.handleOpenUrl(url)),
       current_language: props.current_language,
@@ -26,6 +26,7 @@ class CustomTSNotice extends React.Component {
       terms_of_services_articles: get_terms_of_services_articles(this.data, (url) => this.handleOpenUrl(url)),
     };
   }
+
   static getDerivedStateFromProps(props, state) {
     var new_state = {};
     var return_new_state = false;
@@ -39,6 +40,7 @@ class CustomTSNotice extends React.Component {
     }
     return return_new_state ? new_state : null;
   }
+
   componentDidUpdate(prevProps, prevState){
     var new_state = {}, set_state = false;
     if(prevState.current_language !== this.state.current_language){
@@ -53,6 +55,7 @@ class CustomTSNotice extends React.Component {
       this.setState(new_state);
     }
   }
+
   static propTypes = {
     current_language: PropTypes.string,
     is_not_button: PropTypes.bool,
@@ -66,6 +69,7 @@ class CustomTSNotice extends React.Component {
       PropTypes.object,
     ]),
   }
+
   static defaultProps = {
     current_language: "en",
     is_not_button: false,
@@ -78,6 +82,10 @@ class CustomTSNotice extends React.Component {
   }
 
   handleOpenUrl = async (url) => {
+    // Asynchronous function to handle the opening of a URL
+    // Params:
+    //  - url (string): The URL to be opened
+    // decodeURIComponent(url): Decode the URL before opening it asynchronously using Linking API
     await Linking.openURL(decodeURIComponent(url));
   }
 
@@ -96,35 +104,37 @@ class CustomTSNotice extends React.Component {
       open_terms_of_service: false,
     });
   }
+
   renderTermsOfService = () => {
     const {current_language, terms_of_services_articles} = this.state;
     return <View style={styles.TSContainerStyle}>
       {terms_of_services_articles.map((terms_of_services_article, idx) => {
-          return <View key={idx} style={styles.articleStyle}>
-            <View  style={styles.articleTitleStyle}>
-              <View><Text style={styles.articleTitleNumberStyle}>{t("Item") + " " + (idx + 1) + ": "}</Text></View>
-              <View style={{ flexShrink: 1 }}>{terms_of_services_article.title[current_language]()}</View>
-            </View>
-            {terms_of_services_article.paragraphs.map((paragraph, idx_p) => {
-              return <View key={idx_p} style={styles.paragraphStyle}>
-                <View style={styles.paragraphContentStyle}>
-                  {paragraph[current_language]()}
-                </View>
-                {paragraph.list_items &&
-                  <View style={styles.paragraphListItemsContentStyle}>
-                    {paragraph.list_items.map((li, idx_li) => {
-                      return <View key={idx_p + "_" + idx_li} style={styles.paragraphItemStyle}>
-                        {li[current_language]()}
-                      </View>
-                    })}
-                  </View>
-                }
-              </View>
-            })}
+        return <View key={idx} style={styles.articleStyle}>
+          <View  style={styles.articleTitleStyle}>
+            <View><Text style={styles.articleTitleNumberStyle}>{t("Item") + " " + (idx + 1) + ": "}</Text></View>
+            <View style={{ flexShrink: 1 }}>{terms_of_services_article.title[current_language]()}</View>
           </View>
-        })}
+          {terms_of_services_article.paragraphs.map((paragraph, idx_p) => {
+            return <View key={idx_p} style={styles.paragraphStyle}>
+              <View style={styles.paragraphContentStyle}>
+                {paragraph[current_language]()}
+              </View>
+              {paragraph.list_items &&
+                <View style={styles.paragraphListItemsContentStyle}>
+                  {paragraph.list_items.map((li, idx_li) => {
+                    return <View key={idx_p + "_" + idx_li} style={styles.paragraphItemStyle}>
+                      {li[current_language]()}
+                    </View>
+                  })}
+                </View>
+              }
+            </View>
+          })}
+        </View>
+      })}
     </View>
   }
+
   renderCookiePolicy = () => {
     const {current_language, cookies_policy_articles} = this.state;
     return <View style={styles.TSContainerStyle}>
@@ -132,47 +142,48 @@ class CustomTSNotice extends React.Component {
         {cookies_policy_articles.intro[current_language]()}
       </View>
       {cookies_policy_articles.items.map((cookies_policy_article, idx) => {
-          return <View key={idx} style={styles.articleStyle}>
-            <View  style={styles.articleTitleStyle}>
-              {/*<View><Text style={styles.articleTitleNumberStyle}>{t("Item") + " " + (idx + 1) + ": "}</Text></View>*/}
-              <View style={{ flexShrink: 1 }}>{cookies_policy_article.title[current_language]()}</View>
-            </View>
-            {cookies_policy_article.intro &&
-              <View  style={styles.paragraphStyle}>
-                {cookies_policy_article.intro[current_language]()}
-              </View>
-            }
-            {cookies_policy_article.paragraphs.map((paragraph, idx_p) => {
-              return <View key={idx_p} style={styles.paragraphStyle}>
-                <View style={styles.paragraphContentStyle}>
-                  {paragraph[current_language]()}
-                </View>
-                {paragraph.list_items &&
-                  <View style={styles.paragraphListItemsContentStyle}>
-                    {paragraph.list_items.map((li, idx_li) => {
-                      return <View key={idx_p + "_" + idx_li} style={styles.paragraphStyle}>
-                        <View  style={styles.paragraphItemStyle}>
-                          {li[current_language]()}
-                        </View>
-                        {li.sub_list_items &&
-                          <View style={styles.paragraphSubListItemsContentStyle}>
-                            {li.sub_list_items.map((sli, idx_sli) => {
-                              return <View key={idx_p + "_" + idx_li + "_" + idx_sli} style={styles.paragraphItemStyle}>
-                                {sli[current_language]()}
-                              </View>
-                            })}
-                          </View>
-                        }
-                      </View>
-                    })}
-                  </View>
-                }
-              </View>
-            })}
+        return <View key={idx} style={styles.articleStyle}>
+          <View  style={styles.articleTitleStyle}>
+            {/*<View><Text style={styles.articleTitleNumberStyle}>{t("Item") + " " + (idx + 1) + ": "}</Text></View>*/}
+            <View style={{ flexShrink: 1 }}>{cookies_policy_article.title[current_language]()}</View>
           </View>
-        })}
+          {cookies_policy_article.intro &&
+            <View  style={styles.paragraphStyle}>
+              {cookies_policy_article.intro[current_language]()}
+            </View>
+          }
+          {cookies_policy_article.paragraphs.map((paragraph, idx_p) => {
+            return <View key={idx_p} style={styles.paragraphStyle}>
+              <View style={styles.paragraphContentStyle}>
+                {paragraph[current_language]()}
+              </View>
+              {paragraph.list_items &&
+                <View style={styles.paragraphListItemsContentStyle}>
+                  {paragraph.list_items.map((li, idx_li) => {
+                    return <View key={idx_p + "_" + idx_li} style={styles.paragraphStyle}>
+                      <View  style={styles.paragraphItemStyle}>
+                        {li[current_language]()}
+                      </View>
+                      {li.sub_list_items &&
+                        <View style={styles.paragraphSubListItemsContentStyle}>
+                          {li.sub_list_items.map((sli, idx_sli) => {
+                            return <View key={idx_p + "_" + idx_li + "_" + idx_sli} style={styles.paragraphItemStyle}>
+                              {sli[current_language]()}
+                            </View>
+                          })}
+                        </View>
+                      }
+                    </View>
+                  })}
+                </View>
+              }
+            </View>
+          })}
+        </View>
+      })}
     </View>
   }
+
   renderDataUsePolicy = () => {
     const {current_language, data_use_policy_articles} = this.state;
     return <View style={styles.TSContainerStyle}>
@@ -180,47 +191,48 @@ class CustomTSNotice extends React.Component {
         {data_use_policy_articles.intro[current_language]()}
       </View>
       {data_use_policy_articles.items.map((data_use_policy_article, idx) => {
-          return <View key={idx} style={styles.articleStyle}>
-            <View  style={styles.articleTitleStyle}>
-              {/*<View><Text style={styles.articleTitleNumberStyle}>{t("Item") + " " + (idx + 1) + ": "}</Text></View>*/}
-              <View style={{ flexShrink: 1 }}>{data_use_policy_article.title[current_language]()}</View>
-            </View>
-            {data_use_policy_article.intro &&
-              <View  style={styles.paragraphStyle}>
-                {data_use_policy_article.intro[current_language]()}
-              </View>
-            }
-            {data_use_policy_article.paragraphs.map((paragraph, idx_p) => {
-              return <View key={idx_p} style={styles.paragraphStyle}>
-                <View style={styles.paragraphContentStyle}>
-                  {paragraph[current_language]()}
-                </View>
-                {paragraph.list_items &&
-                  <View style={styles.paragraphListItemsContentStyle}>
-                    {paragraph.list_items.map((li, idx_li) => {
-                      return <View key={idx_p + "_" + idx_li} style={styles.paragraphStyle}>
-                        <View  style={styles.paragraphItemStyle}>
-                          {li[current_language]()}
-                        </View>
-                        {li.sub_list_items &&
-                          <View style={styles.paragraphSubListItemsContentStyle}>
-                            {li.sub_list_items.map((sli, idx_sli) => {
-                              return <View key={idx_p + "_" + idx_li + "_" + idx_sli} style={styles.paragraphItemStyle}>
-                                {sli[current_language]()}
-                              </View>
-                            })}
-                          </View>
-                        }
-                      </View>
-                    })}
-                  </View>
-                }
-              </View>
-            })}
+        return <View key={idx} style={styles.articleStyle}>
+          <View  style={styles.articleTitleStyle}>
+            {/*<View><Text style={styles.articleTitleNumberStyle}>{t("Item") + " " + (idx + 1) + ": "}</Text></View>*/}
+            <View style={{ flexShrink: 1 }}>{data_use_policy_article.title[current_language]()}</View>
           </View>
-        })}
+          {data_use_policy_article.intro &&
+            <View  style={styles.paragraphStyle}>
+              {data_use_policy_article.intro[current_language]()}
+            </View>
+          }
+          {data_use_policy_article.paragraphs.map((paragraph, idx_p) => {
+            return <View key={idx_p} style={styles.paragraphStyle}>
+              <View style={styles.paragraphContentStyle}>
+                {paragraph[current_language]()}
+              </View>
+              {paragraph.list_items &&
+                <View style={styles.paragraphListItemsContentStyle}>
+                  {paragraph.list_items.map((li, idx_li) => {
+                    return <View key={idx_p + "_" + idx_li} style={styles.paragraphStyle}>
+                      <View  style={styles.paragraphItemStyle}>
+                        {li[current_language]()}
+                      </View>
+                      {li.sub_list_items &&
+                        <View style={styles.paragraphSubListItemsContentStyle}>
+                          {li.sub_list_items.map((sli, idx_sli) => {
+                            return <View key={idx_p + "_" + idx_li + "_" + idx_sli} style={styles.paragraphItemStyle}>
+                              {sli[current_language]()}
+                            </View>
+                          })}
+                        </View>
+                      }
+                    </View>
+                  })}
+                </View>
+              }
+            </View>
+          })}
+        </View>
+      })}
     </View>
   }
+  
   render() {
     const { current_language, open_cookie_policy, open_data_use_policy, open_terms_of_service, registration_label } = this.state;
     var terms_service_notice = get_terms_service_notice({registration_label: registration_label})
@@ -378,4 +390,5 @@ const mapStateToProps = (state) => {
     current_language: state.current_language,
   }
 }
+
 export default connect(mapStateToProps)(CustomTSNotice);

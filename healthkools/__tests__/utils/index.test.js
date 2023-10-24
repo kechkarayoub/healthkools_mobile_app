@@ -1,5 +1,5 @@
 import moment from "moment";
-import { COLORS, get_country_phone_code_from_number, get_current_languages, get_date_format, 
+import { COLORS, get_country_phone_code_from_number, get_current_language, get_date_format, 
   get_datetime_format, get_local_number_from_international, get_random_color, get_time_format } from 'src/utils/index';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
 import { set } from 'src/Store/locale';
@@ -40,11 +40,11 @@ describe('Test get_time_format', () => {
   });
 });
 
-describe('Test get_current_languages', () => {
+describe('Test get_current_language', () => {
   test('Should render default stored language', async () => {
     var current_language;
     await act(async () => {
-      get_current_languages((cl) => {
+      get_current_language((cl) => {
         current_language = cl;
       })
     });
@@ -54,7 +54,7 @@ describe('Test get_current_languages', () => {
     var current_language;
     set("current_language", "ar");
     await act(async () => {
-      get_current_languages((cl) => {
+      get_current_language((cl) => {
         current_language = cl;
       })
     });
