@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "test_v": "jest --verbose"
   },
   "dependencies": {
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.0.0-0",

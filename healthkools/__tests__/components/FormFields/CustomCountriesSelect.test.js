@@ -2,7 +2,7 @@ import CustomCountriesSelect from 'src/Components/FormFields/CustomCountriesSele
 import React from 'react';
 // Import the module containing the function I want to mock
 import { get_contries_select_options } from "src/utils/countries_list";
-import { render, fireEvent, waitFor, screen } from '@testing-library/react-native';
+import { act, fireEvent, render, waitFor } from '@testing-library/react-native';
 
 // Use jest.mock to mock the function
 jest.mock('src/utils/countries_list');
@@ -88,10 +88,12 @@ describe('CustomCountriesSelect component', () => {
     });
     // Select an option (e.g., "United States")
     const optionToSelect = getByText('United states');
-    fireEvent.press(optionToSelect);
-    // Check if onSelect was called with the selected value
-    expect(onSelectMock).toHaveBeenCalled();
-    expect(onSelectMock).toHaveBeenCalledWith('US');
+    await act(async () => {
+      fireEvent.press(optionToSelect);
+      // Check if onSelect was called with the selected value
+      expect(onSelectMock).toHaveBeenCalled();
+      expect(onSelectMock).toHaveBeenCalledWith('US');
+    });
     
   });
 
