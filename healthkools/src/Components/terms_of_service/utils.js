@@ -12,23 +12,23 @@ export const render_term_service_custom_item = (label, style) => {
 const styles = StyleSheet.create({
     linkStyle: {
       color: "#0d6efd",
+      fontSize: 15,
+      fontWeight: "bold",
       marginLeft: 5,
       marginRight: 5,
-        fontWeight: "bold",
-        fontSize: 15,
     },
     boldBlackStyle: {
       color: "#000000",
+      fontSize: 15,
+      fontWeight: "bold",
       marginLeft: 5,
       marginRight: 5,
-        fontWeight: "bold",
-        fontSize: 15,
     },
     customItemStyle: {
         color: "#000000",
+        fontSize: 15,
+        fontWeight: "bold",
         marginLeft: 5,
         marginRight: 5,
-          fontWeight: "bold",
-          fontSize: 15,
     },
   });

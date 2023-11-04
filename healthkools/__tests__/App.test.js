@@ -1,6 +1,6 @@
 import App from '../App';
 import React from 'react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { render } from '@testing-library/react-native';
 import 'react-native';
 
 jest.mock('react-native-localize', () => ({

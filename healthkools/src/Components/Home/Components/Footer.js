@@ -1,8 +1,18 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { logos } from 'src/images';
 
 class Footer extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    static propTypes = {
+    }
+    
+    static defaultProps = {
+    }
+
     render() {
         return (
             <View style={styles.footer}>

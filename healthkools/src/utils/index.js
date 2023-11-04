@@ -1,6 +1,7 @@
 // import {supported_languages} from 'src/config/global';
 import { get } from 'src/Store/locale';
 import { PhoneNumberUtil } from 'google-libphonenumber';
+
 const phoneUtil = PhoneNumberUtil.getInstance();
 
 export const COLORS = ["#f36422", "#ffee02", "#f070a9", "#00adef", "#7cc142", "#d02b49"];

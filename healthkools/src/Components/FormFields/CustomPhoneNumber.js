@@ -6,7 +6,7 @@ import Flag from 'react-native-flags';
 import Overlay from 'react-native-modal-overlay';
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { FlatList, StyleSheet, View, Text } from 'react-native'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
 import { get_countries, get_contry_by_code } from "src/utils/countries_list";
 import { PhoneNumberUtil } from 'google-libphonenumber';
 
@@ -123,16 +123,19 @@ class CustomPhoneNumber extends React.Component {
       this.searched_list = this.all_countries;
     }
   }
+
   componentDidMount () {
   }
 
   openSelectCountry () {
+    // Open countries list to select country code
     this.setState({
       is_visible_code_select: true,
     });
   }
 
   closeOverlay = () => {
+    // Close country list
     this.searched_list = this.all_countries;
     this.setState({
       is_visible_code_select: false,
@@ -141,6 +144,7 @@ class CustomPhoneNumber extends React.Component {
   }
 
   selectCountry = (item) => {
+    // A country is selected
     this.setState({
       country_phone_code: item.phone_code_str,
       is_visible_code_select: false,
@@ -156,6 +160,7 @@ class CustomPhoneNumber extends React.Component {
   }
 
   renderItem = ({ item }) => {
+    // Render country
     return <View style={styles.CountryItemStyle}>
       <Flag code={item.country_code} size={32}  onPress={() => this.selectCountry(item)}/>
       <Text style={styles.CountryItemNameStyle}  onPress={() => this.selectCountry(item)}>{item.translations[this.state.current_language]} ({item.phone_code_str})</Text>
@@ -174,6 +179,7 @@ class CustomPhoneNumber extends React.Component {
   }
 
   inputTextChange = number => {
+    // Phone number is changed
     if(this.props.onChangeText){
       this.props.onChangeText(number, this.state.country_phone_code);
     }

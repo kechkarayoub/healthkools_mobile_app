@@ -1,16 +1,18 @@
 import LanguagePicker from 'src/Components/Common/LanguagePicker';
 import React from "react";
-import store from 'src/Store/configureStore'
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import store from 'src/Store/configureStore';
+import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import { get_current_language } from 'src/utils'
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
 import { set } from 'src/Store/locale';
 
 jest.mock('react-native-localize', () => ({
   // Mock the getLocales for testing
   getLocales: jest.fn(() => [{ countryCode: 'FR', languageTag: 'fr-FR' }]),
 }));
+
 const current_language = "fr";
+
 set("current_language", current_language);
 
 describe('LanguagePicker component', () => {
@@ -21,6 +23,7 @@ describe('LanguagePicker component', () => {
       </Provider>
     );
   });
+
   test('Should contains props data', async () => {
     render(
       <Provider store={store}>
@@ -38,6 +41,7 @@ describe('LanguagePicker component', () => {
     expect(drop_down_pickers_by_text_fr).toHaveLength(1);
 
   });
+  
   test('Should language change', async () => {
     render(
       <Provider store={store}>

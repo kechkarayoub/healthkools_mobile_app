@@ -1,8 +1,8 @@
 import React from "react";
 import SignUp from 'src/Components/Home/Components/SignUp';
-import Store from 'src/Store/configureStore'
+import Store from 'src/Store/configureStore';
 import { Provider } from 'react-redux'
-import { fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { render } from '@testing-library/react-native';
 
 jest.mock('react-native-localize', () => ({
   // Mock getLocales for testing

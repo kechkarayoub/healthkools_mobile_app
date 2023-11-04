@@ -15,6 +15,7 @@ class CloseButton extends React.Component {
 
   static propTypes = {
     alignItems: PropTypes.string,
+    disabled: PropTypes.bool,
     elevation: PropTypes.number,
     justifyContent: PropTypes.string,
     marginBottom: PropTypes.number,
@@ -26,6 +27,7 @@ class CloseButton extends React.Component {
 
   static defaultProps = {
     alignItems: "flex-end",
+    disabled: false,
     elevation: 2,
     justifyContent: "flex-end",
     marginBottom: 15,
@@ -49,7 +51,7 @@ class CloseButton extends React.Component {
       >
         <IconButton 
           icon={props => <Icon name="close" color={COLORS.default_color} size={BUTTON_SIZE/2} {...props} />}
-          onPress={this.props.onPress}
+          onPress={this.props.disabled ? () => {} : this.props.onPress}
           style={styles.button} 
           testID={this.props.test_id || 'test_id'}
         />

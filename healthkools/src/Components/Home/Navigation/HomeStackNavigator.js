@@ -36,6 +36,14 @@ class HomeStackNavigator extends React.Component  {
       return return_new_state ? new_state : null;
     }
 
+    static propTypes = {
+      current_language: PropTypes.string,
+    }
+
+    static defaultProps = {
+      current_language: 'en',
+    }
+
     componentDidUpdate(prevProps, prevState){
       var new_state = {}, set_state = false;
       if(prevState.current_language !== this.state.current_language){

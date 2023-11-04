@@ -21,15 +21,19 @@ class AppInit extends Component{
       }
     });
   }
+
   componentDidMount() {
     this.handleInitLanguage();
   }
-  // static get propTypes() {
-  //   return {
-  //     current_language: PropTypes.string,
-  //     dispatch: PropTypes.fun,
-  //   };
-  // }
+  
+  static propTypes = {
+    current_language: PropTypes.string,
+  }
+  
+  static defaultProps = {
+    current_language: 'en',
+  }
+
   static getDerivedStateFromProps(props, state) {
     var new_state = {};
     var return_new_state = false;
@@ -39,11 +43,13 @@ class AppInit extends Component{
     }
     return return_new_state ? new_state : null;
   }
+
   componentDidUpdate(prevProps, prevState){
     if(prevState.current_language != this.state.current_language){
       this.handleInitLanguage(true);
     }
   }
+
   handleInitLanguage = (reload) => {
       i18n.init(this.state.current_language)
           .then(() => {
@@ -72,6 +78,7 @@ class AppInit extends Component{
           })
           .catch((error) => console.warn(error));
   }
+
   render(){
     return (
       <I18nextProvider i18n={i18n}>
@@ -100,6 +107,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
 const mapStateToProps = (state) => {
   return {
     current_language: state.current_language

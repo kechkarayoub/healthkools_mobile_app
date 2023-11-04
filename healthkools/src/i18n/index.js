@@ -1,5 +1,5 @@
-import i18next from 'i18next';
 import date from 'src/i18n/date';
+import i18next from 'i18next';
 import { I18nManager as RNI18nManager } from 'react-native';
 import * as config from 'src/i18n/config';
 import 'intl-pluralrules';

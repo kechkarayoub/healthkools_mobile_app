@@ -1,6 +1,6 @@
 import InitialsColor from 'src/Components/Common/InitialsColor';
 import React from "react";
-import { fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { fireEvent, render, screen } from '@testing-library/react-native';
 
 describe('InitialsColor component', () => {
   test('Should render without crash', async () => {
@@ -10,6 +10,7 @@ describe('InitialsColor component', () => {
     const initials_color_by_test_id = screen.queryAllByTestId('initials_color_test_id');
     expect(initials_color_by_test_id).toHaveLength(1);
   });
+
   test('Should contains props data', async () => {
     render(
       <InitialsColor
@@ -24,6 +25,7 @@ describe('InitialsColor component', () => {
     // screen.debug()
 
   });
+
   test('Should onPress called', async () => {
     const onPress = jest.fn();
     render(

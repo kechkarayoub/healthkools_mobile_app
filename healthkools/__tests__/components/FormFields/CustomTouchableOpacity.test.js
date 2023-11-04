@@ -1,6 +1,6 @@
 import CustomTouchableOpacity from 'src/Components/FormFields/CustomTouchableOpacity';
 import React from "react";
-import { fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { fireEvent, render, screen } from '@testing-library/react-native';
 
 describe('CustomTouchableOpacity component', () => {
   test('Should render without crash', async () => {
@@ -8,6 +8,7 @@ describe('CustomTouchableOpacity component', () => {
       <CustomTouchableOpacity />
     );
   });
+
   test('Should contains props data', async () => {
     render(
       <CustomTouchableOpacity
@@ -22,6 +23,7 @@ describe('CustomTouchableOpacity component', () => {
     // screen.debug()
 
   });
+  
   test('Should onPress called', async () => {
     const onPress = jest.fn();
     render(

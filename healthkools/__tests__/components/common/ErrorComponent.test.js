@@ -1,6 +1,6 @@
 import ErrorComponent from 'src/Components/Common/ErrorComponent';
 import React from "react";
-import { fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { render, screen, waitFor } from '@testing-library/react-native';
 
 describe('ErrorComponent component', () => {
   test('Should render without crash', async () => {
@@ -8,6 +8,7 @@ describe('ErrorComponent component', () => {
       <ErrorComponent />
     );
   });
+  
   test('Should contains props data', async () => {
     render(
       <ErrorComponent

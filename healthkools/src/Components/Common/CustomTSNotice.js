@@ -3,7 +3,7 @@ import Overlay from 'react-native-modal-overlay';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { COLORS } from "src/variables/colors";
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { get_cookies_policy_articles } from 'src/Components/terms_of_service/cookies_policy';
 import { get_data } from "src/Components/terms_of_service/data";
 import { get_data_use_policy_articles } from 'src/Components/terms_of_service/data_use_policy';

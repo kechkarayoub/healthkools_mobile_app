@@ -100,6 +100,7 @@ class SignUp extends React.Component {
     ]),
     registration_label: PropTypes.string,
   }
+  
   static defaultProps = {
     current_language: 'en',
     navigation: null,

@@ -1,6 +1,6 @@
 import CustomTouchableOpacityWithIcon from 'src/Components/FormFields/CustomTouchableOpacityWithIcon';
 import React from "react";
-import { fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { fireEvent, render, screen } from '@testing-library/react-native';
 
 describe('CustomTouchableOpacity component', () => {
   test('Should render without crash', async () => {
@@ -8,6 +8,7 @@ describe('CustomTouchableOpacity component', () => {
       <CustomTouchableOpacityWithIcon />
     );
   });
+
   test('Should contains props data', async () => {
     render(
       <CustomTouchableOpacityWithIcon
@@ -21,6 +22,7 @@ describe('CustomTouchableOpacity component', () => {
     expect(touchable_opacities_with_icons_by_text).toHaveLength(1);
     // screen.debug()
   });
+  
   test('Should onPress called', async () => {
     const onPress = jest.fn();
     render(

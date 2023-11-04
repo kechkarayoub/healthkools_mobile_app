@@ -52,6 +52,18 @@ class SignIn extends React.Component {
     this.props.dispatch(action);
   }
 
+  static propTypes = {
+    current_language: PropTypes.string,
+    navigation: PropTypes.oneOfType([
+      PropTypes.object,
+    ]),
+  }
+  
+  static defaultProps = {
+    current_language: 'en',
+    navigation: null,
+  }
+
   render() {
     const username_or_email = this.state.username_or_email, password = this.state.password, current_language = this.state.current_language;
     return (

@@ -1,7 +1,7 @@
 import moment from "moment";
 import { COLORS, get_country_phone_code_from_number, get_current_language, get_date_format, 
   get_datetime_format, get_local_number_from_international, get_random_color, get_time_format } from 'src/utils/index';
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { act } from '@testing-library/react-native';
 import { set } from 'src/Store/locale';
 
 jest.mock('react-native-localize', () => ({
@@ -50,6 +50,7 @@ describe('Test get_current_language', () => {
     });
     expect(current_language).toBe("fr");
   });
+
   test('Should render stored language', async () => {
     var current_language;
     set("current_language", "ar");
@@ -67,10 +68,12 @@ describe('Test get_local_number_from_international', () => {
     var local_number = get_local_number_from_international(null);
     expect(local_number).toBe(null);
   });
+
   test('Should render undefined if undefined', async () => {
     var local_number = get_local_number_from_international();
     expect(local_number).toBe(undefined);
   });
+  
   test('Should format number', async () => {
     var local_number = get_local_number_from_international("+212612121212");
     expect(local_number).toBe("0612121212");

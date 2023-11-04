@@ -1,6 +1,6 @@
 import CustomTextArea from 'src/Components/FormFields/CustomTextArea';
 import React from "react";
-import { fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { fireEvent, render, screen } from '@testing-library/react-native';
 
 const current_language = "en";
 
@@ -12,6 +12,7 @@ describe('CustomTextArea component', () => {
     const components_errors_by_text = screen.queryAllByText('form_error');
     expect(components_errors_by_text).toHaveLength(0);
   });
+
   test('Should contains props data', async () => {
     render(
       <CustomTextArea
@@ -29,6 +30,7 @@ describe('CustomTextArea component', () => {
     expect(components_errors_by_text).toHaveLength(1);
     // screen.debug()
   });
+
   test('Should contains props data 2', async () => {
     render(
       <CustomTextArea
@@ -43,6 +45,7 @@ describe('CustomTextArea component', () => {
     // console.log(textarea_by_test_id.props)
     // screen.debug()
   });
+
   test('Should value change', async () => {
     render(
       <CustomTextArea
@@ -61,6 +64,7 @@ describe('CustomTextArea component', () => {
     expect(textarea_by_test_id.props.value).toBe("new_val_test");
     // screen.debug()
   });
+  
   test('Should value change with onChangeText props', async () => {
     const onChangeText = jest.fn();
     render(

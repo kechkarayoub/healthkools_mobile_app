@@ -1,8 +1,7 @@
 import CustomCountriesSelect from 'src/Components/FormFields/CustomCountriesSelect';
 import React from 'react';
-// Import the module containing the function I want to mock
-import { get_contries_select_options } from "src/utils/countries_list";
 import { act, fireEvent, render, waitFor } from '@testing-library/react-native';
+import { get_contries_select_options } from "src/utils/countries_list";
 
 // Use jest.mock to mock the function
 jest.mock('src/utils/countries_list');

@@ -4,27 +4,6 @@ import { clear, get, set } from "src/Store/locale";
 
 const instance = axios.create({ baseURL: Config.REACT_APP_URL_BACKEND });
 
-const mapAuthError = message => {
-  if (message.error === "not_activated") {
-    return `Ton compte n'a pas encore été activé - Le message d'activation a été envoyé à l'adresse ${message.parent_email}`;
-  } else if (message.error === "no_subscription") {
-    return "Votre abonnement a expiré";
-  } else if (message.error === "not_email_active") {
-    return [
-      `Ton compte n'a pas encore été activé - Le message d'activation a été envoyé à l'adresse ${message.email}`,
-      "mail_not_yet_verified"
-    ];
-  } else if (message.error === "not_phone_active") {
-    return [
-      `Ton compte n'a pas encore été activé - Le code d'activation a été envoyé au numéro ${message.phone}`,
-      "phone_not_yet_verified"
-    ];
-  } else {
-    return "Username or Password incorrect";
-  }
-  //return "Erreur d'authentification";
-};
-
 var check_if_email_or_username_exists_api_sent = false;
 export const check_if_email_or_username_exists_api_get = (data) => {
   if(!check_if_email_or_username_exists_api_sent){
@@ -104,6 +83,27 @@ export const login = data => {
       }
       console.log(err);
     });
+};
+
+const mapAuthError = message => {
+  if (message.error === "not_activated") {
+    return `Ton compte n'a pas encore été activé - Le message d'activation a été envoyé à l'adresse ${message.parent_email}`;
+  } else if (message.error === "no_subscription") {
+    return "Votre abonnement a expiré";
+  } else if (message.error === "not_email_active") {
+    return [
+      `Ton compte n'a pas encore été activé - Le message d'activation a été envoyé à l'adresse ${message.email}`,
+      "mail_not_yet_verified"
+    ];
+  } else if (message.error === "not_phone_active") {
+    return [
+      `Ton compte n'a pas encore été activé - Le code d'activation a été envoyé au numéro ${message.phone}`,
+      "phone_not_yet_verified"
+    ];
+  } else {
+    return "Username or Password incorrect";
+  }
+  //return "Erreur d'authentification";
 };
 
 export const register = data => {

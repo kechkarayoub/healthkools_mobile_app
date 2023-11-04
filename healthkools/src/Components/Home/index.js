@@ -12,11 +12,14 @@ class Home extends React.Component {
       selected_view: 'sign_in',
     };
   }
-  // static get propTypes() {
-  //   return {
-  //       t: PropTypes.func
-  //   };
-  // }
+  
+
+  static propTypes = {
+    current_language: PropTypes.string,
+  }
+  static defaultProps = {
+    current_language: 'en',
+  }
 
   render() {
     return (

@@ -1,6 +1,6 @@
 import CustomPhoneNumber from 'src/Components/FormFields/CustomPhoneNumber';
 import React from "react";
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { fireEvent, render, screen } from '@testing-library/react-native';
 
 jest.mock('react-native-localize', () => ({
   // Mock getLocales for testing
@@ -17,6 +17,7 @@ describe('CustomPhoneNumber component', () => {
     const components_errors_by_text = screen.queryAllByText('form_error');
     expect(components_errors_by_text).toHaveLength(0);
   });
+
   test('Should contains props data', async () => {
     render(
       <CustomPhoneNumber
@@ -37,6 +38,7 @@ describe('CustomPhoneNumber component', () => {
     expect(components_errors_by_text).toHaveLength(1);
 
   });
+
   test('Should contains props data 2', async () => {
     render(
       <CustomPhoneNumber
@@ -57,6 +59,7 @@ describe('CustomPhoneNumber component', () => {
     //screen.debug()
 
   });
+  
   // test('Should Country not change if not onChangeText prop', async () => {
   //   render(
   //     <CustomPhoneNumber

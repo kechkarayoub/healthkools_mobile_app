@@ -1,6 +1,6 @@
 import CloseButton from 'src/Components/Common/CloseButton';
 import React from "react";
-import { fireEvent, render, screen, waitFor } from '@testing-library/react-native';
+import { fireEvent, render, screen } from '@testing-library/react-native';
 
 describe('CloseButton component', () => {
   test('Should render without crash', async () => {
@@ -8,6 +8,7 @@ describe('CloseButton component', () => {
       <CloseButton />
     );
   });
+
   test('Should contains props data', async () => {
     render(
       <CloseButton
@@ -19,6 +20,7 @@ describe('CloseButton component', () => {
     // screen.debug()
 
   });
+
   test('Should onPress called', async () => {
     const onPress = jest.fn();
     render(
