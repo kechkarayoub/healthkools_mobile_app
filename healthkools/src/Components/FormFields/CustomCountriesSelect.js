@@ -128,7 +128,7 @@ class CustomCountriesSelect extends React.Component {
           selectedItemContainerStyle={styles.selectedItemContainerStyle}
           setOpen={(open_) => this.setOpen(open_)}
           setValue={this.setValue}
-          style={styles.style}
+          style={{...styles.style, ...(disabled ? styles.disabledStyle : {})}}
           value={value}
         />
         {icon_url &&
@@ -159,6 +159,9 @@ const styles = StyleSheet.create({
       shadowOpacity: 0,
       width: 255,
       zIndex: 300, // works on ios
+    },
+    disabledStyle: {
+      opacity: 0.6,
     },
     dropDownContainerStyle: {
       borderColor: COLORS.default_color,

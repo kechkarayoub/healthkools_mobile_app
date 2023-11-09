@@ -111,6 +111,7 @@ describe('CustomCountriesSelect component', () => {
     await waitFor(() => {
       expect(queryByText('United states')).toBeNull();
     });
+    expect(dropdownButton.props.accessibilityState.disabled).toBe(true);
   });
 
   it('Renders with a form error', () => {
