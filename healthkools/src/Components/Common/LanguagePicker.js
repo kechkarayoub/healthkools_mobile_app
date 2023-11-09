@@ -12,6 +12,7 @@ class LanguagePicker extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      disabled: props.disabled,
       items: [
         {
           value: "ar",
@@ -60,6 +61,7 @@ class LanguagePicker extends React.Component {
 
   static propTypes = {
     current_language: PropTypes.string,
+    disabled: PropTypes.bool,
     dispatch: PropTypes.func,
     list_mode: PropTypes.string,
     test_id: PropTypes.string,
@@ -67,6 +69,7 @@ class LanguagePicker extends React.Component {
 
   static defaultProps = {
     current_language: "fr",
+    disabled: false,
     dispatch: () => {},
     list_mode: "FLATLIST",
     test_id: 'test_id',
@@ -77,6 +80,10 @@ class LanguagePicker extends React.Component {
     var return_new_state = false;
     if (props.current_language !== state.current_language) {
       new_state.current_language = props.current_language;
+      return_new_state = true;
+    }
+    if (props.disabled !== state.disabled) {
+      new_state.disabled = props.disabled;
       return_new_state = true;
     }
     return return_new_state ? new_state : null;
@@ -131,9 +138,10 @@ class LanguagePicker extends React.Component {
   }
 
   render() {
-    const { current_language, items, list_mode, open, test_id } = this.state;
+    const { current_language, disabled, items, list_mode, open, test_id } = this.state;
     return(
       <DropDownPicker
+        disabled={disabled}
         dropDownContainerStyle={styles.dropDownContainerStyle}
         items={items}
         listMode={list_mode}
@@ -143,7 +151,7 @@ class LanguagePicker extends React.Component {
         setItems={this.setItems}
         setOpen={this.setOpen}
         setValue={this.setValue}
-        style={styles.style}
+        style={{...styles.style, ...(disabled ? styles.disabledStyle : {})}}
         testID={test_id}
         value={current_language}
       />
@@ -152,12 +160,16 @@ class LanguagePicker extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    iconStyle: {
-      height: 20,
-      width: 36,
+    disabledStyle: {
+      opacity: 0.8,
+      backgroundColor: "#d8d8d8",
     },
     dropDownContainerStyle: {
       borderColor: COLORS.default_color,
+    },
+    iconStyle: {
+      height: 20,
+      width: 36,
     },
     selectedItemContainerStyle: {
     },

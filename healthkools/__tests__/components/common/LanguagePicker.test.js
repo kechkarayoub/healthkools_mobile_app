@@ -93,4 +93,30 @@ describe('LanguagePicker component', () => {
     }
     expect(new_stored_language).toBe("en");
   });
+  
+  test('Should disable props false', async () => {
+    const { getByTestId } = render(
+      <Provider store={store}>
+        <LanguagePicker 
+          current_language={"en"} test_id='test2_id' 
+          list_mode="FLATLIST" 
+        />
+      </Provider>
+    );
+    const dropDownPicker = getByTestId('test2_id');
+    expect(dropDownPicker.props.accessibilityState.disabled).toBe(false);
+  });
+
+  test('Should disable props true', async () => {
+    const { getByTestId } = render(
+      <Provider store={store}>
+        <LanguagePicker 
+          current_language={"en"} test_id='test2_id' 
+          list_mode="FLATLIST" disabled={true}
+        />
+      </Provider>
+    );
+    const dropDownPicker = getByTestId('test2_id');
+    expect(dropDownPicker.props.accessibilityState.disabled).toBe(true);
+  });
 });
