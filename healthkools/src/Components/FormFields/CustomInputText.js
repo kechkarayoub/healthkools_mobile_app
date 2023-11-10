@@ -8,6 +8,7 @@ class CustomInputText extends React.Component {
     super(props);
     this.state = {
       current_language: props.current_language,
+      disabled: props.disabled,
       form_error: props.form_error,
       icon_url: props.icon_url,
       keyboardType: props.keyboardType || "default",
@@ -23,6 +24,7 @@ class CustomInputText extends React.Component {
   static propTypes = {
     containerStyle: PropTypes.object,
     current_language: PropTypes.string,
+    disabled: PropTypes.bool,
     form_error: PropTypes.string,
     icon_url: PropTypes.oneOfType([
       PropTypes.number,
@@ -46,6 +48,7 @@ class CustomInputText extends React.Component {
   static defaultProps = {
     containerStyle: null,
     current_language: 'en',
+    disabled: false,
     form_error: "",
     icon_url: null,
     iconStyle: null,
@@ -71,6 +74,10 @@ class CustomInputText extends React.Component {
       new_state.form_error = props.form_error;
       return_new_state = true;
     }
+    if(props.disabled !== state.disabled) {
+      new_state.disabled = props.disabled;
+      return_new_state = true;
+    }
     if (props.placeholder !== state.placeholder) {
       new_state.placeholder = props.placeholder;
       return_new_state = true;
@@ -83,10 +90,11 @@ class CustomInputText extends React.Component {
   }
 
   render() {
-    const { form_error, icon_url, keyboardType, placeholder, secureTextEntry, test_id, underlineColorAndroid, value } = this.state;
+    const { disabled, form_error, icon_url, keyboardType, placeholder, secureTextEntry, test_id, underlineColorAndroid, value } = this.state;
     return (
       <View style={[this.props.containerStyle || styles.inputContainer, form_error ? styles.errorStyle : {}]}>
         <TextInput
+          editable={!disabled}
           keyboardType={keyboardType}
           onChangeText={(value) => {
             if(this.props.onChangeText){
@@ -98,7 +106,8 @@ class CustomInputText extends React.Component {
           }}
           placeholder={placeholder}
           secureTextEntry={secureTextEntry}
-          style={[styles.inputs, this.props.style || {}]}
+          selectTextOnFocus={!disabled}
+          style={[styles.inputs, this.props.style || {}, disabled ? styles.disabledStyle : {}]}
           testID={test_id}
           value={value}
           underlineColorAndroid={underlineColorAndroid}
@@ -115,6 +124,9 @@ class CustomInputText extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  disabledStyle: {
+    opacity: 0.5,
+  },
   errorStyle: {
     height: 60,
     paddingBottom: 10,

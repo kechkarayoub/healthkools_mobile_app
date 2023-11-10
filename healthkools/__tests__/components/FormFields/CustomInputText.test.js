@@ -82,10 +82,28 @@ describe('CustomInputText component', () => {
     expect(input_text_by_test_id.props.value).toBe("value_test");
     fireEvent(input_text_by_test_id, 'onChangeText', "new_val_test");
     expect(onChangeText).toHaveBeenCalled();
-    // if onSelect exists in props, value will be changed by the props.value not by setState function
+    // if onChangeText exists in props, value will be changed by the props.value not by setState function
     input_text_by_test_id = screen.queryByTestId('test_id');
     expect(input_text_by_test_id.props.value).toBe("value_test");
 
     // screen.debug()
+  });
+  
+  test('Should value not change if disabled props is true', async () => {
+    const onChangeText = jest.fn();
+    render(
+      <CustomInputText
+        current_language={current_language}
+        disabled={true}
+        test_id='test_id'
+        placeholder="PlaceholderTest"
+        value="value_test"
+        onChangeText={onChangeText}
+      />
+    );
+    var input_text_by_test_id = screen.queryByTestId('test_id');
+    expect(input_text_by_test_id.props.value).toBe("value_test");
+    fireEvent(input_text_by_test_id, 'onChangeText', "new_val_test");
+    expect(onChangeText).not.toHaveBeenCalled();
   });
 });
