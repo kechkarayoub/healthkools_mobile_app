@@ -338,7 +338,6 @@ class SignUp extends React.Component {
           />
           <CustomDatePicker 
             current_language={current_language} 
-            disabled={false} 
             form_error={form_errors.birthday}
             icon_url={icons.birthdayIcon}
             maximumDate={moment().toDate()}
