@@ -12,8 +12,8 @@ describe('CustomTouchableOpacity component', () => {
   test('Should contains props data', async () => {
     render(
       <CustomTouchableOpacity
-        text='Text test'
         test_id='test_id'
+        text='Text test'
       />
     );
     const touchable_opacities_by_test_id = screen.queryAllByTestId('test_id');
@@ -28,14 +28,30 @@ describe('CustomTouchableOpacity component', () => {
     const onPress = jest.fn();
     render(
       <CustomTouchableOpacity
-        text='Text test'
-        test_id='test_id'
-        onPress={onPress}
+      onPress={onPress}
+      test_id='test_id'
+      text='Text test'
       />
     );
     const touchable_opacity_by_test_id = screen.queryByTestId('test_id');
     fireEvent.press(touchable_opacity_by_test_id);
     expect(onPress).toHaveBeenCalled();
+    // screen.debug()
+  });
+  
+  test('Should onPress not called if disabled props is true', async () => {
+    const onPress = jest.fn();
+    render(
+      <CustomTouchableOpacity
+        disabled={true}
+        onPress={onPress}
+        test_id='test_id'
+        text='Text test'
+      />
+    );
+    const touchable_opacity_by_test_id = screen.queryByTestId('test_id');
+    fireEvent.press(touchable_opacity_by_test_id);
+    expect(onPress).not.toHaveBeenCalled();
     // screen.debug()
   });
 });

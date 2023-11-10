@@ -6,9 +6,13 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 class CustomTouchableOpacityWithIcon extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      disabled: props.disabled,
+    };
   }
 
   static propTypes = {
+    disabled: PropTypes.bool,
     icon_name: PropTypes.string,
     onPress: PropTypes.func,
     style: PropTypes.object,
@@ -18,6 +22,7 @@ class CustomTouchableOpacityWithIcon extends React.Component {
   }
 
   static defaultProps = {
+    disabled: false,
     icon_name: "close",
     onPress: () => {},
     style: null,
@@ -27,10 +32,11 @@ class CustomTouchableOpacityWithIcon extends React.Component {
   }
 
   render() {
+    const { disabled } = this.state;
     var text_length = (this.props.text || '').length;
     return (
-      <TouchableOpacity style={[styles.containerStyle, this.props.style || {}]}
-        onPress={this.props.onPress} testID={this.props.test_id}
+      <TouchableOpacity style={[styles.containerStyle, this.props.style || {}, disabled ? styles.disabledStyle : {}]}
+        onPress={disabled ? null: this.props.onPress} testID={this.props.test_id}
       >
         <Text 
           style={[styles.textStyle, this.props.textStyle || {}, text_length == 4 ? {fontSize: 17} : text_length == 5 ? {fontSize: 14} : {}]}
@@ -53,6 +59,9 @@ const styles = StyleSheet.create({
     height: 15,
     justifyContent: 'flex-end',
     width: 300,
+  },
+  disabledStyle: {
+    opacity: 0.5,
   },
   iconStyle: {
     marginTop: 0,

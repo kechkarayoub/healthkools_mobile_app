@@ -5,8 +5,12 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 class CustomTouchableOpacity extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      disabled: props.disabled,
+    };
   }
   static propTypes = {
+    disabled: PropTypes.bool,
     is_not_button: PropTypes.bool,
     onPress: PropTypes.func,
     style: PropTypes.object,
@@ -19,6 +23,7 @@ class CustomTouchableOpacity extends React.Component {
   }
 
   static defaultProps = {
+    disabled: false,
     is_not_button: false,
     onPress: () => {},
     style: null,
@@ -28,9 +33,10 @@ class CustomTouchableOpacity extends React.Component {
   }
 
   render() {
+    const { disabled } = this.state;
     return (
-      <TouchableOpacity style={[this.props.is_not_button ? styles.notButtonCotainer : styles.buttonContainer, this.props.style || {}]}
-        onPress={this.props.onPress} testID={this.props.test_id}
+      <TouchableOpacity style={[this.props.is_not_button ? styles.notButtonCotainer : styles.buttonContainer, this.props.style || {}, disabled ? styles.disabledStyle : {}]}
+        onPress={disabled ? null: this.props.onPress} testID={this.props.test_id}
       >
         <Text style={[this.props.is_not_button ? styles.notButtonText : styles.buttonText, this.props.textStyle || {}]}>
           {this.props.text}
@@ -53,6 +59,9 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white',
+  },
+  disabledStyle: {
+    opacity: 0.5,
   },
   notButtonCotainer: {
     alignItems: 'flex-end',
