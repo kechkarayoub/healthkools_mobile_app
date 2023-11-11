@@ -42,10 +42,10 @@ describe('CustomPhoneNumber component', () => {
   test('Should contains props data 2', async () => {
     render(
       <CustomPhoneNumber
-        current_language={"fr"}
-        test_id='test_id'
-        placeholder="PlaceholderTest"
         country_phone_code="MA"
+        current_language={"fr"}
+        placeholder="PlaceholderTest"
+        test_id='test_id'
       />
     );
     const phone_numbers_by_test_id = screen.queryAllByTestId('test_id');
@@ -130,11 +130,11 @@ describe('CustomPhoneNumber component', () => {
     render(
       <CustomPhoneNumber
         current_language={current_language}
-        test_id='test_id'
-        placeholder="PlaceholderTest"
-        value="0612"
-        onChangeText={null}
         country_phone_code="ma"
+        onChangeText={null}
+        placeholder="PlaceholderTest"
+        test_id='test_id'
+        value="0612"
       />
     );
     const phone_inputs_by_test_id = screen.queryAllByTestId('test_id');
@@ -152,11 +152,11 @@ describe('CustomPhoneNumber component', () => {
     render(
         <CustomPhoneNumber
           current_language={current_language}
-          test_id='test_id'
-          placeholder="PlaceholderTest"
-          value="0612"
-          onChangeText={onChangeText}
           country_phone_code="ma"
+          onChangeText={onChangeText}
+          placeholder="PlaceholderTest"
+          test_id='test_id'
+          value="0612"
         />
     );
     const phone_inputs_by_test_id = screen.queryAllByTestId('test_id');
@@ -169,5 +169,26 @@ describe('CustomPhoneNumber component', () => {
     phone_input_by_test_id = screen.queryByTestId('test_id');
     expect(phone_input_by_test_id.props.value).toBe("0612");
     // screen.debug()
+  });
+
+  test('Should disabled if disabled props is true', async () => {
+    const onChangeText = jest.fn();
+    render(
+        <CustomPhoneNumber
+          current_language={current_language}
+          country_phone_code="ma"
+          disabled={true}
+          onChangeText={onChangeText}
+          placeholder="PlaceholderTest"
+          test_id='test_id'
+          value="0612"
+        />
+    );
+    const phone_inputs_by_test_id = screen.queryAllByTestId('test_id');
+    expect(phone_inputs_by_test_id).toHaveLength(1);
+    var phone_input_by_test_id = screen.queryByTestId('test_id');
+    expect(phone_input_by_test_id.props.value).toBe("0612");
+    fireEvent(phone_input_by_test_id, 'onChangeText', "052222");
+    expect(onChangeText).not.toHaveBeenCalled();
   });
 });

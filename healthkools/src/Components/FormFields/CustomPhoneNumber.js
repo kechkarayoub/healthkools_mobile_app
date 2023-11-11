@@ -194,6 +194,7 @@ class CustomPhoneNumber extends React.Component {
         <View style={[styles.codeNumberContainerStyle, form_error ? styles.errorStyleCodeNumberContainer : {}]} >
           <View style={styles.buttonCodeContainerStyle} >
             <CustomTouchableOpacityWithIcon 
+              disabled={disabled}
               icon_name="caret-down"
               onPress={() => this.openSelectCountry()}
               style={styles.buttonCodeStyle}
@@ -205,6 +206,7 @@ class CustomPhoneNumber extends React.Component {
           <View style={styles.phoneInputContainerStyle}>
             <CustomInputText 
               containerStyle={styles.phoneInputContainerStyle2}
+              disabled={disabled}
               iconStyle={[styles.inputIcon, this.props.iconStyle]}
               keyboardType='number-pad' icon_url={icon_url} 
               onChangeText={(text) => {
