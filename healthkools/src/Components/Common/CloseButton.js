@@ -52,7 +52,7 @@ class CloseButton extends React.Component {
         <IconButton 
           icon={props => <Icon name="close" color={COLORS.default_color} size={BUTTON_SIZE/2} {...props} />}
           onPress={this.props.disabled ? () => {} : this.props.onPress}
-          style={styles.button} 
+          style={[styles.button, this.props.disabled ? styles.disabledStyle : {}]} 
           testID={this.props.test_id || 'test_id'}
         />
       </Stack>
@@ -68,6 +68,9 @@ const styles = StyleSheet.create({
     height: BUTTON_SIZE + BORDER_WIDTH,
     justifyContent: 'flex-end',
     width: BUTTON_SIZE + BORDER_WIDTH,
+  },
+  disabledStyle: {
+    opacity: 0.3,
   },
 });
 

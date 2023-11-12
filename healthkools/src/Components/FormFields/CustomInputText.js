@@ -113,7 +113,7 @@ class CustomInputText extends React.Component {
           underlineColorAndroid={underlineColorAndroid}
         />
         {icon_url &&
-          <Image style={[styles.inputIcon, this.props.iconStyle]} source={icon_url}/>
+          <Image style={[styles.inputIcon, this.props.iconStyle, disabled ? styles.disabledIconStyle : {}]} source={icon_url}/>
         }
         {form_error &&
           <ErrorComponent error={form_error} />
@@ -124,6 +124,9 @@ class CustomInputText extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  disabledIconStyle: {
+    opacity: 0.5,
+  },
   disabledStyle: {
     opacity: 0.5,
   },

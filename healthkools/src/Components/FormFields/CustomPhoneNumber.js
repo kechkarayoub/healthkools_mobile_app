@@ -318,6 +318,9 @@ const styles = StyleSheet.create({
   CountryItemStyle: {
     flexDirection: 'row'
   },
+  disabledIconStyle: {
+    opacity: 0.5,
+  },
   errorStyle: {
     height: 60,
   },

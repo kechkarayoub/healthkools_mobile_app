@@ -150,7 +150,7 @@ class CustomDatePicker extends React.Component {
           textStyle={[value ? styles.dateTimeStyle : styles.placeholderStyle, disabled ? styles.disabledStyle : {}]}
         />
         {icon_url &&
-          <Image style={[styles.datePickerIcon, this.props.iconStyle]} source={icon_url}/>
+          <Image style={[styles.datePickerIcon, this.props.iconStyle, disabled ? styles.disabledIconStyle : {}]} source={icon_url}/>
         }
         {form_error &&
           <ErrorComponent error={form_error} />
@@ -208,6 +208,9 @@ const styles = StyleSheet.create({
   dateTimeStyle: {
     color: 'black',
     textAlign: 'left',
+  },
+  disabledIconStyle: {
+    opacity: 0.5,
   },
   disabledStyle: {
     opacity: 0.5,

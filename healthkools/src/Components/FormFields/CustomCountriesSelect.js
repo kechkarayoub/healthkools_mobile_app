@@ -132,7 +132,7 @@ class CustomCountriesSelect extends React.Component {
           value={value}
         />
         {icon_url &&
-          <Image style={[styles.inputIcon, this.props.iconStyle]} source={icon_url}/>
+          <Image style={[styles.inputIcon, this.props.iconStyle, disabled ? styles.disabledIconStyle : {}]} source={icon_url}/>
         }
         {form_error &&
           <ErrorComponent error={form_error} />
@@ -159,6 +159,9 @@ const styles = StyleSheet.create({
       shadowOpacity: 0,
       width: 255,
       zIndex: 300, // works on ios
+    },
+    disabledIconStyle: {
+      opacity: 0.5,
     },
     disabledStyle: {
       opacity: 0.6,
