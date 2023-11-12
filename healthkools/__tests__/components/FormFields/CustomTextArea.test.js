@@ -85,4 +85,22 @@ describe('CustomTextArea component', () => {
     expect(textarea_by_test_id.props.value).toBe("value_test");
     // screen.debug()
   });
+  
+  test('Should value not change if disabled props is true', async () => {
+    const onChangeText = jest.fn();
+    render(
+      <CustomTextArea
+        current_language={current_language}
+        disabled={true}
+        test_id='test_id'
+        placeholder="PlaceholderTest"
+        value="value_test"
+        onChangeText={onChangeText}
+      />
+    );
+    var textarea_by_test_id = screen.queryByTestId('test_id');
+    expect(textarea_by_test_id.props.value).toBe("value_test");
+    fireEvent(textarea_by_test_id, 'onChangeText', "new_val_test");
+    expect(onChangeText).not.toHaveBeenCalled();
+  });
 });

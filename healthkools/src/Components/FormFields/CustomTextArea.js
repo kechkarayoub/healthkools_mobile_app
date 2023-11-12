@@ -8,6 +8,7 @@ class CustomTextArea extends React.Component {
     super(props);
     this.state = {
       current_language: props.current_language,
+      disabled: props.disabled,
       form_error: props.form_error,
       icon_url: props.icon_url,
       multiline: props.multiline,
@@ -22,6 +23,7 @@ class CustomTextArea extends React.Component {
 
   static propTypes = {
     current_language: PropTypes.string,
+    disabled: PropTypes.bool,
     form_error: PropTypes.string,
     icon_url: PropTypes.oneOfType([
       PropTypes.number,
@@ -41,6 +43,7 @@ class CustomTextArea extends React.Component {
 
   static defaultProps = {
     current_language: 'en',
+    disabled: false,
     form_error: "",
     icon_url: null,
     multiline: false,
@@ -58,8 +61,12 @@ class CustomTextArea extends React.Component {
   static getDerivedStateFromProps(props, state) {
     var new_state = {};
     var return_new_state = false;
-    if (props.current_language !== state.current_language) {
+    if(props.current_language !== state.current_language) {
       new_state.current_language = props.current_language;
+      return_new_state = true;
+    }
+    if(props.disabled !== state.disabled) {
+      new_state.disabled = props.disabled;
       return_new_state = true;
     }
     if(props.form_error !== state.form_error) {
@@ -79,11 +86,12 @@ class CustomTextArea extends React.Component {
   
   render() {
     const { 
-      form_error, icon_url, multiline, numberOfLines, placeholder, secureTextEntry, test_id, underlineColorAndroid, value 
+      disabled, form_error, icon_url, multiline, numberOfLines, placeholder, secureTextEntry, test_id, underlineColorAndroid, value 
     } = this.state;
     return (
       <View style={[styles.textAreaContainer, form_error ? styles.errorStyle : {}]}>
         <TextInput
+          editable={!disabled}
           multiline={multiline}
           numberOfLines={numberOfLines}
           onChangeText={(value) => {
@@ -96,13 +104,14 @@ class CustomTextArea extends React.Component {
           }}
           placeholder={placeholder}
           secureTextEntry={secureTextEntry}
-          style={[styles.textArea, this.props.style || {}]}
+          selectTextOnFocus={!disabled}
+          style={[styles.textArea, this.props.style || {}, disabled ? styles.disabledStyle : {}]}
           testID={test_id}
           underlineColorAndroid={underlineColorAndroid}
           value={value}
         />
         {icon_url &&
-          <Image style={styles.inputIcon} source={icon_url}/>
+          <Image style={[styles.inputIcon, disabled ? styles.disabledIconStyle : {}]} source={icon_url}/>
         }
         {form_error &&
           <ErrorComponent error={form_error} />
@@ -113,6 +122,12 @@ class CustomTextArea extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  disabledIconStyle: {
+    opacity: 0.5,
+  },
+  disabledStyle: {
+    opacity: 0.5,
+  },
   errorStyle: {
     height: 60,
     paddingBottom: 10,
