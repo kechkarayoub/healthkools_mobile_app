@@ -1,7 +1,7 @@
 import Icon from "react-native-vector-icons/FontAwesome";
 import PropTypes from 'prop-types';
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 class CustomTouchableOpacityWithIcon extends React.Component {
   constructor(props) {
@@ -34,9 +34,25 @@ class CustomTouchableOpacityWithIcon extends React.Component {
   render() {
     const { disabled } = this.state;
     var text_length = (this.props.text || '').length;
+    if(disabled){
+      return (
+        <View style={[styles.containerStyle, this.props.style || {}, styles.disabledStyle]}
+          testID={this.props.test_id}
+        >
+          <Text 
+            style={[styles.textStyle, this.props.textStyle || {}, text_length == 4 ? {fontSize: 17} : text_length == 5 ? {fontSize: 14} : {}]}
+          >{this.props.text}</Text>
+          <Icon
+            name={this.props.icon_name}
+            size={16}
+            style={styles.iconStyle}
+          />
+        </View>
+      )
+    }
     return (
-      <TouchableOpacity style={[styles.containerStyle, this.props.style || {}, disabled ? styles.disabledStyle : {}]}
-        onPress={disabled ? null: this.props.onPress} testID={this.props.test_id}
+      <TouchableOpacity style={[styles.containerStyle, this.props.style || {}]}
+        onPress={this.props.onPress} testID={this.props.test_id}
       >
         <Text 
           style={[styles.textStyle, this.props.textStyle || {}, text_length == 4 ? {fontSize: 17} : text_length == 5 ? {fontSize: 14} : {}]}
@@ -61,7 +77,7 @@ const styles = StyleSheet.create({
     width: 300,
   },
   disabledStyle: {
-    opacity: 0.5,
+    opacity: 0.7,
   },
   iconStyle: {
     marginTop: 0,
