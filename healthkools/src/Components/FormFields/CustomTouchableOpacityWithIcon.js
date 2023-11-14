@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     width: 300,
   },
   disabledStyle: {
-    opacity: 0.7,
+    opacity: 0.5,
   },
   iconStyle: {
     marginTop: 0,
