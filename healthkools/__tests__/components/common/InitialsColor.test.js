@@ -14,8 +14,8 @@ describe('InitialsColor component', () => {
   test('Should contains props data', async () => {
     render(
       <InitialsColor
-        test_id='test_id'
         initials="KA"
+        test_id='test_id'
       />
     );
     const initials_color_by_test_id = screen.queryAllByTestId('test_id');
@@ -30,14 +30,30 @@ describe('InitialsColor component', () => {
     const onPress = jest.fn();
     render(
       <InitialsColor
-        test_id='test_id'
         initials="KA"
         onPress={onPress}
+        test_id='test_id'
       />
     );
     const initials_color_by_test_id = screen.queryByText('KA');
     fireEvent.press(initials_color_by_test_id);
     expect(onPress).toHaveBeenCalled();
+    //screen.debug()
+  });
+
+  test('Should onPress not called if disabled props is true', async () => {
+    const onPress = jest.fn();
+    render(
+      <InitialsColor
+        disabled={true}
+        initials="KA"
+        onPress={onPress}
+        test_id='test_id'
+      />
+    );
+    const initials_color_by_test_id = screen.queryByText('KA');
+    fireEvent.press(initials_color_by_test_id);
+    expect(onPress).not.toHaveBeenCalled();
     //screen.debug()
   });
 });

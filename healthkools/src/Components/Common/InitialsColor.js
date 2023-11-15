@@ -5,11 +5,16 @@ import { StyleSheet, Text, View } from 'react-native';
 class InitialsColor extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      bg_color: props.bg_color,
+      disabled: props.disabled,
+    }
   }
 
   static propTypes = {
     bg_color: PropTypes.string,
     containerStyle: PropTypes.object,
+    disabled: PropTypes.bool,
     initials: PropTypes.string,
     onPress: PropTypes.oneOfType([
       PropTypes.func,
@@ -22,6 +27,7 @@ class InitialsColor extends React.Component {
   static defaultProps = {
     bg_color: "gray",
     containerStyle: null,
+    disabled: false,
     initials: "",
     onPress: null,
     style: null,
@@ -31,10 +37,11 @@ class InitialsColor extends React.Component {
   render() {
     var containerStyle = this.props.containerStyle || {};
     var style = this.props.style || {};
-    style.backgroundColor = this.props.bg_color;
+    style.backgroundColor = this.state.bg_color || "gray";
+    const { disabled } = this.state;
     return(
       <View style={[styles.container, containerStyle]} testID={this.props.test_id}>
-        <Text style={[styles.textStyle, style]} onPress={this.props.onPress}>{this.props.initials}</Text>
+        <Text style={[styles.textStyle, style]} onPress={disabled ? null : this.props.onPress}>{this.props.initials}</Text>
       </View>
     )
   }
