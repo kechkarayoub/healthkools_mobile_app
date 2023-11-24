@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { PixelRatio, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 class CustomTouchableOpacity extends React.Component {
   constructor(props) {
@@ -63,10 +63,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderRadius: 30,
     flexDirection: 'row',
-    height: 45,
+    height: PixelRatio.getPixelSizeForLayoutSize(25),
     justifyContent: 'center',
-    marginBottom: 20,
-    width: 300,
+    marginBottom: PixelRatio.getPixelSizeForLayoutSize(10),
+    width: PixelRatio.getPixelSizeForLayoutSize(150),
   },
   buttonText: {
     color: 'white',
@@ -83,11 +83,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     width: 300,
   },
-  notButtonText:{
+  notButtonText: {
     color:"white",
     fontWeight:'bold',
     height: 20,
-  }
+    textAlign: 'right',
+    width: "100%",
+  },
 });
 
 export default CustomTouchableOpacity;

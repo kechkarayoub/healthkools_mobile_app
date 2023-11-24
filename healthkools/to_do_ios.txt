@@ -1,0 +1,17 @@
+To do:
+run: RCT_NEW_ARCH_ENABLED=1 npx pod-install ios
+
+Add the appropriate keys to your Info.plist depending on your requirement:
+
+Requirement                             	Key
+Select image/video from photos	NSPhotoLibraryUsageDescription
+Capture Image	                NSCameraUsageDescription
+Capture Video	                NSCameraUsageDescription & NSCameraUsageDescription
+
+
+npx pod-install ios
+
+
+
+
+Done:

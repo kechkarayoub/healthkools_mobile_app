@@ -73,25 +73,18 @@ class HomeStackNavigator extends React.Component  {
 
     render() {
       return (
-        <NavigationContainer style={styles.navigationStyle}>
-          <Stack.Navigator initialRouteName={"SignIn"} screenOptions={{headerTitleAlign: 'center'}}>
-            <Stack.Screen name="SignIn" options={{title: t("Sign in")}}>
-              {props => <SignIn {...props} t={t}/>}
-            </Stack.Screen>
-            <Stack.Screen name="SignUp" options={{title: this.registration_label}}>
-              {props => <SignUp {...props} t={t} registration_label={this.registration_label} />}
-            </Stack.Screen>
-          </Stack.Navigator>
-        </NavigationContainer>
+      <Stack.Navigator initialRouteName={"SignIn"} screenOptions={{headerTitleAlign: 'center'}}>
+        <Stack.Screen name="SignIn" options={{title: t("Sign in")}}>
+          {props => <SignIn {...props} t={t}/>}
+        </Stack.Screen>
+        <Stack.Screen name="SignUp" options={{title: this.registration_label}}>
+          {props => <SignUp {...props} t={t} registration_label={this.registration_label} />}
+        </Stack.Screen>
+      </Stack.Navigator>
       )
     }
 }
 
-const styles = StyleSheet.create({
-    navigationStyle: {
-      flex: 1,
-    },
-});
 
 const mapStateToProps = (state) => {
   return {
