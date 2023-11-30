@@ -63,10 +63,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderRadius: 30,
     flexDirection: 'row',
-    height: PixelRatio.getPixelSizeForLayoutSize(25),
+    height: 50,
     justifyContent: 'center',
-    marginBottom: PixelRatio.getPixelSizeForLayoutSize(10),
-    width: PixelRatio.getPixelSizeForLayoutSize(150),
+    marginBottom: 20,
+    width: 300,
   },
   buttonText: {
     color: 'white',
