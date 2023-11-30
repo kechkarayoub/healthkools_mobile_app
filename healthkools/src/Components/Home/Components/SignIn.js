@@ -1,5 +1,6 @@
 import CustomInputText from 'src/Components/FormFields/CustomInputText';
 import CustomTouchableOpacity from 'src/Components/FormFields/CustomTouchableOpacity';
+import LanguagePicker from 'src/Components/Common/LanguagePicker';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Alert, ImageBackground, StyleSheet, View } from 'react-native';
@@ -69,6 +70,7 @@ class SignIn extends React.Component {
     return (
         <View style={styles.body}>
           <ImageBackground source={logos.logo} style={styles.background}/>
+          <LanguagePicker />
           <CustomInputText placeholder={t("Username or email")} underlineColorAndroid='transparent'
             onChangeText={username_or_email => this.setState({username_or_email: username_or_email})}
             icon_url={icons.emailIcon} value={username_or_email}  iconStyle={{height:26, width: 25, marginRight: 18}}

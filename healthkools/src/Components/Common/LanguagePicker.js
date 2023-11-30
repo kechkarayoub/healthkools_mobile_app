@@ -4,8 +4,8 @@ import React from 'react';
 import { COLORS } from "src/variables/colors";
 import { connect } from 'react-redux'
 import { flags } from "src/_ressources";
+import { Image, PixelRatio, StyleSheet, View } from 'react-native';
 import { set } from 'src/Store/locale';
-import { StyleSheet, Image } from 'react-native';
 import { t } from 'src/i18n';
 
 class LanguagePicker extends React.Component {
@@ -60,18 +60,22 @@ class LanguagePicker extends React.Component {
   }
 
   static propTypes = {
+    container_style: PropTypes.object,
     current_language: PropTypes.string,
     disabled: PropTypes.bool,
     dispatch: PropTypes.func,
     list_mode: PropTypes.string,
+    main_container_style: PropTypes.object,
     test_id: PropTypes.string,
   }
 
   static defaultProps = {
+    container_style: null,
     current_language: "fr",
     disabled: false,
     dispatch: () => {},
     list_mode: "FLATLIST",
+    main_container_style: null,
     test_id: 'test_id',
   }
 
@@ -140,26 +144,51 @@ class LanguagePicker extends React.Component {
   render() {
     const { current_language, disabled, items, list_mode, open, test_id } = this.state;
     return(
-      <DropDownPicker
-        disabled={disabled}
-        dropDownContainerStyle={styles.dropDownContainerStyle}
-        items={items}
-        listMode={list_mode}
-        open={open}
-        selectedItemContainerStyle={styles.selectedItemContainerStyle}
-        selectedItemLabelStyle={styles.selectedItemLabelStyle}
-        setItems={this.setItems}
-        setOpen={this.setOpen}
-        setValue={this.setValue}
-        style={{...styles.style, ...(disabled ? styles.disabledStyle : {})}}
-        testID={test_id}
-        value={current_language}
-      />
+      <View style={[this.props.main_container_style || styles.main_container_style]}>
+        <View style={[this.props.container_style || styles.container_style]}>
+          <DropDownPicker
+            disabled={disabled}
+            dropDownContainerStyle={{...styles.dropDownContainerStyle}}
+            items={items}
+            listMode={list_mode}
+            open={open}
+            selectedItemContainerStyle={styles.selectedItemContainerStyle}
+            selectedItemLabelStyle={styles.selectedItemLabelStyle}
+            setItems={this.setItems}
+            setOpen={this.setOpen}
+            setValue={this.setValue}
+            style={{...styles.style, ...(disabled ? styles.disabledStyle : {})}}
+            testID={test_id}
+            value={current_language}
+          />
+        </View>
+      </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
+    container_style: {
+      alignItems: 'center',
+      backgroundColor: '#FFFFFF',
+      borderBottomColor: '#F5FCFF',
+      borderBottomWidth: 0,
+      borderRadius: 30,
+      display: 'flex',
+      elevation: 5, // works on android
+      flexDirection: 'row',
+      height: 45,
+      marginBottom: 20,
+      shadowColor: "#808080",
+      shadowOffset: {
+        height: 2,
+        width: 0,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+      width: 300,
+      zIndex: 5,
+    },
     disabledStyle: {
       opacity: 0.8,
       backgroundColor: "#d8d8d8",
@@ -171,6 +200,10 @@ const styles = StyleSheet.create({
       height: 20,
       width: 36,
     },
+    main_container_style: {
+      alignItems: 'center',
+      width: '100%',
+    },
     selectedItemContainerStyle: {
     },
     selectedItemLabelStyle: {
@@ -181,7 +214,7 @@ const styles = StyleSheet.create({
       borderBottomColor: COLORS.default_color,
       borderColor: COLORS.default_color,
       borderLeftWidth: 0,
-      borderRadius: 0,
+      borderRadius: 30,
       borderRightWidth: 0,
     },
 });

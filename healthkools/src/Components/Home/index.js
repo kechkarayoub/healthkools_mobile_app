@@ -1,5 +1,4 @@
 import HomeStackNavigator from 'src/Components/Home/Navigation/HomeStackNavigator';
-import LanguagePicker from 'src/Components/Common/LanguagePicker';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { COLORS } from "src/variables/colors";
@@ -24,7 +23,6 @@ class Home extends React.Component {
   render() {
     return (
       <View style={styles.home}>
-        <LanguagePicker />
         <HomeStackNavigator t={this.props.t}/>
       </View>
     )

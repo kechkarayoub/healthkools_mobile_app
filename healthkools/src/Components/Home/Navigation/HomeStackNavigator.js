@@ -1,3 +1,5 @@
+
+import LanguagePicker from 'src/Components/Common/LanguagePicker';
 import PropTypes from 'prop-types';
 import React from 'react';
 import SignIn from 'src/Components/Home/Components/SignIn';
@@ -9,6 +11,8 @@ import { StyleSheet } from 'react-native';
 import { t } from 'src/i18n';
 
 const Stack = createNativeStackNavigator();
+
+const common_nav_header_options = {headerTransparent: true, headerStyle: {backgroundColor: "white"}};
 
 class HomeStackNavigator extends React.Component  {
     constructor(props) {
@@ -72,16 +76,17 @@ class HomeStackNavigator extends React.Component  {
     // }
 
     render() {
-      return (
+      return (<>
+      
       <Stack.Navigator initialRouteName={"SignIn"} screenOptions={{headerTitleAlign: 'center'}}>
-        <Stack.Screen name="SignIn" options={{title: t("Sign in")}}>
+        <Stack.Screen name="SignIn" options={{title: t("Sign in"), ...common_nav_header_options}}>
           {props => <SignIn {...props} t={t}/>}
         </Stack.Screen>
-        <Stack.Screen name="SignUp" options={{title: this.registration_label}}>
+        <Stack.Screen name="SignUp" options={{title: this.registration_label, ...common_nav_header_options}}>
           {props => <SignUp {...props} t={t} registration_label={this.registration_label} />}
         </Stack.Screen>
       </Stack.Navigator>
-      )
+      </>)
     }
 }
 

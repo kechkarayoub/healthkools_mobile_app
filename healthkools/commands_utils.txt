@@ -1,0 +1,4 @@
+To run inspector on android device:
+    1) On shell/cmd; go to platform-tools: cd C:\Users\PC\AppData\Local\Android\Sdk\platform-tools
+    2) Run: adb shell input keyevent 82
+
