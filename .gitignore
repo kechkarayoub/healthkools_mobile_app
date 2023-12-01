@@ -6,6 +6,8 @@
 #
 build/
 *.pbxuser
+ios/*.pbxproj
+*.pbxproj
 !default.pbxuser
 *.mode1v3
 !default.mode1v3
