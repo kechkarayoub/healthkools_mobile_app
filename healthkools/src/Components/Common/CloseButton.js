@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import Icon from "react-native-vector-icons/FontAwesome";
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -15,6 +16,7 @@ class CloseButton extends React.Component {
 
   static propTypes = {
     alignItems: PropTypes.string,
+    current_language: PropTypes.string,
     disabled: PropTypes.bool,
     elevation: PropTypes.number,
     justifyContent: PropTypes.string,
@@ -27,6 +29,7 @@ class CloseButton extends React.Component {
 
   static defaultProps = {
     alignItems: "flex-end",
+    current_language: "en",
     disabled: false,
     elevation: 2,
     justifyContent: "flex-end",
@@ -74,4 +77,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CloseButton;
+const mapStateToProps = (state) => {
+  return {
+    current_language: state.current_language,
+  }
+}
+
+export default connect(mapStateToProps)(CloseButton);

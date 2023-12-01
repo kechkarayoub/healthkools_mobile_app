@@ -1,7 +1,9 @@
 import ErrorComponent from "src/Components/Common/ErrorComponent";
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 import { Image, StyleSheet, TextInput, View } from 'react-native';
+import { reverse_style } from "src/utils/rtl_layout";
 
 class CustomInputText extends React.Component {
   constructor(props) {
@@ -90,9 +92,9 @@ class CustomInputText extends React.Component {
   }
 
   render() {
-    const { disabled, form_error, icon_url, keyboardType, placeholder, secureTextEntry, test_id, underlineColorAndroid, value } = this.state;
+    const { current_language, disabled, form_error, icon_url, keyboardType, placeholder, secureTextEntry, test_id, underlineColorAndroid, value } = this.state;
     return (
-      <View style={[this.props.containerStyle || styles.inputContainer, form_error ? styles.errorStyle : {}]}>
+      <View style={[reverse_style(current_language, this.props.containerStyle || styles.inputContainer), form_error ? styles.errorStyle : {}]}>
         <TextInput
           editable={!disabled}
           keyboardType={keyboardType}
@@ -107,13 +109,13 @@ class CustomInputText extends React.Component {
           placeholder={placeholder}
           secureTextEntry={secureTextEntry}
           selectTextOnFocus={!disabled}
-          style={[styles.inputs, this.props.style || {}, disabled ? styles.disabledStyle : {}]}
+          style={[reverse_style(current_language, styles.inputs), reverse_style(current_language, this.props.style || {}), reverse_style(current_language, disabled ? styles.disabledStyle : {})]}
           testID={test_id}
           value={value}
           underlineColorAndroid={underlineColorAndroid}
         />
         {icon_url &&
-          <Image style={[styles.inputIcon, this.props.iconStyle, disabled ? styles.disabledIconStyle : {}]} source={icon_url}/>
+          <Image style={[reverse_style(current_language, styles.inputIcon), reverse_style(current_language, this.props.iconStyle), disabled ? styles.disabledIconStyle : {}]} source={icon_url}/>
         }
         {form_error &&
           <ErrorComponent error={form_error} />
@@ -163,9 +165,16 @@ const styles = StyleSheet.create({
   inputs:{
     borderBottomColor: '#FFFFFF',
     flex: 1,
-    height:45,
-    marginLeft:16,
+    height: 45,
+    marginLeft: 16,
+    textAlign: 'left',
   },
 });
 
-export default CustomInputText;
+const mapStateToProps = (state) => {
+  return {
+    current_language: state.current_language,
+  }
+}
+
+export default connect(mapStateToProps)(CustomInputText);
