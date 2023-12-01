@@ -195,6 +195,7 @@ const styles = StyleSheet.create({
     },
     dropDownContainerStyle: {
       borderColor: COLORS.default_color,
+      zIndex: 5,
     },
     iconStyle: {
       height: 20,
@@ -203,6 +204,7 @@ const styles = StyleSheet.create({
     main_container_style: {
       alignItems: 'center',
       width: '100%',
+      zIndex: 5,
     },
     selectedItemContainerStyle: {
     },
