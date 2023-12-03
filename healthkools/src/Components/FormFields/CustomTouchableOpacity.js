@@ -55,20 +55,20 @@ class CustomTouchableOpacity extends React.Component {
     const { current_language, disabled } = this.state;
     if(disabled){
       return (
-        <View style={[reverse_style(current_language, this.props.is_not_button ? styles.notButtonCotainer : styles.buttonContainer), reverse_style(current_language, this.props.style || {}), styles.disabledStyle]}
+        <View style={[reverse_style(current_language, this.props.is_not_button ? styles.notButtonCotainer : styles.buttonContainer), this.props.style || {}, styles.disabledStyle]}
           testID={this.props.test_id}
         >
-          <Text style={[reverse_style(current_language, this.props.is_not_button ? styles.notButtonText : styles.buttonText), reverse_style(current_language, this.props.textStyle || {})]}>
+          <Text style={[reverse_style(current_language, this.props.is_not_button ? styles.notButtonText : styles.buttonText), this.props.textStyle || {}]}>
             {this.props.text}
           </Text>
         </View>
       )
     }
     return (
-      <TouchableOpacity style={[reverse_style(current_language, this.props.is_not_button ? styles.notButtonCotainer : styles.buttonContainer), reverse_style(current_language, this.props.style || {})]}
+      <TouchableOpacity style={[reverse_style(current_language, this.props.is_not_button ? styles.notButtonCotainer : styles.buttonContainer), this.props.style || {}]}
         onPress={this.props.onPress} testID={this.props.test_id}
       >
-        <Text style={[reverse_style(current_language, this.props.is_not_button ? styles.notButtonText : styles.buttonText), reverse_style(current_language, this.props.textStyle || {})]}>
+        <Text style={[reverse_style(current_language, this.props.is_not_button ? styles.notButtonText : styles.buttonText), this.props.textStyle || {}]}>
           {this.props.text}
         </Text>
       </TouchableOpacity>

@@ -1,4 +1,4 @@
-export const reverse_property = (is_rtl, property, value) => {
+export const reverse_property = (is_rtl, property, value, only_value, reversed_value_) => {
   // Function to reverse property depending on is_rtl parameter
   // Params:
   //  - is_rtl: Boolean indicated if the current_language is rtl
@@ -14,70 +14,75 @@ export const reverse_property = (is_rtl, property, value) => {
   // if(show_log)console.log('is_rtl: ', is_rtl)
   let reversed_property = property, reversed_value = value;
   if(is_rtl){
-    switch(property){
-      case "alignItems":
-        if(show_log)console.log('555555555555555')
-        switch(value){
-          case 'flex-end':
-            reversed_value = 'flex-start';
-            break;
-          case 'flex-start':
-            reversed_value = 'flex-end';
-            break;
-        }
-        break;
-      case "alignSelf":
-        switch(value){
-          case 'flex-end':
-            reversed_value = 'flex-start';
-            break;
-          case 'flex-start':
-            reversed_value = 'flex-end';
-            break;
-        }
-        break;
-      case "flexDirection":
-        switch(value){
-          case 'row':
-            reversed_value = 'row-reverse';
-            break;
-          case 'row-reverse':
-            reversed_value = 'row';
-            break;
-        }
-        break;
-      case "justifyContent":
-        switch(value){
-          case 'flex-end':
-            reversed_value = 'flex-start';
-            break;
-          case 'flex-start':
-            reversed_value = 'flex-end';
-            break;
-        }
-        break;
-      case "paddingLeft":
-        reversed_property = "paddingRight"
-        break;
-      case "paddingRight": 
-        reversed_property = "paddingLeft"
-        break;
-      case "marginLeft":
-        reversed_property = "marginRight"
-        break;
-      case "marginRight": 
-        reversed_property = "marginLeft"
-        break;
-      case "textAlign":
-        switch(value){
-          case 'left':
-            reversed_value = 'right';
-            break;
-          case 'right':
-            reversed_value = 'left';
-            break;
-        }
-        break;
+    if(only_value){
+      reversed_value = reversed_value_;
+    }
+    else{
+      switch(property){
+        case "alignItems":
+          if(show_log)console.log('555555555555555')
+          switch(value){
+            case 'flex-end':
+              reversed_value = 'flex-start';
+              break;
+            case 'flex-start':
+              reversed_value = 'flex-end';
+              break;
+          }
+          break;
+        case "alignSelf":
+          switch(value){
+            case 'flex-end':
+              reversed_value = 'flex-start';
+              break;
+            case 'flex-start':
+              reversed_value = 'flex-end';
+              break;
+          }
+          break;
+        case "flexDirection":
+          switch(value){
+            case 'row':
+              reversed_value = 'row-reverse';
+              break;
+            case 'row-reverse':
+              reversed_value = 'row';
+              break;
+          }
+          break;
+        case "justifyContent":
+          switch(value){
+            case 'flex-end':
+              reversed_value = 'flex-start';
+              break;
+            case 'flex-start':
+              reversed_value = 'flex-end';
+              break;
+          }
+          break;
+        case "paddingLeft":
+          reversed_property = "paddingRight"
+          break;
+        case "paddingRight": 
+          reversed_property = "paddingLeft"
+          break;
+        case "marginLeft":
+          reversed_property = "marginRight"
+          break;
+        case "marginRight": 
+          reversed_property = "marginLeft"
+          break;
+        case "textAlign":
+          switch(value){
+            case 'left':
+              reversed_value = 'right';
+              break;
+            case 'right':
+              reversed_value = 'left';
+              break;
+          }
+          break;
+      }
     }
   }
   // if(show_log)console.log("111111111111111111111111111111111111111: ")

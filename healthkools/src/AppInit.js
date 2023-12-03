@@ -58,7 +58,7 @@ class AppInit extends Component{
               // locale direction, so we force it here.
               if (i18n.dir !== RNDir) {
                   const isLocaleRTL = i18n.dir === 'RTL';
-                  RNI18nManager.forceRTL(isLocaleRTL);
+                  //RNI18nManager.forceRTL(isLocaleRTL);
                   // RN won't set the layout direction if we
                   // don't restart the app's JavaScript.
                   // if(reload){

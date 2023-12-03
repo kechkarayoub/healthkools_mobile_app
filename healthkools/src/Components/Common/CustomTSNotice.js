@@ -9,6 +9,7 @@ import { get_data } from "src/Components/terms_of_service/data";
 import { get_data_use_policy_articles } from 'src/Components/terms_of_service/data_use_policy';
 import { get_terms_service_notice, get_terms_of_services_articles } from 'src/Components/terms_of_service/terms_of_service';
 import { Linking, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { reverse_style } from 'src/utils/rtl_layout';
 import { t } from 'src/i18n';
 
 class CustomTSNotice extends React.Component {
@@ -238,10 +239,10 @@ class CustomTSNotice extends React.Component {
     var terms_service_notice = get_terms_service_notice({registration_label: registration_label})
     return (
       <>
-        <Text style={[styles.cotainer, this.props.style || {}]}
+        <Text style={[reverse_style(current_language, styles.cotainer), this.props.style || {}]}
           testID={this.props.test_id}
         >
-          <Text style={[styles.buttonText, this.props.textStyle || {}]}>{terms_service_notice[current_language](this.handleItemClicked)}</Text>
+          <Text style={[reverse_style(current_language, styles.buttonText), this.props.textStyle || {}]}>{terms_service_notice[current_language](this.handleItemClicked)}</Text>
         </Text>
         {(open_terms_of_service || open_cookie_policy || open_data_use_policy) &&
           <Overlay
@@ -250,12 +251,12 @@ class CustomTSNotice extends React.Component {
             closeOnTouchOutside={true}
             onClose={this.closeOverlay}
           >
-            <View style={styles.overlayContainer}>
-              <View style={styles.titleCloseContainer}>
-                <View style={styles.titleContainerStyle}>
-                  <Text style={[styles.titleStyle]}>{t(open_terms_of_service ? "Terms of service" : open_cookie_policy ? "Cookies and other storage technologies" : "Data use policy")}</Text>
+            <View style={reverse_style(current_language, styles.overlayContainer)}>
+              <View style={reverse_style(current_language, styles.titleCloseContainer)}>
+                <View style={reverse_style(current_language, styles.titleContainerStyle)}>
+                  <Text style={[reverse_style(current_language, styles.titleStyle)]}>{t(open_terms_of_service ? "Terms of service" : open_cookie_policy ? "Cookies and other storage technologies" : "Data use policy")}</Text>
                 </View>
-                <CloseButton name='close'  containerStyle={styles.iconCloseStyle} onPress={this.closeOverlay} />
+                <CloseButton name='close'  containerStyle={reverse_style(current_language, styles.iconCloseStyle)} onPress={this.closeOverlay} />
               </View>
               <SafeAreaView style={{flex: 1}}>
                 <ScrollView style={styles.TSOverlayContainerStyle} contentContainerStyle={styles.TSContentContainerStyle}>
@@ -352,6 +353,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     marginBottom: 10,
+    paddingLeft: 25,
     paddingRight: 25,
     width: '100%',
   },

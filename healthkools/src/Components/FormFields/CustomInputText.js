@@ -109,7 +109,7 @@ class CustomInputText extends React.Component {
           placeholder={placeholder}
           secureTextEntry={secureTextEntry}
           selectTextOnFocus={!disabled}
-          style={[reverse_style(current_language, styles.inputs), reverse_style(current_language, this.props.style || {}), reverse_style(current_language, disabled ? styles.disabledStyle : {})]}
+          style={[reverse_style(current_language, styles.inputs), reverse_style(current_language, this.props.style || {}), disabled ? styles.disabledStyle : {}]}
           testID={test_id}
           value={value}
           underlineColorAndroid={underlineColorAndroid}

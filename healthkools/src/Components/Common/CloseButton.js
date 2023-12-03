@@ -5,6 +5,7 @@ import React from 'react';
 import { COLORS } from "src/variables/colors";
 import { Stack, IconButton } from "@react-native-material/core";
 import { StyleSheet } from 'react-native';
+import { reverse_property, reverse_style } from 'src/utils/rtl_layout';
 
 const BORDER_WIDTH = 1; // This variable will be used in styling
 const BUTTON_SIZE = 25; // This variable will be used in styling
@@ -21,7 +22,9 @@ class CloseButton extends React.Component {
     elevation: PropTypes.number,
     justifyContent: PropTypes.string,
     marginBottom: PropTypes.number,
+    marginLeft: PropTypes.number,
     marginRight: PropTypes.number,
+    marginTop: PropTypes.number,
     onPress: PropTypes.func,
     test_id: PropTypes.string,
     zIndex: PropTypes.number,
@@ -34,28 +37,33 @@ class CloseButton extends React.Component {
     elevation: 2,
     justifyContent: "flex-end",
     marginBottom: 15,
-    marginRight: -35,
+    marginLeft: -20,
+    marginRight: -20,
+    marginTop: 0,
     onPress: () => {},
     test_id: 'test_id',
     zIndex: 2,
   }
 
   render() {
+    const { current_language } = this.props;
     return(
       <Stack
-        alignItems={this.props.alignItems || "flex-end"}
+        alignItems={reverse_property(current_language == "ar", "alignItems", this.props.alignItems || "flex-end")[1]}
         elevation={this.props.elevation || 2}
         fill 
-        justifyContent={this.props.justifyContent || "flex-end"}
+        justifyContent={reverse_property(current_language == "ar", "justifyContent", this.props.justifyContent || "flex-end")[1]}
         marginBottom={this.props.marginBottom || 15}
-        marginRight={this.props.marginRight || -35}
+        marginLeft={reverse_property(current_language == "ar", "marginLeft", undefined, true, this.props.marginLeft || -5)[1]}
+        marginRight={reverse_property(current_language == "ar", "marginRight", this.props.marginRight || -5, true, undefined)[1]}
+        marginTop={this.props.marginTop}
         spacing={4}
         zIndex={this.props.zIndex || 2}
       >
         <IconButton 
           icon={props => <Icon name="close" color={COLORS.default_color} size={BUTTON_SIZE/2} {...props} />}
           onPress={this.props.disabled ? () => {} : this.props.onPress}
-          style={[styles.button, this.props.disabled ? styles.disabledStyle : {}]} 
+          style={[reverse_style(current_language, styles.button), this.props.disabled ? styles.disabledStyle : {}]} 
           testID={this.props.test_id || 'test_id'}
         />
       </Stack>

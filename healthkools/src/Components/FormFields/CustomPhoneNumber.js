@@ -207,7 +207,7 @@ class CustomPhoneNumber extends React.Component {
             <CustomInputText 
               containerStyle={styles.phoneInputContainerStyle2}
               disabled={disabled}
-              iconStyle={[styles.inputIcon, this.props.iconStyle]}
+              iconStyle={{...styles.inputIcon, ...this.props.iconStyle}}
               keyboardType='number-pad' icon_url={icon_url} 
               onChangeText={(text) => {
                 if(this.props.onChangeText){
