@@ -1,8 +1,8 @@
-import { connect } from 'react-redux';
 import Icon from "react-native-vector-icons/FontAwesome";
 import PropTypes from 'prop-types';
 import React from 'react';
 import { COLORS } from "src/variables/colors";
+import { connect } from 'react-redux';
 import { Stack, IconButton } from "@react-native-material/core";
 import { StyleSheet } from 'react-native';
 import { reverse_property, reverse_style } from 'src/utils/rtl_layout';
