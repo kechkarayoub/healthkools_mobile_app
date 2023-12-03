@@ -10,7 +10,7 @@ import Config from 'react-native-config';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Alert, ImageBackground, ScrollView, StyleSheet, View } from 'react-native';
+import { Alert, ImageBackground, Platform, ScrollView, StyleSheet, View } from 'react-native';
 import { COLORS } from "src/variables/colors";
 import { connect } from 'react-redux'
 import { get_contry_by_code } from "src/utils/countries_list";
@@ -158,6 +158,9 @@ class SignUp extends React.Component {
       <View style={styles.body}>
         <ImageBackground source={logos.logo} style={styles.background}/>
         <ScrollView contentContainerStyle={styles.scrollView}>
+          {Platform.OS === 'ios' && (
+            <View style={{marginTop: 50}}></View>
+          )}
           {/* <InitialsColor initials={(last_name ? last_name.charAt(0) : "") + (first_name ? first_name.charAt(0) : "")} bg_color={initials_bg_color}
           /> */}
 

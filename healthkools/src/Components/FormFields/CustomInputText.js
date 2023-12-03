@@ -93,8 +93,23 @@ class CustomInputText extends React.Component {
 
   render() {
     const { current_language, disabled, form_error, icon_url, keyboardType, placeholder, secureTextEntry, test_id, underlineColorAndroid, value } = this.state;
+    let inputContainerPlatformStyle = {
+      flexDirection: 'row',
+    },
+    inputIconPlatformStyle = {
+      marginRight: 15,
+    },
+    inputsPlatformStyle = {
+      marginLeft: 16,
+    };
+    if(Platform.OS === 'ios'){
+      // Unexpected behavior on ios; I need to reverse direction value to work normally
+      inputContainerPlatformStyle = reverse_style(current_language, inputContainerPlatformStyle, true);
+      inputIconPlatformStyle = reverse_style(current_language, inputIconPlatformStyle, true);
+      inputsPlatformStyle = reverse_style(current_language, inputsPlatformStyle, true);
+    }
     return (
-      <View style={[reverse_style(current_language, this.props.containerStyle || styles.inputContainer), form_error ? styles.errorStyle : {}]}>
+      <View style={[reverse_style(current_language, this.props.containerStyle || styles.inputContainer), reverse_style(current_language, inputContainerPlatformStyle), form_error ? styles.errorStyle : {}]}>
         <TextInput
           editable={!disabled}
           keyboardType={keyboardType}
@@ -109,13 +124,13 @@ class CustomInputText extends React.Component {
           placeholder={placeholder}
           secureTextEntry={secureTextEntry}
           selectTextOnFocus={!disabled}
-          style={[reverse_style(current_language, styles.inputs), reverse_style(current_language, this.props.style || {}), disabled ? styles.disabledStyle : {}]}
+          style={[reverse_style(current_language, styles.inputs), reverse_style(current_language, inputsPlatformStyle), reverse_style(current_language, this.props.style || {}), disabled ? styles.disabledStyle : {}]}
           testID={test_id}
           value={value}
           underlineColorAndroid={underlineColorAndroid}
         />
         {icon_url &&
-          <Image style={[reverse_style(current_language, styles.inputIcon), reverse_style(current_language, this.props.iconStyle), disabled ? styles.disabledIconStyle : {}]} source={icon_url}/>
+          <Image style={[reverse_style(current_language, styles.inputIcon), reverse_style(current_language, inputIconPlatformStyle), reverse_style(current_language, this.props.iconStyle), disabled ? styles.disabledIconStyle : {}]} source={icon_url}/>
         }
         {form_error &&
           <ErrorComponent error={form_error} />
@@ -159,14 +174,12 @@ const styles = StyleSheet.create({
   inputIcon:{
     height: 30,
     justifyContent: 'center',
-    marginRight: 15,
     width: 30,
   },
   inputs:{
     borderBottomColor: '#FFFFFF',
     flex: 1,
     height: 45,
-    marginLeft: 16,
     textAlign: 'left',
   },
 });

@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
     height: BUTTON_SIZE + BORDER_WIDTH,
     justifyContent: 'flex-end',
     width: BUTTON_SIZE + BORDER_WIDTH,
+    marginRight: 0,
   },
   disabledStyle: {
     opacity: 0.3,

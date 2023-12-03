@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { reverse_style } from "src/utils/rtl_layout";
-import { PixelRatio, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { PixelRatio, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 class CustomTouchableOpacity extends React.Component {
   constructor(props) {
@@ -53,12 +53,24 @@ class CustomTouchableOpacity extends React.Component {
 
   render() {
     const { current_language, disabled } = this.state;
+
+    var notButtonTextPlatformStyle = {
+      textAlign: 'left',
+      paddingLeft: 10,
+    };
+    if(!this.props.is_not_button){
+      notButtonTextPlatformStyle = {};
+    }
+    else if(Platform.OS === 'ios'){
+      // Unexpected behavior on ios; I need to reverse direction value to work normally
+      notButtonTextPlatformStyle = reverse_style(current_language, notButtonTextPlatformStyle, true);
+    }
     if(disabled){
       return (
         <View style={[reverse_style(current_language, this.props.is_not_button ? styles.notButtonCotainer : styles.buttonContainer), this.props.style || {}, styles.disabledStyle]}
           testID={this.props.test_id}
         >
-          <Text style={[reverse_style(current_language, this.props.is_not_button ? styles.notButtonText : styles.buttonText), this.props.textStyle || {}]}>
+          <Text style={[reverse_style(current_language, this.props.is_not_button ? styles.notButtonText : styles.buttonText), reverse_style(current_language, notButtonTextPlatformStyle), this.props.textStyle || {}]}>
             {this.props.text}
           </Text>
         </View>
@@ -68,7 +80,7 @@ class CustomTouchableOpacity extends React.Component {
       <TouchableOpacity style={[reverse_style(current_language, this.props.is_not_button ? styles.notButtonCotainer : styles.buttonContainer), this.props.style || {}]}
         onPress={this.props.onPress} testID={this.props.test_id}
       >
-        <Text style={[reverse_style(current_language, this.props.is_not_button ? styles.notButtonText : styles.buttonText), this.props.textStyle || {}]}>
+        <Text style={[reverse_style(current_language, this.props.is_not_button ? styles.notButtonText : styles.buttonText), reverse_style(current_language, notButtonTextPlatformStyle), this.props.textStyle || {}]}>
           {this.props.text}
         </Text>
       </TouchableOpacity>
@@ -94,11 +106,11 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   notButtonCotainer: {
-    alignItems: 'flex-end',
+    alignItems: 'flex-start',
     backgroundColor: 'transparent',
     flexDirection: 'row',
     height: 15,
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
     marginBottom: 10,
     width: 300,
   },
@@ -106,7 +118,6 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: 'bold',
     height: 20,
-    paddingLeft: 10,
     textAlign: 'left',
     width: "100%",
   },

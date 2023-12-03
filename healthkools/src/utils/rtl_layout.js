@@ -1,7 +1,7 @@
-export const reverse_property = (is_rtl, property, value, only_value, reversed_value_) => {
-  // Function to reverse property depending on is_rtl parameter
+export const reverse_property = (convert, property, value, only_value, reversed_value_) => {
+  // Function to reverse property depending on convert parameter
   // Params:
-  //  - is_rtl: Boolean indicated if the current_language is rtl
+  //  - convert: Boolean indicated if the current_language is rtl or only forcing convertion
   //  - property: Property to reverse
   //  - value: Value to reverse
   // Returns:
@@ -11,9 +11,9 @@ export const reverse_property = (is_rtl, property, value, only_value, reversed_v
   // if(show_log)console.log("000000000000000000000000000000000000000000000: ")
   // if(show_log)console.log("property: ", property)
   // if(show_log)console.log("value: ", value)
-  // if(show_log)console.log('is_rtl: ', is_rtl)
+  // if(show_log)console.log('convert: ', convert)
   let reversed_property = property, reversed_value = value;
-  if(is_rtl){
+  if(convert){
     if(only_value){
       reversed_value = reversed_value_;
     }
@@ -91,7 +91,7 @@ export const reverse_property = (is_rtl, property, value, only_value, reversed_v
   return [reversed_property, reversed_value];
 }
 
-export const reverse_style = (current_language, style) => {
+export const reverse_style = (current_language, style, force_convertion) => {
   // Function to reverse style depending on current_language
   // Params:
   //  - current_language: Current language selected
@@ -101,9 +101,9 @@ export const reverse_style = (current_language, style) => {
   let reverse_style = {};
   style = style || {};
   // console.log("current_language: ", current_language)
-  let is_rtl = current_language == "ar";
+  let convert = force_convertion || current_language == "ar";
   Object.keys(style).map(property => {
-    let reversed_property_value = reverse_property(is_rtl, property, style[property]);
+    let reversed_property_value = reverse_property(convert, property, style[property]);
     reverse_style[reversed_property_value[0]] = reversed_property_value[1];
   });
   // console.log("style: ", style)
