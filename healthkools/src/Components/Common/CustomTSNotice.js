@@ -236,14 +236,14 @@ class CustomTSNotice extends React.Component {
   
   render() {
     const { current_language, open_cookie_policy, open_data_use_policy, open_terms_of_service, registration_label } = this.state;
-    var terms_service_notice = get_terms_service_notice({registration_label: registration_label})
+    var terms_service_notice = get_terms_service_notice({registration_label: registration_label}, current_language)
     return (
       <>
-        <Text style={[reverse_style(current_language, styles.cotainer), this.props.style || {}]}
+        <View style={[reverse_style(current_language, styles.cotainer), this.props.style || {}]}
           testID={this.props.test_id}
         >
           <Text style={[reverse_style(current_language, styles.buttonText), this.props.textStyle || {}]}>{terms_service_notice[current_language](this.handleItemClicked)}</Text>
-        </Text>
+        </View>
         {(open_terms_of_service || open_cookie_policy || open_data_use_policy) &&
           <Overlay
             fullScreen

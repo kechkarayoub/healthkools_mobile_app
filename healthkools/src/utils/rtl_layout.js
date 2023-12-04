@@ -40,6 +40,16 @@ export const reverse_property = (convert, property, value, only_value, reversed_
               break;
           }
           break;
+        case "direction":
+          switch(value){
+            case 'rtl':
+              reversed_value = 'ltr';
+              break;
+            case 'ltr':
+              reversed_value = 'rtl';
+              break;
+          }
+          break;
         case "flexDirection":
           switch(value){
             case 'row':
@@ -79,6 +89,16 @@ export const reverse_property = (convert, property, value, only_value, reversed_
               break;
             case 'right':
               reversed_value = 'left';
+              break;
+          }
+          break;
+        case "writingDirection":
+          switch(value){
+            case 'rtl':
+              reversed_value = 'ltr';
+              break;
+            case 'ltr':
+              reversed_value = 'rtl';
               break;
           }
           break;

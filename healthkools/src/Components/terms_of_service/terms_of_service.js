@@ -1,6 +1,7 @@
 import React from 'react';
 import { COLORS } from "src/variables/colors";
 import { render_term_service_custom_item, render_term_service_link } from "src/Components/terms_of_service/utils";
+import { reverse_style } from 'src/utils/rtl_layout';
 import { StyleSheet, Text } from 'react-native';
 
 export const get_terms_of_services_articles = (data, handleOpenUrl) => {
@@ -859,44 +860,48 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
     ];
 };
 
-export const get_terms_service_notice = (props) => {
+export const get_terms_service_notice = (props, current_language) => {
     return {
         ar: (handleItemClicked) => {
           return <>
             <Text style={{}}>{"   بالضغط على "}</Text>
-            <Text style={styles.registrationLabelStyle}>{props.registration_label}</Text>
+            <Text style={reverse_style(current_language, styles.registrationLabelStyle)}>{props.registration_label}</Text>
             <Text style={{}}>{" ، فإنك توافق على "}</Text>
-            <Text style={styles.termStyle} onPress={() => handleItemClicked("terms_of_service")} testID="terms_of_service_test_id">{"شروط الخدمة"}</Text>
-            <Text style={{}}>{" الخاصة بنا ، و"}</Text>
-            <Text style={styles.termStyle} onPress={() => handleItemClicked("data_use_policy")} testID="data_use_policy_test_id">{"سياسة استخدام البيانات"}</Text>
+            <Text style={reverse_style(current_language, styles.termStyle)} onPress={() => handleItemClicked("terms_of_service")} testID="terms_of_service_test_id">{"شروط الخدمة"}</Text>
+            <Text style={{}}>{"، "}</Text>
+            <Text style={reverse_style(current_language, styles.termStyle)} onPress={() => handleItemClicked("data_use_policy")} testID="data_use_policy_test_id">{"سياسة استخدام البيانات"}</Text>
             <Text style={{}}>{" و"}</Text>
-            <Text style={styles.termStyle} onPress={() => handleItemClicked("cookie_policy")} testID="cookie_policy_test_id">{"سياسة ملفات تعريف الارتباط"}</Text>
-            <Text style={{}}>{".الخاصة بنا"}</Text>
+            <Text style={reverse_style(current_language, styles.termStyle)} onPress={() => handleItemClicked("cookie_policy")} testID="cookie_policy_test_id">{"سياسة ملفات تعريف الارتباط"}</Text>
+            <Text style={{}}>{" "}</Text>
+            <Text style={{}}>{"الخاصة بنا"}</Text>
+            <Text style={{}}>{"."}</Text>
+            <Text style={{color: 'transparent'}}>{"........ ........ ... ...... .......... ...... ..... ...... ....... ..... .... ...... ....... ..... ...."}</Text>
+
           </>
         },
         en: (handleItemClicked) => {
           return <>
             <Text style={{}}>{"   By pressing "}</Text>
-            <Text style={styles.registrationLabelStyle}>{props.registration_label}</Text>
+            <Text style={reverse_style(current_language, styles.registrationLabelStyle)}>{props.registration_label}</Text>
             <Text style={{}}>{", you agree to our "}</Text>
-            <Text style={styles.termStyle} onPress={() => handleItemClicked("terms_of_service")} testID="terms_of_service_test_id">{"Terms of service"}</Text>
+            <Text style={reverse_style(current_language, styles.termStyle)} onPress={() => handleItemClicked("terms_of_service")} testID="terms_of_service_test_id">{"Terms of service"}</Text>
             <Text style={{}}>{", our "}</Text>
-            <Text style={styles.termStyle} onPress={() => handleItemClicked("data_use_policy")} testID="data_use_policy_test_id">{"Data Use Policy"}</Text>
+            <Text style={reverse_style(current_language, styles.termStyle)} onPress={() => handleItemClicked("data_use_policy")} testID="data_use_policy_test_id">{"Data Use Policy"}</Text>
             <Text style={{}}>{" and our "}</Text>
-            <Text style={styles.termStyle} onPress={() => handleItemClicked("cookie_policy")} testID="cookie_policy_test_id">{"Cookies Policy"}</Text>
+            <Text style={reverse_style(current_language, styles.termStyle)} onPress={() => handleItemClicked("cookie_policy")} testID="cookie_policy_test_id">{"Cookies Policy"}</Text>
             <Text style={{}}>{"."}</Text>
           </>
         },
         fr: (handleItemClicked) => {
           return <>
             <Text style={{}}>{"   En appuyant sur "}</Text>
-            <Text style={styles.registrationLabelStyle}>{props.registration_label}</Text>
+            <Text style={reverse_style(current_language, styles.registrationLabelStyle)}>{props.registration_label}</Text>
             <Text style={{}}>{", vous acceptez nos "}</Text>
-            <Text style={styles.termStyle} onPress={() => handleItemClicked("terms_of_service")} testID="terms_of_service_test_id">{"Conditions d'utilisation"}</Text>
+            <Text style={reverse_style(current_language, styles.termStyle)} onPress={() => handleItemClicked("terms_of_service")} testID="terms_of_service_test_id">{"Conditions d'utilisation"}</Text>
             <Text style={{}}>{", notre "}</Text>
-            <Text style={styles.termStyle} onPress={() => handleItemClicked("data_use_policy")} testID="data_use_policy_test_id">{"Politique d'utilisation des données"}</Text>
+            <Text style={reverse_style(current_language, styles.termStyle)} onPress={() => handleItemClicked("data_use_policy")} testID="data_use_policy_test_id">{"Politique d'utilisation des données"}</Text>
             <Text style={{}}>{" et notre "}</Text>
-            <Text style={styles.termStyle} onPress={() => handleItemClicked("cookie_policy")} testID="cookie_policy_test_id">{"Politique d'utilisation des cookies"}</Text>
+            <Text style={reverse_style(current_language, styles.termStyle)} onPress={() => handleItemClicked("cookie_policy")} testID="cookie_policy_test_id">{"Politique d'utilisation des cookies"}</Text>
             <Text style={{}}>{"."}</Text>
           </>
         },
