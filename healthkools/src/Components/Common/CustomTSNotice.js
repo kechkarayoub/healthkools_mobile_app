@@ -8,23 +8,26 @@ import { get_cookies_policy_articles } from 'src/Components/terms_of_service/coo
 import { get_data } from "src/Components/terms_of_service/data";
 import { get_data_use_policy_articles } from 'src/Components/terms_of_service/data_use_policy';
 import { get_terms_service_notice, get_terms_of_services_articles } from 'src/Components/terms_of_service/terms_of_service';
-import { Linking, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { handleOpenUrl } from 'src/utils';
+import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { reverse_style } from 'src/utils/rtl_layout';
 import { t } from 'src/i18n';
 
 class CustomTSNotice extends React.Component {
   constructor(props) {
     super(props);
-    this.data = get_data();  // Site information
+    this.data = get_data(),  // Site information
     this.state = {
-      cookies_policy_articles: get_cookies_policy_articles(this.data, (url) => this.handleOpenUrl(url)),
+      cookies_policy_articles: get_cookies_policy_articles(this.data, (url) => handleOpenUrl(url), props.current_language, props.is_portrait),
       current_language: props.current_language,
-      data_use_policy_articles: get_data_use_policy_articles(this.data, (url) => this.handleOpenUrl(url)),
+      data: this.data,
+      data_use_policy_articles: get_data_use_policy_articles(this.data, (url) => handleOpenUrl(url), props.current_language, props.is_portrait),
+      is_portrait: props.is_portrait,
       open_cookie_policy: false,
       open_data_use_policy: false,
       open_terms_of_service: false,
       registration_label: props.registration_label,
-      terms_of_services_articles: get_terms_of_services_articles(this.data, (url) => this.handleOpenUrl(url)),
+      terms_of_services_articles: get_terms_of_services_articles(this.data, (url) => handleOpenUrl(url), props.current_language, props.is_portrait),
     };
   }
 
@@ -33,6 +36,13 @@ class CustomTSNotice extends React.Component {
     var return_new_state = false;
     if(props.current_language !== state.current_language) {
       new_state.current_language = props.current_language;
+      return_new_state = true;
+    }
+    if(props.is_portrait !== state.is_portrait) {
+      new_state.is_portrait = props.is_portrait;
+      new_state.cookies_policy_articles = get_cookies_policy_articles(state.data, (url) => handleOpenUrl(url), new_state.current_language || state.current_language, new_state.is_portrait);
+      new_state.data_use_policy_articles = get_data_use_policy_articles(state.data, (url) => handleOpenUrl(url), new_state.current_language || state.current_language, new_state.is_portrait);
+      new_state.terms_of_services_articles = get_terms_of_services_articles(state.data, (url) => handleOpenUrl(url), new_state.current_language || state.current_language, new_state.is_portrait);
       return_new_state = true;
     }
     if(props.registration_label !== state.registration_label) {
@@ -48,6 +58,13 @@ class CustomTSNotice extends React.Component {
       new_state.current_language = this.state.current_language;
       set_state = true;
     }
+    if(prevState.is_portrait !== this.state.is_portrait){
+      new_state.is_portrait = this.state.is_portrait;
+      new_state.cookies_policy_articles = get_cookies_policy_articles(prevState.data, (url) => handleOpenUrl(url), new_state.current_language || prevState.current_language, new_state.is_portrait);
+      new_state.data_use_policy_articles = get_data_use_policy_articles(prevState.data, (url) => handleOpenUrl(url), new_state.current_language || prevState.current_language, new_state.is_portrait);
+      new_state.terms_of_services_articles = get_terms_of_services_articles(prevState.data, (url) => handleOpenUrl(url), new_state.current_language || prevState.current_language, new_state.is_portrait);
+      set_state = true;
+    }
     if(prevState.registration_label !== this.state.registration_label){
       new_state.registration_label = this.state.registration_label;
       set_state = true;
@@ -60,6 +77,7 @@ class CustomTSNotice extends React.Component {
   static propTypes = {
     current_language: PropTypes.string,
     is_not_button: PropTypes.bool,
+    is_portrait: PropTypes.bool,
     onPress: PropTypes.func,
     registration_label: PropTypes.string,
     style: PropTypes.object,
@@ -74,20 +92,13 @@ class CustomTSNotice extends React.Component {
   static defaultProps = {
     current_language: "en",
     is_not_button: false,
+    is_portrait: true,
     onPress: () => {},
     registration_label: "Sign up",
     style: null,
     test_id: '',
     text: '',
     textStyle: null,
-  }
-
-  handleOpenUrl = async (url) => {
-    // Asynchronous function to handle the opening of a URL
-    // Params:
-    //  - url (string): The URL to be opened
-    // decodeURIComponent(url): Decode the URL before opening it asynchronously using Linking API
-    await Linking.openURL(decodeURIComponent(url));
   }
 
   handleItemClicked = clicked_item => {
@@ -111,13 +122,13 @@ class CustomTSNotice extends React.Component {
     return <View style={styles.TSContainerStyle}>
       {terms_of_services_articles.map((terms_of_services_article, idx) => {
         return <View key={idx} style={styles.articleStyle}>
-          <View  style={styles.articleTitleStyle}>
-            <View><Text style={styles.articleTitleNumberStyle}>{t("Item") + " " + (idx + 1) + ": "}</Text></View>
+          <View style={reverse_style(current_language, styles.articleTitleStyle, undefined, ['justifyContent'])}>
+            <View><Text style={styles.articleTitleNumberStyle}>{t("Item") + " " + (idx + 1) + " : "}</Text></View>
             <View style={{ flexShrink: 1 }}>{terms_of_services_article.title[current_language]()}</View>
           </View>
           {terms_of_services_article.paragraphs.map((paragraph, idx_p) => {
             return <View key={idx_p} style={styles.paragraphStyle}>
-              <View style={styles.paragraphContentStyle}>
+              <View style={reverse_style(current_language, styles.paragraphContentStyle)}>
                 {paragraph[current_language]()}
               </View>
               {paragraph.list_items &&
@@ -144,7 +155,7 @@ class CustomTSNotice extends React.Component {
       </View>
       {cookies_policy_articles.items.map((cookies_policy_article, idx) => {
         return <View key={idx} style={styles.articleStyle}>
-          <View  style={styles.articleTitleStyle}>
+          <View style={reverse_style(current_language, styles.articleTitleStyle, undefined, ['justifyContent'])}>
             {/*<View><Text style={styles.articleTitleNumberStyle}>{t("Item") + " " + (idx + 1) + ": "}</Text></View>*/}
             <View style={{ flexShrink: 1 }}>{cookies_policy_article.title[current_language]()}</View>
           </View>
@@ -155,7 +166,7 @@ class CustomTSNotice extends React.Component {
           }
           {cookies_policy_article.paragraphs.map((paragraph, idx_p) => {
             return <View key={idx_p} style={styles.paragraphStyle}>
-              <View style={styles.paragraphContentStyle}>
+              <View style={reverse_style(current_language, styles.paragraphContentStyle)}>
                 {paragraph[current_language]()}
               </View>
               {paragraph.list_items &&
@@ -193,7 +204,7 @@ class CustomTSNotice extends React.Component {
       </View>
       {data_use_policy_articles.items.map((data_use_policy_article, idx) => {
         return <View key={idx} style={styles.articleStyle}>
-          <View  style={styles.articleTitleStyle}>
+          <View style={reverse_style(current_language, styles.articleTitleStyle, undefined, ['justifyContent'])}>
             {/*<View><Text style={styles.articleTitleNumberStyle}>{t("Item") + " " + (idx + 1) + ": "}</Text></View>*/}
             <View style={{ flexShrink: 1 }}>{data_use_policy_article.title[current_language]()}</View>
           </View>
@@ -204,7 +215,7 @@ class CustomTSNotice extends React.Component {
           }
           {data_use_policy_article.paragraphs.map((paragraph, idx_p) => {
             return <View key={idx_p} style={styles.paragraphStyle}>
-              <View style={styles.paragraphContentStyle}>
+              <View style={reverse_style(current_language, styles.paragraphContentStyle)}>
                 {paragraph[current_language]()}
               </View>
               {paragraph.list_items &&
@@ -235,7 +246,7 @@ class CustomTSNotice extends React.Component {
   }
   
   render() {
-    const { current_language, open_cookie_policy, open_data_use_policy, open_terms_of_service, registration_label } = this.state;
+    const { current_language, is_portrait, open_cookie_policy, open_data_use_policy, open_terms_of_service, registration_label } = this.state;
     var terms_service_notice = get_terms_service_notice({registration_label: registration_label}, current_language)
     return (
       <>
@@ -335,6 +346,10 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   paragraphContentStyle: {
+    display: 'flex',
+    flexDirection: 'row-reverse',
+    justifyContent: 'flex-start',
+    textAlign: "left",
   },
   paragraphItemStyle: {},
   paragraphListItemsContentStyle: {},
@@ -406,6 +421,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
   return {
     current_language: state.current_language,
+    is_portrait: state.is_portrait,
   }
 }
 

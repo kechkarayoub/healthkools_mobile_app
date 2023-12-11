@@ -8,7 +8,10 @@ if(locale_splited && supported_languages.indexOf(locale_splited) !== -1){
   current_language = locale_splited;
 }
 
-const initialState = { current_language: current_language }
+const initialState = { 
+  current_language: current_language,
+  is_portrait: true,
+ };
 
 function gloabalReducer(state, action) {
   state = state || initialState;
@@ -17,9 +20,15 @@ function gloabalReducer(state, action) {
     case 'CHANGE_LANGUAGE':
       nextState = {
         ...state,
-        current_language: action.value
+        current_language: action.value,
       }
-      return nextState
+      return nextState;
+    case 'CHANGE_DIMENTIONS':
+      nextState = {
+        ...state,
+        is_portrait: action.value,
+      }
+      return nextState;
   default:
     return state
   }

@@ -6,6 +6,7 @@ import CustomTextArea from 'src/Components/FormFields/CustomTextArea';
 import CustomTouchableOpacity from 'src/Components/FormFields/CustomTouchableOpacity';
 import CustomTSNotice from 'src/Components/Common/CustomTSNotice';
 import Config from 'react-native-config';
+import LanguagePicker from 'src/Components/Common/LanguagePicker';
 //import InitialsColor from 'src/Components/Common/InitialsColor';
 import moment from 'moment';
 import PropTypes from 'prop-types';
@@ -40,6 +41,7 @@ class SignUp extends React.Component {
       gender: "",
       initials_bg_color: get_random_color(),
       invalid_messages: {},
+      is_portrait: props.is_portrait,
       is_valid_phone_number: false,
       last_name: "",
       password: "",
@@ -65,6 +67,10 @@ class SignUp extends React.Component {
     var return_new_state = false;
     if (props.current_language !== state.current_language) {
       new_state.current_language = props.current_language;
+      return_new_state = true;
+    }
+    if (props.is_portrait !== state.is_portrait) {
+      new_state.is_portrait = props.is_portrait;
       return_new_state = true;
     }
     if (props.registration_label !== state.registration_label) {
@@ -95,6 +101,7 @@ class SignUp extends React.Component {
 
   static propTypes = {
     current_language: PropTypes.string,
+    is_portrait: PropTypes.bool,
     navigation: PropTypes.oneOfType([
       PropTypes.object,
     ]),
@@ -103,6 +110,7 @@ class SignUp extends React.Component {
   
   static defaultProps = {
     current_language: 'en',
+    is_portrait: true,
     navigation: null,
     registration_label: 'Sign up',
   }
@@ -111,6 +119,10 @@ class SignUp extends React.Component {
     var new_state = {}, set_state = false;
     if(prevState.current_language !== this.state.current_language){
       new_state.current_language = this.state.current_language;
+      set_state = true;
+    }
+    if(prevState.is_portrait !== this.state.is_portrait){
+      new_state.is_portrait = this.state.is_portrait;
       set_state = true;
     }
     if(prevState.registration_label !== this.state.registration_label){
@@ -149,7 +161,7 @@ class SignUp extends React.Component {
 
   render() {
     const {address, birthday, country_code, country_phone_code, current_language, email, formatted_phone_number,
-      form_errors, first_name, is_valid_phone_number, initials_bg_color,
+      form_errors, first_name, is_portrait, is_valid_phone_number, initials_bg_color,
       last_name, password, password_confirmation, phone_number, registration_label,
       username
     } = this.state;
@@ -158,9 +170,8 @@ class SignUp extends React.Component {
       <View style={styles.body}>
         <ImageBackground source={logos.logo} style={styles.background}/>
         <ScrollView contentContainerStyle={styles.scrollView}>
-          {Platform.OS === 'ios' && (
-            <View style={{marginTop: 50}}></View>
-          )}
+          <View style={{marginTop: 70}}></View>
+          <LanguagePicker />
           {/* <InitialsColor initials={(last_name ? last_name.charAt(0) : "") + (first_name ? first_name.charAt(0) : "")} bg_color={initials_bg_color}
           /> */}
 
@@ -357,7 +368,7 @@ class SignUp extends React.Component {
             type_date="birthday"
             value={birthday}
           />
-          <CustomTSNotice {...this.props} current_language={current_language} registration_label={registration_label} />
+          <CustomTSNotice {...this.props} current_language={current_language} is_portrait={is_portrait} registration_label={registration_label} />
           <CustomTouchableOpacity onPress={() => this.onClickListener('register')}
             text={t("Sign up")} style={styles.loginButton}
           />
@@ -404,7 +415,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    current_language: state.current_language
+    current_language: state.current_language,
+    is_portrait: state.is_portrait,
   }
 }
 

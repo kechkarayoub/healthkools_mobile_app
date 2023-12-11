@@ -1,15 +1,16 @@
 import React from 'react';
 import { COLORS } from "src/variables/colors";
 import { line_return } from "src/utils";
-import { render_term_service_link } from "src/Components/terms_of_service/utils";
+import { render_term_service_link, render_transparent_text } from "src/Components/terms_of_service/utils";
+import { reverse_style } from 'src/utils/rtl_layout';
 import { StyleSheet, Text } from 'react-native';
 
-export const get_cookies_policy_articles = (data, handleOpenUrl) => {
+export const get_cookies_policy_articles = (data, handleOpenUrl, current_language, is_portrait) => {
     return {
         intro: {
             ar: () => {
                 return <>
-                  <Text style={styles.paragraphContentStyle}>{`ملفات تعريف الارتباط عبارة عن أجزاء نصية صغيرة يتم استخدامها لتخزين المعلومات على متصفحات الويب. يتم استخدام ملفات تعريف الارتباط لتخزين المعرفات والمعلومات الأخرى واستلامها على أجهزة الكمبيوتر والهواتف المحمولة والأجهزة الأخرى. ويتم استخدام تقنيات أخرى، بما في ذلك البيانات التي نقوم بتخزينها على متصفح الويب أو الجهاز لديّك والمعرفات المرتبطة بجهازك وغير ذلك من البرامج، لأغراض مماثلة. في هذه السياسة، نشير إلى كل هذه التقنيات باسم "ملفات تعريف الارتباط".${line_return(1)}نستخدم ملفات تعريف الارتباط إذا كان لديك حساب على `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` أو كنت تستخدم منتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` بما في ذلك موقعنا على الويب وتطبيقاتنا، أو عند زيارة مواقع الويب والتطبيقات الأخرى التي تستخدم منتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{`. تتيح ملفات تعريف الارتباط ل`}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` إمكانية توفير منتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` لك والتعرف على المعلومات التي نتلقاها عنك، بما في ذلك المعلومات ذات الصلة باستخدامك لمواقع الويب والتطبيقات الأخرى، بصرف النظر عما إذا كنت قد قمت بالتسجيل أو تسجيل الدخول أم لا.${line_return(1)}توضّح هذه السياسة كيفية استخدامنا لملفات تعريف الارتباط والخيارات المتاحة لك. ما لم تنص هذه السياسة على خلاف ذلك، سيتم تطبيق سياسة البيانات على طريقة معالجتنا للبيانات التي نجمعها عبر ملفات تعريف الارتباط.`}</Text>
+                  <Text style={styles.paragraphContentStyle}>{`ملفات تعريف الارتباط عبارة عن أجزاء نصية صغيرة يتم استخدامها لتخزين المعلومات على متصفحات الويب. يتم استخدام ملفات تعريف الارتباط لتخزين المعرفات والمعلومات الأخرى واستلامها على أجهزة الكمبيوتر والهواتف المحمولة والأجهزة الأخرى. ويتم استخدام تقنيات أخرى، بما في ذلك البيانات التي نقوم بتخزينها على متصفح الويب أو الجهاز لديّك والمعرفات المرتبطة بجهازك وغير ذلك من البرامج، لأغراض مماثلة. في هذه السياسة، نشير إلى كل هذه التقنيات باسم "ملفات تعريف الارتباط".`}{render_transparent_text(styles.transparentText, 100, is_portrait)}{`${line_return(1)}نستخدم ملفات تعريف الارتباط إذا كان لديك حساب على `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` أو كنت تستخدم منتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` بما في ذلك موقعنا على الويب وتطبيقاتنا، أو عند زيارة مواقع الويب والتطبيقات الأخرى التي تستخدم منتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{`. تتيح ملفات تعريف الارتباط ل`}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` إمكانية توفير منتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` لك والتعرف على المعلومات التي نتلقاها عنك، بما في ذلك المعلومات ذات الصلة باستخدامك لمواقع الويب والتطبيقات الأخرى، بصرف النظر عما إذا كنت قد قمت بالتسجيل أو تسجيل الدخول أم لا.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}{`${line_return(1)}توضّح هذه السياسة كيفية استخدامنا لملفات تعريف الارتباط والخيارات المتاحة لك. ما لم تنص هذه السياسة على خلاف ذلك، سيتم تطبيق سياسة البيانات على طريقة معالجتنا للبيانات التي نجمعها عبر ملفات تعريف الارتباط.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                 </>
             },
             en: () => {
@@ -33,7 +34,7 @@ export const get_cookies_policy_articles = (data, handleOpenUrl) => {
                 intro: {
                     ar: () => {
                         return <>
-                          <Text style={styles.paragraphContentStyle}>{`تساعدنا ملفات تعريف الارتباط على توفير منتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` وحمايتها وتحسينها، على سبيل المثال، عن طريق إضفاء طابع شخصي على المحتوى وتخصيص الإعلانات وقياسها وتقديم تجربة أكثر أمانًا. تتضمن ملفات تعريف الارتباط التي نستخدمها ملفات تعريف ارتباط الجلسات، والتي يتم حذفها عند إغلاق المتصفح، وملفات تعريف الارتباط الدائمة، والتي تبقى على المتصفح حتى تنتهي صلاحيتها أو يتم حذفها. ونظرًا لتغير أسماء ملفات تعريف الارتباط التي نستخدمها من حين لآخر أثناء تحسين منتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` التي نقدمها وتحديثها، نستخدم ملفات تعريف الارتباط للأغراض التالية:`}</Text>
+                          <Text style={styles.paragraphContentStyle}>{`تساعدنا ملفات تعريف الارتباط على توفير منتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` وحمايتها وتحسينها، على سبيل المثال، عن طريق إضفاء طابع شخصي على المحتوى وتخصيص الإعلانات وقياسها وتقديم تجربة أكثر أمانًا. تتضمن ملفات تعريف الارتباط التي نستخدمها ملفات تعريف ارتباط الجلسات، والتي يتم حذفها عند إغلاق المتصفح، وملفات تعريف الارتباط الدائمة، والتي تبقى على المتصفح حتى تنتهي صلاحيتها أو يتم حذفها. ونظرًا لتغير أسماء ملفات تعريف الارتباط التي نستخدمها من حين لآخر أثناء تحسين منتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` التي نقدمها وتحديثها، نستخدم ملفات تعريف الارتباط للأغراض التالية:`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                         </>
                     },
                     en: () => {
@@ -56,7 +57,7 @@ export const get_cookies_policy_articles = (data, handleOpenUrl) => {
                             {
                                 ar: () => {
                                     return <>
-                                      <Text style={styles.paragraphContentStyle}>{`نستخدم ملفات تعريف الارتباط للتحقق من حسابك وتحديد وقت تسجيل دخولك، و ذلك حتى نتمكن من جعل عملية وصولك إلى منتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` أكثر سهولة بالإضافة إلى منحك الميزات وتجربة الاستخدام المناسبة.`}</Text>
+                                      <Text style={styles.paragraphContentStyle}>{`نستخدم ملفات تعريف الارتباط للتحقق من حسابك وتحديد وقت تسجيل دخولك، و ذلك حتى نتمكن من جعل عملية وصولك إلى منتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` أكثر سهولة بالإضافة إلى منحك الميزات وتجربة الاستخدام المناسبة.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                                     </>
                                 },
                                 en: () => {
@@ -80,7 +81,7 @@ export const get_cookies_policy_articles = (data, handleOpenUrl) => {
                             {
                                 ar: () => {
                                     return <>
-                                      <Text style={styles.paragraphContentStyle}>{`نستخدم ملفات تعريف الارتباط للمساعدة في الحفاظ على أمان الحساب والبيانات ومنتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` وسلامتها.`}</Text>
+                                      <Text style={styles.paragraphContentStyle}>{`نستخدم ملفات تعريف الارتباط للمساعدة في الحفاظ على أمان الحساب والبيانات ومنتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` وسلامتها.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                                     </>
                                 },
                                 en: () => {
@@ -97,7 +98,7 @@ export const get_cookies_policy_articles = (data, handleOpenUrl) => {
                             {
                                 ar: () => {
                                     return <>
-                                      <Text style={styles.paragraphContentStyle}>{`نستخدم أيضًا ملفات تعريف الارتباط لمواجهة الأنشطة التي تمثل انتهاكًا لسياساتنا أو التي تحد من قدرتنا على تقديم منتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` بكفاءة.`}</Text>
+                                      <Text style={styles.paragraphContentStyle}>{`نستخدم أيضًا ملفات تعريف الارتباط لمواجهة الأنشطة التي تمثل انتهاكًا لسياساتنا أو التي تحد من قدرتنا على تقديم منتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` بكفاءة.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                                     </>
                                 },
                                 en: () => {
@@ -121,7 +122,7 @@ export const get_cookies_policy_articles = (data, handleOpenUrl) => {
                             {
                                 ar: () => {
                                     return <>
-                                      <Text style={styles.paragraphContentStyle}>{`نستخدم ملفات تعريف الارتباط لتساعدنا على عرض إعلانات الأنشطة التجارية وغيرها من المؤسسات وعرض توصيات خاصة بها أمام الأشخاص الذين يُحتمل اهتمامهم بالمنتجات أو الخدمات أو القضايا التي يروجون لها.`}</Text>
+                                      <Text style={styles.paragraphContentStyle}>{`نستخدم ملفات تعريف الارتباط لتساعدنا على عرض إعلانات الأنشطة التجارية وغيرها من المؤسسات وعرض توصيات خاصة بها أمام الأشخاص الذين يُحتمل اهتمامهم بالمنتجات أو الخدمات أو القضايا التي يروجون لها.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                                     </>
                                 },
                                 en: () => {
@@ -145,7 +146,7 @@ export const get_cookies_policy_articles = (data, handleOpenUrl) => {
                             {
                                 ar: () => {
                                     return <>
-                                      <Text style={styles.paragraphContentStyle}>{`نستخدم ملفات تعريف الارتباط لتمكين الوظيفة التي تساعدنا على تقديم منتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{`.`}</Text>
+                                      <Text style={styles.paragraphContentStyle}>{`نستخدم ملفات تعريف الارتباط لتمكين الوظيفة التي تساعدنا على تقديم منتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{`.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                                     </>
                                 },
                                 en: () => {
@@ -162,7 +163,7 @@ export const get_cookies_policy_articles = (data, handleOpenUrl) => {
                             {
                                 ar: () => {
                                     return <>
-                                      <Text style={styles.paragraphContentStyle}>{`كما نستخدم ملفات تعريف الارتباط أيضًا للمساعدة في تزويدك بالمحتوى الذي يتناسب مع لغتك وإعداداتك المحلية.`}</Text>
+                                      <Text style={styles.paragraphContentStyle}>{`كما نستخدم ملفات تعريف الارتباط أيضًا للمساعدة في تزويدك بالمحتوى الذي يتناسب مع لغتك وإعداداتك المحلية.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                                     </>
                                 },
                                 en: () => {
@@ -186,7 +187,7 @@ export const get_cookies_policy_articles = (data, handleOpenUrl) => {
                             {
                                 ar: () => {
                                     return <>
-                                      <Text style={styles.paragraphContentStyle}>{`نستخدم ملفات تعريف الارتباط لتوفير أفضل تجربة استخدام ممكنة.`}</Text>
+                                      <Text style={styles.paragraphContentStyle}>{`نستخدم ملفات تعريف الارتباط لتوفير أفضل تجربة استخدام ممكنة.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                                     </>
                                 },
                                 en: () => {
@@ -210,7 +211,7 @@ export const get_cookies_policy_articles = (data, handleOpenUrl) => {
                             {
                                 ar: () => {
                                     return <>
-                                      <Text style={styles.paragraphContentStyle}>{`نستخدم ملفات تعريف الارتباط من أجل فهم طبيعة استخدام الأشخاص لمنتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` حتى نتمكن من تحسينها لهم.`}</Text>
+                                      <Text style={styles.paragraphContentStyle}>{`نستخدم ملفات تعريف الارتباط من أجل فهم طبيعة استخدام الأشخاص لمنتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` حتى نتمكن من تحسينها لهم.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                                     </>
                                 },
                                 en: () => {
@@ -234,7 +235,7 @@ export const get_cookies_policy_articles = (data, handleOpenUrl) => {
                             {
                                 ar: () => {
                                     return <>
-                                      <Text style={styles.paragraphContentStyle}>{`قد يختار شركاء الأعمال التابعين لنا أيضًا مشاركة المعلومات مع `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` من ملفات تعريف الارتباط التي تم تعيينها في نطاقات مواقع الويب الخاصة بهم، سواء كان لديك حساب على `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` أم لا أو سجلت دخولك أم لا. وعلى وجه التحديد، قد يتم تعيين ملفات تعريف الارتباط التي تحمل اسم _hkc على نطاق شريك أعمال `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` الذي تزور موقعه. وعلى عكس ملفات تعريف الارتباط التي يتم تعيينها على النطاقات الخاصة ب`}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{`، لا يمكن الوصول إلى ملفات تعريف الارتباط هذه بواسطة `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` عندما تزور موقعًا آخر غير الموقع الذي تم تعيين ملفات تعريف الارتباط عليه، بما في ذلك عندما تكون على أحد نطاقاتنا. وتخدم نفس أغراض ملفات تعريف الارتباط التي يتم تعيينها في النطاق الخاص ب`}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{`، والتي تهدف إلى إضفاء طابع شخصي على المحتوى (بما في ذلك الإعلانات)، وقياس أدائها، وتوفير التحليلات، وتجربة أكثر أمانًا، كما هو موضح في سياسة ملفات تعريف الارتباط هذه.`}</Text>
+                                      <Text style={styles.paragraphContentStyle}>{`قد يختار شركاء الأعمال التابعين لنا أيضًا مشاركة المعلومات مع `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` من ملفات تعريف الارتباط التي تم تعيينها في نطاقات مواقع الويب الخاصة بهم، سواء كان لديك حساب على `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` أم لا أو سجلت دخولك أم لا. وعلى وجه التحديد، قد يتم تعيين ملفات تعريف الارتباط التي تحمل اسم _hkc على نطاق شريك أعمال `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` الذي تزور موقعه. وعلى عكس ملفات تعريف الارتباط التي يتم تعيينها على النطاقات الخاصة ب`}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{`، لا يمكن الوصول إلى ملفات تعريف الارتباط هذه بواسطة `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` عندما تزور موقعًا آخر غير الموقع الذي تم تعيين ملفات تعريف الارتباط عليه، بما في ذلك عندما تكون على أحد نطاقاتنا. وتخدم نفس أغراض ملفات تعريف الارتباط التي يتم تعيينها في النطاق الخاص ب`}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{`، والتي تهدف إلى إضفاء طابع شخصي على المحتوى (بما في ذلك الإعلانات)، وقياس أدائها، وتوفير التحليلات، وتجربة أكثر أمانًا، كما هو موضح في سياسة ملفات تعريف الارتباط هذه.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                                     </>
                                 },
                                 en: () => {
@@ -261,7 +262,7 @@ export const get_cookies_policy_articles = (data, handleOpenUrl) => {
                 intro: {
                     ar: () => {
                         return <>
-                          <Text style={styles.paragraphContentStyle}>{`يجوز لنا وضع ملفات تعريف الارتباط على جهاز الكمبيوتر أو أي جهاز آخر تستخدمه واستلام المعلومات التي يتم تخزينها داخل تلك الملفات، وذلك عند استخدام أو زيارة:`}</Text>
+                          <Text style={styles.paragraphContentStyle}>{`يجوز لنا وضع ملفات تعريف الارتباط على جهاز الكمبيوتر أو أي جهاز آخر تستخدمه واستلام المعلومات التي يتم تخزينها داخل تلك الملفات، وذلك عند استخدام أو زيارة:`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                         </>
                     },
                     en: () => {
@@ -279,7 +280,7 @@ export const get_cookies_policy_articles = (data, handleOpenUrl) => {
                     {
                         ar: () => {
                             return <>
-                              <Text style={styles.paragraphContentStyle}>{`منتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{`؛`}</Text>
+                              <Text style={[styles.paragraphContentStyle, reverse_style(current_language, styles.paragraphContentStyleAlign)]}>{`منتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{`؛`}</Text>
                             </>
                         },
                         en: () => {
@@ -296,7 +297,7 @@ export const get_cookies_policy_articles = (data, handleOpenUrl) => {
                     {
                         ar: () => {
                             return <>
-                              <Text style={styles.paragraphContentStyle}>{`مواقع الويب والتطبيقات التي توفرها الشركات الأخرى التي تستخدم منتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{`. تستخدم `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` ملفات تعريف الارتباط وتتلقى المعلومات عند زيارتك لمواقع الويب والتطبيقات هذه، بما في ذلك معلومات الجهاز والمعلومات ذات الصلة بنشاطك، دون مطالبتك باتخاذ أي إجراء. ويتم ذلك كله بصرف النظر عما إذا كان لديك حساب على `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` أم لا، أو كنت قد قمت بتسجيل الدخول إلى `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` أم لا.`}</Text>
+                              <Text style={styles.paragraphContentStyle}>{`مواقع الويب والتطبيقات التي توفرها الشركات الأخرى التي تستخدم منتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{`. تستخدم `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` ملفات تعريف الارتباط وتتلقى المعلومات عند زيارتك لمواقع الويب والتطبيقات هذه، بما في ذلك معلومات الجهاز والمعلومات ذات الصلة بنشاطك، دون مطالبتك باتخاذ أي إجراء. ويتم ذلك كله بصرف النظر عما إذا كان لديك حساب على `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` أم لا، أو كنت قد قمت بتسجيل الدخول إلى `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` أم لا.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                             </>
                         },
                         en: () => {
@@ -321,7 +322,7 @@ export const get_cookies_policy_articles = (data, handleOpenUrl) => {
                 intro: {
                     ar: () => {
                         return <>
-                          <Text style={styles.paragraphContentStyle}>{`نعم، تستخدم الشركات الأخرى ملفات تعريف الارتباط على منتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` لتقديم خدمات الإعلانات والقياس والتسويق والتحليلات إلينا، ولتوفير ميزات معينة وتحسين خدماتنا من أجلك.${line_return(1)}تستخدم الشركات الخارجية أيضًا ملفات تعريف الارتباط في مواقعها على الويب وتطبيقاتها فيما يتعلق بمنتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{`. لفهم كيفية استخدام الشركات الأخرى لملفات تعريف الارتباط، يرجى مراجعة سياسات الخصوصية لكل منها.`}</Text>
+                          <Text style={styles.paragraphContentStyle}>{`نعم، تستخدم الشركات الأخرى ملفات تعريف الارتباط على منتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` لتقديم خدمات الإعلانات والقياس والتسويق والتحليلات إلينا، ولتوفير ميزات معينة وتحسين خدماتنا من أجلك.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}{`${line_return(1)}تستخدم الشركات الخارجية أيضًا ملفات تعريف الارتباط في مواقعها على الويب وتطبيقاتها فيما يتعلق بمنتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{`. لفهم كيفية استخدام الشركات الأخرى لملفات تعريف الارتباط، يرجى مراجعة سياسات الخصوصية لكل منها.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                         </>
                     },
                     en: () => {
@@ -348,7 +349,7 @@ export const get_cookies_policy_articles = (data, handleOpenUrl) => {
                 intro: {
                     ar: () => {
                         return <>
-                          <Text style={styles.paragraphContentStyle}>{`نستخدم ملفات تعريف الارتباط لإضفاء طابع شخصي على المحتوى والخدمات وتحسينها، وتوفير تجربة أكثر أمنًا وعرض إعلانات مفيدة وملائمة لك داخل `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` وخارجه. يمكنك التحكم في طريقة استخدامنا للبيانات لعرض الإعلانات عليك وغير ذلك باستخدام الأدوات الموضّحة أدناه.`}</Text>
+                          <Text style={styles.paragraphContentStyle}>{`نستخدم ملفات تعريف الارتباط لإضفاء طابع شخصي على المحتوى والخدمات وتحسينها، وتوفير تجربة أكثر أمنًا وعرض إعلانات مفيدة وملائمة لك داخل `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` وخارجه. يمكنك التحكم في طريقة استخدامنا للبيانات لعرض الإعلانات عليك وغير ذلك باستخدام الأدوات الموضّحة أدناه.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                         </>
                     },
                     en: () => {
@@ -371,7 +372,7 @@ export const get_cookies_policy_articles = (data, handleOpenUrl) => {
                             {
                                 ar: () => {
                                     return <>
-                                      <Text style={styles.paragraphContentStyle}>{`قد يوفر المتصفح أو الجهاز مجموعة من الإعدادات التي يمكنك من خلالها اختيار تعيين ملفات تعريف الارتباط للمتصفح أو حذفها. تتنوع عناصر التحكم حسب المتصفح، وقد تقوم الجهات المصنّعة بتغيير الإعدادات التي يوفرونها وكيفية عمل تلك الإعدادات في أي وقت. يمكنك العثور على معلومات إضافية عن عناصر التحكم التي توفرها المتصفحات الشهيرة في روابطها. قد لا تعمل بعض أجزاء منتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` بشكل صحيح في حالة تعطيل استخدام ملفات تعريف الارتباط بالمتصفح. يرجى العلم بأن عناصر التحكم تلك تختلف عن عناصر التحكم التي يوفرها `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` لك.`}</Text>
+                                      <Text style={styles.paragraphContentStyle}>{`قد يوفر المتصفح أو الجهاز مجموعة من الإعدادات التي يمكنك من خلالها اختيار تعيين ملفات تعريف الارتباط للمتصفح أو حذفها. تتنوع عناصر التحكم حسب المتصفح، وقد تقوم الجهات المصنّعة بتغيير الإعدادات التي يوفرونها وكيفية عمل تلك الإعدادات في أي وقت. يمكنك العثور على معلومات إضافية عن عناصر التحكم التي توفرها المتصفحات الشهيرة في روابطها. قد لا تعمل بعض أجزاء منتجات `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` بشكل صحيح في حالة تعطيل استخدام ملفات تعريف الارتباط بالمتصفح. يرجى العلم بأن عناصر التحكم تلك تختلف عن عناصر التحكم التي يوفرها `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` لك.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                                     </>
                                 },
                                 en: () => {
@@ -424,6 +425,9 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     marginTop: 10,
   },
+  paragraphContentStyleAlign: {
+    textAlign: 'left',
+  },
   paragraphContentStyle: {
     display: 'flex',
     flexDirection: 'row',
@@ -452,5 +456,8 @@ const styles = StyleSheet.create({
     color: "#004eff",
     marginLeft: 5,
     marginRight: 5,
+  },
+  transparentText: {
+    color: 'transparent',
   },
 });

@@ -3,7 +3,7 @@ import CustomTouchableOpacity from 'src/Components/FormFields/CustomTouchableOpa
 import LanguagePicker from 'src/Components/Common/LanguagePicker';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Alert, ImageBackground, StyleSheet, View } from 'react-native';
+import { Alert, ImageBackground, Platform, ScrollView, StyleSheet, View } from 'react-native';
 import { COLORS } from "src/variables/colors";
 import { connect } from 'react-redux'
 import { icons, logos } from "src/_ressources";
@@ -15,6 +15,7 @@ class SignIn extends React.Component {
     super(props);
     this.state = {
       current_language: "en",
+      is_portrait: props.is_portrait,
       password: '',
       username_or_email: '',
     }
@@ -55,6 +56,7 @@ class SignIn extends React.Component {
 
   static propTypes = {
     current_language: PropTypes.string,
+    is_portrait: PropTypes.bool,
     navigation: PropTypes.oneOfType([
       PropTypes.object,
     ]),
@@ -62,6 +64,7 @@ class SignIn extends React.Component {
   
   static defaultProps = {
     current_language: 'en',
+    is_portrait: true,
     navigation: null,
   }
 
@@ -70,26 +73,29 @@ class SignIn extends React.Component {
     return (
         <View style={styles.body}>
           <ImageBackground source={logos.logo} style={styles.background}/>
-          <LanguagePicker />
-          <CustomInputText placeholder={t("Username or email")} underlineColorAndroid='transparent'
-            onChangeText={username_or_email => this.setState({username_or_email: username_or_email})}
-            icon_url={icons.emailIcon} value={username_or_email}  iconStyle={{height:26, width: 25, marginRight: 18}}
-            current_language={current_language} test_id={"username_or_email"}  type_input="email"
-          />
-          <CustomInputText placeholder={t("Password")} underlineColorAndroid='transparent' secureTextEntry={true}
-            onChangeText={password => this.setState({password: password})} iconStyle={{height:28, width: 24, marginRight: 18}}
-            icon_url={icons.passwordIcon} value={password} current_language={current_language} type_input="password"
-            test_id={"password"}
-          />
-          <CustomTouchableOpacity is_not_button={true} onPress={() => this.onClickListener('restore_password')}
-            text={t("Forgot your password?")} style={{marginBottom: 25}}
-          />
-          <CustomTouchableOpacity onPress={() => this.onClickListener('login')}
-            text={t("Sign in")} style={styles.loginButton}
-          />
-          <CustomTouchableOpacity onPress={() => this.props.navigation.navigate('SignUp')}
-            text={t("Sign up")} style={styles.loginButton}
-          />
+          <ScrollView contentContainerStyle={styles.scrollView}>
+            <View style={{marginTop: 70}}></View>
+            <LanguagePicker />
+            <CustomInputText placeholder={t("Username or email")} underlineColorAndroid='transparent'
+              onChangeText={username_or_email => this.setState({username_or_email: username_or_email})}
+              icon_url={icons.emailIcon} value={username_or_email}  iconStyle={{height:26, width: 25, marginRight: 18}}
+              current_language={current_language} test_id={"username_or_email"}  type_input="email"
+            />
+            <CustomInputText placeholder={t("Password")} underlineColorAndroid='transparent' secureTextEntry={true}
+              onChangeText={password => this.setState({password: password})} iconStyle={{height:28, width: 24, marginRight: 18}}
+              icon_url={icons.passwordIcon} value={password} current_language={current_language} type_input="password"
+              test_id={"password"}
+            />
+            <CustomTouchableOpacity is_not_button={true} onPress={() => this.onClickListener('restore_password')}
+              text={t("Forgot your password?")} style={{marginBottom: 25}}
+            />
+            <CustomTouchableOpacity onPress={() => this.onClickListener('login')}
+              text={t("Sign in")} style={styles.loginButton}
+            />
+            <CustomTouchableOpacity onPress={() => this.props.navigation.navigate('SignUp')}
+              text={t("Sign up")} style={styles.loginButton}
+            />
+          </ScrollView>
         </View>
     )
   }
@@ -104,7 +110,6 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   body: {
-    alignItems: 'center',
     backgroundColor: COLORS.default_color,
     flex: 1,
     justifyContent: 'center',
@@ -120,10 +125,17 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.50,
     shadowRadius: 12.35,
   },
+  scrollView: {
+    alignItems: 'center',
+    flexGrow: 1,
+    width: '100%',
+    paddingTop: 10,
+  },
 });
 const mapStateToProps = (state) => {
   return {
-    current_language: state.current_language
+    current_language: state.current_language,
+    is_portrait: state.is_portrait,
   }
 }
 

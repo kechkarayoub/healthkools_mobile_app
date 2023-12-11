@@ -1,5 +1,6 @@
 // import {supported_languages} from 'src/config/global';
 import { get } from 'src/Store/locale';
+import { Linking } from 'react-native';
 import { PhoneNumberUtil } from 'google-libphonenumber';
 
 const phoneUtil = PhoneNumberUtil.getInstance();
@@ -123,3 +124,14 @@ export const get_random_color = () => {
   //  - (string): A randomly selected color from the COLORS array
   return COLORS[Math.floor(Math.random() * COLORS.length)];
 };
+
+
+
+
+export const handleOpenUrl = async (url) => {
+  // Asynchronous function to handle the opening of a URL
+  // Params:
+  //  - url (string): The URL to be opened
+  // decodeURIComponent(url): Decode the URL before opening it asynchronously using Linking API
+  await Linking.openURL(decodeURIComponent(url));
+}

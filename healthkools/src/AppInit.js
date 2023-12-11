@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import { COLORS } from "src/variables/colors";
 import { connect } from 'react-redux'
 import { get_current_language } from 'src/utils'
-import { I18nManager as RNI18nManager, Platform, SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
+import { Dimensions, I18nManager as RNI18nManager, Platform, SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
 import { I18nextProvider } from 'react-i18next';
 
 class AppInit extends Component{
@@ -14,6 +14,7 @@ class AppInit extends Component{
     this.state = {
       current_language: props.current_language,
     };
+    this.updateOrientation = this.updateOrientation.bind(this);
     get_current_language(current_language => {
       if(this.state.current_language !== current_language){
         const action = { type: "CHANGE_LANGUAGE", value: current_language }
@@ -24,14 +25,33 @@ class AppInit extends Component{
 
   componentDidMount() {
     this.handleInitLanguage();
+    Dimensions.addEventListener('change', this.updateOrientation);
+    this.updateOrientation();
   }
+  componentWillUnmount() {
+    if(Dimensions.removeEventListener){ // Sometimes Dimensions.removeEventListener become undefined what generate an error
+      Dimensions.removeEventListener('change', this.updateOrientation);
+    }
+  }
+
+  updateOrientation = () => {
+    const { width, height } = Dimensions.get('window');
+    let is_portrait = height >= width;
+    if(is_portrait !== this.state.is_portrait){
+      const action = { type: "CHANGE_DIMENTIONS", value: is_portrait };
+      //console.log('new dimentions. is portrait: ', is_portrait);
+      this.props.dispatch(action);
+    }
+  };
   
   static propTypes = {
     current_language: PropTypes.string,
+    is_portrait: PropTypes.bool,
   }
   
   static defaultProps = {
     current_language: 'en',
+    is_portrait: true,
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -110,7 +130,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    current_language: state.current_language
+    current_language: state.current_language,
+    is_portrait: state.is_portrait,
   }
 }
 

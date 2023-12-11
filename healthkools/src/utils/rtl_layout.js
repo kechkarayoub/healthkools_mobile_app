@@ -111,7 +111,7 @@ export const reverse_property = (convert, property, value, only_value, reversed_
   return [reversed_property, reversed_value];
 }
 
-export const reverse_style = (current_language, style, force_convertion) => {
+export const reverse_style = (current_language, style, force_convertion, to_not_convert) => {
   // Function to reverse style depending on current_language
   // Params:
   //  - current_language: Current language selected
@@ -120,11 +120,17 @@ export const reverse_style = (current_language, style, force_convertion) => {
   //  - reversed_style: Reversed style
   let reverse_style = {};
   style = style || {};
+  to_not_convert = to_not_convert || [];
   // console.log("current_language: ", current_language)
   let convert = force_convertion || current_language == "ar";
   Object.keys(style).map(property => {
-    let reversed_property_value = reverse_property(convert, property, style[property]);
-    reverse_style[reversed_property_value[0]] = reversed_property_value[1];
+    if(to_not_convert.indexOf(property) !== -1){
+      reverse_style[property] = style[property];
+    }
+    else{
+      let reversed_property_value = reverse_property(convert, property, style[property]);
+      reverse_style[reversed_property_value[0]] = reversed_property_value[1];
+    }
   });
   // console.log("style: ", style)
   // console.log("reverse_style: ", reverse_style)

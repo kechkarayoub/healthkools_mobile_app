@@ -1,10 +1,11 @@
 import React from 'react';
 import { COLORS } from "src/variables/colors";
-import { render_term_service_custom_item, render_term_service_link } from "src/Components/terms_of_service/utils";
+import { render_term_service_custom_item, render_term_service_link, render_transparent_text } from "src/Components/terms_of_service/utils";
 import { reverse_style } from 'src/utils/rtl_layout';
 import { StyleSheet, Text } from 'react-native';
 
-export const get_terms_of_services_articles = (data, handleOpenUrl) => {
+export const get_terms_of_services_articles = (data, handleOpenUrl, current_language, is_portrait) => {
+    //let 
     return [
         {
             title: {
@@ -16,7 +17,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                 {
                     ar: () => {
                       return <>
-                        <Text style={styles.paragraphContentStyle}>{"   الغرض من 'شروط الاستخدام العامة' هذه هو توفير إطار قانوني لاستخدام موقع "}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{" وخدماته. "}</Text>
+                        <Text style={styles.paragraphContentStyle}>{"   الغرض من 'شروط الاستخدام العامة' هذه هو توفير إطار قانوني لاستخدام موقع "}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{" وخدماته. "}{render_transparent_text(styles.transparentText, undefined, is_portrait)}</Text>
                       </>
                     },
                     en: () => {
@@ -33,7 +34,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                 {
                     ar: () => {
                       return <>
-                        <Text style={styles.paragraphContentStyle}>{`  يُبرم هذا العقد بين:`}</Text>
+                        <Text style={[styles.paragraphContentStyle, reverse_style(current_language, styles.paragraphContentStyleAlign)]}>{`  يُبرم هذا العقد بين:`}</Text>
                       </>
                     },
                     en: () => {
@@ -50,7 +51,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                 {
                     ar: () => {
                       return <>
-                        <Text style={styles.paragraphContentStyle}>{`مدير الموقع ، المشار إليه فيما يلي باسم "الناشر" ،`}</Text>
+                        <Text style={[styles.paragraphContentStyle, reverse_style(current_language, styles.paragraphContentStyleAlign)]}>{`مدير الموقع ، المشار إليه فيما يلي باسم "الناشر" ،`}</Text>
                       </>
                     },
                     en: () => {
@@ -60,14 +61,14 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                     },
                     fr: () => {
                       return <>
-                        <Text style={styles.paragraphContentStyle}>{`Le gérant du site internet, ci-après désigné « l'Éditeur »,`}</Text>
+                        <Text style={styles.paragraphContentStyle}>{`Le gérant du site internet, ci-après désigné «l'Éditeur»,`}</Text>
                       </>
                     },
                 },
                 {
                     ar: () => {
                       return <>
-                        <Text style={styles.paragraphContentStyle}>{`أي شخص طبيعي أو اعتباري يرغب في الوصول إلى الموقع وخدماته ، المشار إليه فيما بعد باسم "المستخدم".`}</Text>
+                        <Text style={[styles.paragraphContentStyle]}>{`أي شخص طبيعي أو اعتباري يرغب في الوصول إلى الموقع وخدماته ، المشار إليه فيما بعد باسم "المستخدم".`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                       </>
                     },
                     en: () => {
@@ -77,14 +78,14 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                     },
                     fr: () => {
                       return <>
-                        <Text style={styles.paragraphContentStyle}>{`Toute personne physique ou morale souhaitant accéder au site et à ses services, ci-après appelé « l'Utilisateur ».`}</Text>
+                        <Text style={styles.paragraphContentStyle}>{`Toute personne physique ou morale souhaitant accéder au site et à ses services, ci-après appelé «l'Utilisateur».`}</Text>
                       </>
                     },
                 },
                 {
                     ar: () => {
                       return <>
-                        <Text style={styles.paragraphContentStyle}>{`يجب قبول الشروط العامة للاستخدام من قبل أي مستخدم ، ويشكل الوصول إلى الموقع قبولًا لهذه الشروط.`}</Text>
+                        <Text style={styles.paragraphContentStyle}>{`يجب قبول الشروط العامة للاستخدام من قبل أي مستخدم ، ويشكل الوصول إلى الموقع قبولًا لهذه الشروط.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                       </>
                     },
                     en: () => {
@@ -110,7 +111,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                 {
                     ar: () => {
                       return <>
-                        <Text style={[styles.paragraphContentStyle, styles.paragraphContentCustomStyle]}>{`للأشخاص الاعتباريين:`}</Text>
+                        <Text style={[styles.paragraphContentStyle, styles.paragraphContentCustomStyle, reverse_style(current_language, styles.paragraphContentStyleAlign)]}>{`للأشخاص الاعتباريين:`}</Text>
                       </>
                     },
                     en: () => {
@@ -127,7 +128,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                 {
                     ar: () => {
                       return <>
-                        <Text style={styles.paragraphContentStyle}>{`  يتم نشر موقع `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` من قبل شركة `}{render_term_service_custom_item(data.company_legal_status || "company_legal_status", styles.boldBlackStyle)}{` ، `}{render_term_service_custom_item(data.company_name || "company_name", styles.boldBlackStyle)}{`  برأس مال قدره `}{render_term_service_custom_item(data.company_capital || "company_capital", styles.boldBlackStyle)}{` د.م ، التي يقع مكتبها الرئيسي في `}{render_term_service_custom_item(data.company_address || "company_address", styles.boldBlackStyle)}{`.`}</Text>
+                        <Text style={styles.paragraphContentStyle}>{`  يتم نشر موقع `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` من قبل شركة `}{render_term_service_custom_item(data.company_legal_status || "company_legal_status", styles.boldBlackStyle)}{` ، `}{render_term_service_custom_item(data.company_name || "company_name", styles.boldBlackStyle)}{`  برأس مال قدره `}{render_term_service_custom_item(data.company_capital || "company_capital", styles.boldBlackStyle)}{` د.م ، التي يقع مكتبها الرئيسي في `}{render_term_service_custom_item(data.company_address || "company_address", styles.boldBlackStyle)}{`.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                       </>
                     },
                     en: () => {
@@ -144,7 +145,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                 {
                     ar: () => {
                       return <>
-                        <Text style={styles.paragraphContentStyle}>{`ويمثل الشركة `}{render_term_service_custom_item(data.responsable_full_name || "responsable_full_name", styles.boldBlackStyle)}{`.`}</Text>
+                        <Text style={[styles.paragraphContentStyle, reverse_style(current_language, styles.paragraphContentStyleAlign)]}>{`ويمثل الشركة `}{render_term_service_custom_item(data.responsable_full_name || "responsable_full_name", styles.boldBlackStyle)}{`.`}</Text>
                       </>
                     },
                     en: () => {
@@ -161,7 +162,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                 {
                     ar: () => {
                       return <>
-                        <Text style={[styles.paragraphContentStyle, styles.paragraphContentCustomStyle]}>{`للأفراد:`}</Text>
+                        <Text style={[styles.paragraphContentStyle, styles.paragraphContentCustomStyle, reverse_style(current_language, styles.paragraphContentStyleAlign)]}>{`للأفراد:`}</Text>
                       </>
                     },
                     en: () => {
@@ -178,7 +179,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                 {
                     ar: () => {
                       return <>
-                        <Text style={styles.paragraphContentStyle}>{`  يتم تحرير موقع `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` بواسطة `}{render_term_service_custom_item(data.responsable_full_name || "responsable_full_name", styles.boldBlackStyle)}{`، ومقره في `}{render_term_service_custom_item(data.responsable_address || "responsable_address", styles.boldBlackStyle)}{`.`}</Text>
+                        <Text style={styles.paragraphContentStyle}>{`  يتم تحرير موقع `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` بواسطة `}{render_term_service_custom_item(data.responsable_full_name || "responsable_full_name", styles.boldBlackStyle)}{`، ومقره في `}{render_term_service_custom_item(data.responsable_address || "responsable_address", styles.boldBlackStyle)}{`.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                       </>
                     },
                     en: () => {
@@ -204,7 +205,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                 {
                     ar: () => {
                       return <>
-                        <Text style={styles.paragraphContentStyle}>{`  مستخدم الموقع `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` لديه حق الوصول إلى الخدمات التالية:`}</Text>
+                        <Text style={styles.paragraphContentStyle}>{`  مستخدم الموقع `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` لديه حق الوصول إلى الخدمات التالية:`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                       </>
                     },
                     en: () => {
@@ -221,7 +222,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                       // {
                       //   ar: () => {
                       //     return <>
-                      //       <Text style={styles.paragraphContentStyle}>{` الوصول إلى الأخبار الصحية عبر بروتوكول RSS.`}</Text>
+                      //       <Text style={[styles.paragraphContentStyle, reverse_style(current_language, styles.paragraphContentStyleAlign)]}>{` الوصول إلى الأخبار الصحية عبر بروتوكول RSS.`}</Text>
                       //     </>
                       //   },
                       //   en: () => {
@@ -238,7 +239,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                       {
                         ar: () => {
                           return <>
-                            <Text style={styles.paragraphContentStyle}>{` إمكانية إنشاء حساب.`}</Text>
+                            <Text style={[styles.paragraphContentStyle, reverse_style(current_language, styles.paragraphContentStyleAlign)]}>{` إمكانية إنشاء حساب.`}</Text>
                           </>
                         },
                         en: () => {
@@ -255,7 +256,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                       {
                         ar: () => {
                           return <>
-                            <Text style={styles.paragraphContentStyle}>{`  يمكن للمستخدم الوصول إلى محتوى الموقع `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{`بثلاث لغات: العربية ،الإنجليزية والفرنسية.`}</Text>
+                            <Text style={styles.paragraphContentStyle}>{`  يمكن للمستخدم الوصول إلى محتوى الموقع `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{`بثلاث لغات: العربية ،الإنجليزية والفرنسية.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                           </>
                         },
                         en: () => {
@@ -272,7 +273,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                       {
                         ar: () => {
                           return <>
-                            <Text style={styles.paragraphContentStyle}>{`...`}</Text>
+                            <Text style={[styles.paragraphContentStyle, reverse_style(current_language, styles.paragraphContentStyleAlign)]}>{`...`}</Text>
                           </>
                         },
                         en: () => {
@@ -291,7 +292,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                 {
                     ar: () => {
                       return <>
-                        <Text style={styles.paragraphContentStyle}>{`يمكن لأي مستخدم لديه اتصال بالإنترنت الوصول إلى الموقع مجانًا ومن أي مكان. التكاليف التي يتكبدها المستخدم للوصول إليه (اتصال الإنترنت ، أجهزة الكمبيوتر ، إلخ) ليست من مسؤولية الناشر.`}</Text>
+                        <Text style={styles.paragraphContentStyle}>{`يمكن لأي مستخدم لديه اتصال بالإنترنت الوصول إلى الموقع مجانًا ومن أي مكان. التكاليف التي يتكبدها المستخدم للوصول إليه (اتصال الإنترنت ، أجهزة الكمبيوتر ، إلخ) ليست من مسؤولية الناشر.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                       </>
                     },
                     en: () => {
@@ -308,7 +309,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                 {
                     ar: () => {
                       return <>
-                        <Text style={styles.paragraphContentStyle}>{`لا يمكن للمستخدم الوصول إلى الخدمات التالية ما لم يكن عضوًا في الموقع (أي يتم تحديد هويته باستخدام تفاصيل تسجيل الدخول الخاصة به):`}</Text>
+                        <Text style={styles.paragraphContentStyle}>{`لا يمكن للمستخدم الوصول إلى الخدمات التالية ما لم يكن عضوًا في الموقع (أي يتم تحديد هويته باستخدام تفاصيل تسجيل الدخول الخاصة به):`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                       </>
                     },
                     en: () => {
@@ -325,7 +326,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                       {
                         ar: () => {
                           return <>
-                            <Text style={styles.paragraphContentStyle}>{`تسجيل الدخول إلى حسابه الخاص`}</Text>
+                            <Text style={[styles.paragraphContentStyle, reverse_style(current_language, styles.paragraphContentStyleAlign)]}>{`تسجيل الدخول إلى حسابه الخاص`}</Text>
                           </>
                         },
                         en: () => {
@@ -342,7 +343,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                       {
                         ar: () => {
                           return <>
-                            <Text style={styles.paragraphContentStyle}>{`تسجيل الخروج من حسابه الخاص`}</Text>
+                            <Text style={[styles.paragraphContentStyle, reverse_style(current_language, styles.paragraphContentStyleAlign)]}>{`تسجيل الخروج من حسابه الخاص`}</Text>
                           </>
                         },
                         en: () => {
@@ -359,7 +360,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                       {
                         ar: () => {
                           return <>
-                            <Text style={styles.paragraphContentStyle}>{`...`}</Text>
+                            <Text style={[styles.paragraphContentStyle, reverse_style(current_language, styles.paragraphContentStyleAlign)]}>{`...`}</Text>
                           </>
                         },
                         en: () => {
@@ -378,7 +379,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                 {
                     ar: () => {
                       return <>
-                        <Text style={styles.paragraphContentStyle}>{`قد يتم ايقاف الموقع وخدماته المختلفة أو تعليقها من قبل الناشر ، ولا سيما أثناء الصيانة ، دون إشعار أو مبرر.`}</Text>
+                        <Text style={styles.paragraphContentStyle}>{`قد يتم ايقاف الموقع وخدماته المختلفة أو تعليقها من قبل الناشر ، ولا سيما أثناء الصيانة ، دون إشعار أو مبرر.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                       </>
                     },
                     en: () => {
@@ -404,7 +405,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
               {
                   ar: () => {
                     return <>
-                      <Text style={styles.paragraphContentStyle}>{`المستخدم مسؤول عن المخاطر المرتبطة باستخدام معرف تسجيل الدخول وكلمة المرور الخاصة به.`}</Text>
+                      <Text style={styles.paragraphContentStyle}>{`المستخدم مسؤول عن المخاطر المرتبطة باستخدام معرف تسجيل الدخول وكلمة المرور الخاصة به.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                     </>
                   },
                   en: () => {
@@ -421,7 +422,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
               {
                   ar: () => {
                     return <>
-                      <Text style={styles.paragraphContentStyle}>{`يجب أن تظل كلمة مرور المستخدم سرية. في حالة الكشف عن كلمة المرور ، يرفض الناشر كل المسؤولية.`}</Text>
+                      <Text style={styles.paragraphContentStyle}>{`يجب أن تظل كلمة مرور المستخدم سرية. في حالة الكشف عن كلمة المرور ، يرفض الناشر كل المسؤولية.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                     </>
                   },
                   en: () => {
@@ -438,7 +439,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                 {
                     ar: () => {
                       return <>
-                        <Text style={styles.paragraphContentStyle}>{`  يتحمل المستخدم المسؤولية الكاملة عن استخدامه للمعلومات والمحتوى الموجود على الموقع `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{`.`}</Text>
+                        <Text style={styles.paragraphContentStyle}>{`  يتحمل المستخدم المسؤولية الكاملة عن استخدامه للمعلومات والمحتوى الموجود على الموقع `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{`.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                       </>
                     },
                     en: () => {
@@ -455,7 +456,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                 {
                     ar: () => {
                       return <>
-                        <Text style={styles.paragraphContentStyle}>{`أي استخدام للخدمة من قبل المستخدم يؤدي بشكل مباشر أو غير مباشر إلى الضرر يجب أن يتم تعويضه لصالح الموقع.`}</Text>
+                        <Text style={styles.paragraphContentStyle}>{`أي استخدام للخدمة من قبل المستخدم يؤدي بشكل مباشر أو غير مباشر إلى الضرر يجب أن يتم تعويضه لصالح الموقع.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                       </>
                     },
                     en: () => {
@@ -481,7 +482,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
               {
                   ar: () => {
                     return <>
-                      <Text style={styles.paragraphContentStyle}>{`لا يمكن لأي عطل في الخادم أو الشبكة تحميل مسؤولية الناشر.`}</Text>
+                      <Text style={styles.paragraphContentStyle}>{`لا يمكن لأي عطل في الخادم أو الشبكة تحميل المسؤولية للناشر.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                     </>
                   },
                   en: () => {
@@ -498,7 +499,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
               {
                   ar: () => {
                     return <>
-                      <Text style={styles.paragraphContentStyle}>{`وبالمثل ، لا يمكن تحميل الموقع المسؤولية في حالة القوة القاهرة أو الحقيقة غير المتوقعة والتي لا يمكن التغلب عليها لطرف ثالث.`}</Text>
+                      <Text style={styles.paragraphContentStyle}>{`وبالمثل ، لا يمكن تحميل الموقع المسؤولية في حالة القوة القاهرة أو الحقيقة غير المتوقعة والتي لا يمكن التغلب عليها لطرف ثالث.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                     </>
                   },
                   en: () => {
@@ -515,7 +516,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                 {
                     ar: () => {
                       return <>
-                        <Text style={styles.paragraphContentStyle}>{`  يتعهد الموقع `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` بتنفيذ جميع الوسائل اللازمة لضمان أمن وسرية البيانات. ومع ذلك ، فإنه لا يوفر ضمانًا للأمان الكامل.`}</Text>
+                        <Text style={styles.paragraphContentStyle}>{`  يتعهد الموقع `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` بتنفيذ جميع الوسائل اللازمة لضمان أمن وسرية البيانات. ومع ذلك ، فإنه لا يوفر ضمانًا للأمان الكامل.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                       </>
                     },
                     en: () => {
@@ -532,7 +533,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                 {
                     ar: () => {
                       return <>
-                        <Text style={styles.paragraphContentStyle}>{`يحتفظ الناشر بالحق في عدم ضمان موثوقية المصادر ، على الرغم من أن المعلومات المنشورة على الموقع تعتبر موثوقة.`}</Text>
+                        <Text style={styles.paragraphContentStyle}>{`يحتفظ الناشر بالحق في عدم ضمان موثوقية المصادر ، على الرغم من أن المعلومات المنشورة على الموقع تعتبر موثوقة.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                       </>
                     },
                     en: () => {
@@ -558,7 +559,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                 {
                     ar: () => {
                       return <>
-                        <Text style={styles.paragraphContentStyle}>{`  محتويات الموقع `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` (الشعارات والنصوص والرسومات ومقاطع الفيديو وما إلى ذلك) محمية بموجب حقوق النشر بموجب قانون الملكية الفكرية.`}</Text>
+                        <Text style={styles.paragraphContentStyle}>{`  محتويات الموقع `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` (الشعارات والنصوص والرسومات ومقاطع الفيديو وما إلى ذلك) محمية بموجب حقوق النشر بموجب قانون الملكية الفكرية.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                       </>
                     },
                     en: () => {
@@ -575,7 +576,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                 {
                     ar: () => {
                       return <>
-                        <Text style={styles.paragraphContentStyle}>{`يجب على المستخدم الحصول على إذن من ناشر الموقع قبل أي إعادة إنتاج أو نسخ أو نشر لهذه المحتويات المختلفة.`}</Text>
+                        <Text style={styles.paragraphContentStyle}>{`يجب على المستخدم الحصول على إذن من ناشر الموقع قبل أي إعادة إنتاج أو نسخ أو نشر لهذه المحتويات المختلفة.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                       </>
                     },
                     en: () => {
@@ -592,7 +593,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                 {
                     ar: () => {
                       return <>
-                        <Text style={styles.paragraphContentStyle}>{`يمكن استخدامها من قبل المستخدمين لأغراض خاصة ؛ يحظر جميع الاستخدامات التجارية.`}</Text>
+                        <Text style={styles.paragraphContentStyle}>{`يمكن استخدامها من قبل المستخدمين لأغراض خاصة ؛ يحظر جميع الاستخدامات التجارية.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                       </>
                     },
                     en: () => {
@@ -609,7 +610,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                 {
                     ar: () => {
                       return <>
-                        <Text style={styles.paragraphContentStyle}>{`يتحمل المستخدم المسؤولية الكاملة عن أي محتوى يضعه على الإنترنت ويتعهد بعدم إلحاق الضرر بأي طرف ثالث.`}</Text>
+                        <Text style={styles.paragraphContentStyle}>{`يتحمل المستخدم المسؤولية الكاملة عن أي محتوى يضعه على الإنترنت ويتعهد بعدم إلحاق الضرر بأي طرف ثالث.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                       </>
                     },
                     en: () => {
@@ -626,7 +627,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
                 {
                     ar: () => {
                       return <>
-                        <Text style={styles.paragraphContentStyle}>{`يحتفظ محرر الموقع بالحق في تعديل أو حذف المحتوى الذي ينشره المستخدمون بحرية في أي وقت ، دون مبرر.`}</Text>
+                        <Text style={styles.paragraphContentStyle}>{`يحتفظ محرر الموقع بالحق في تعديل أو حذف المحتوى الذي ينشره المستخدمون بحرية في أي وقت ، دون مبرر.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                       </>
                     },
                     en: () => {
@@ -652,7 +653,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
               {
                   ar: () => {
                     return <>
-                      <Text style={styles.paragraphContentStyle}>{`يجب على المستخدم تقديم معلومات شخصية من أجل التسجيل في الموقع.`}</Text>
+                      <Text style={styles.paragraphContentStyle}>{`يجب على المستخدم تقديم معلومات شخصية من أجل التسجيل في الموقع.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                     </>
                   },
                   en: () => {
@@ -669,7 +670,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
               {
                   ar: () => {
                     return <>
-                      <Text style={styles.paragraphContentStyle}>{`  قد يتم استخدام العنوان الإلكتروني للمستخدم على وجه الخصوص بواسطة الموقع `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` لتوصيل المعلومات المختلفة وإدارة الحساب.`}</Text>
+                      <Text style={styles.paragraphContentStyle}>{`  قد يتم استخدام العنوان الإلكتروني للمستخدم على وجه الخصوص بواسطة الموقع `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` لتوصيل المعلومات المختلفة وإدارة الحساب.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                     </>
                   },
                   en: () => {
@@ -686,7 +687,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
               {
                   ar: () => {
                     return <>
-                      <Text style={styles.paragraphContentStyle}>{`  يضمن `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` احترام خصوصية المستخدم ، وفقًا للقانون رقم 09-08 بشأن حماية الأفراد فيما يتعلق بمعالجة البيانات الشخصية.`}</Text>
+                      <Text style={styles.paragraphContentStyle}>{`  يضمن `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` احترام خصوصية المستخدم ، وفقًا للقانون رقم 09-08 بشأن حماية الأفراد فيما يتعلق بمعالجة البيانات الشخصية.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                     </>
                   },
                   en: () => {
@@ -703,7 +704,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
               {
                   ar: () => {
                     return <>
-                      <Text style={styles.paragraphContentStyle}>{`  يتم الإعلان عن الموقع إلى اللجنة الوطنية لحماية البيانات الشخصية (CNDP) تحت الرقم التالي: `}{render_term_service_custom_item(data.cndp_declaration_number || "cndp_declaration_number", styles.customItemStyle)}{`.`}</Text>
+                      <Text style={styles.paragraphContentStyle}>{`  يتم الإعلان عن الموقع إلى اللجنة الوطنية لحماية البيانات الشخصية (CNDP) تحت الرقم التالي: `}{render_term_service_custom_item(data.cndp_declaration_number || "cndp_declaration_number", styles.customItemStyle)}{`.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                     </>
                   },
                   en: () => {
@@ -720,7 +721,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
               {
                   ar: () => {
                     return <>
-                      <Text style={styles.paragraphContentStyle}>{`  يحق للمستخدم الوصول إلى بياناته الشخصية وتصحيحها وحذفها والاعتراض عليها.`}</Text>
+                      <Text style={styles.paragraphContentStyle}>{`  يحق للمستخدم الوصول إلى بياناته الشخصية وتصحيحها وحذفها والاعتراض عليها.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                     </>
                   },
                   en: () => {
@@ -746,7 +747,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
               {
                   ar: () => {
                     return <>
-                      <Text style={styles.paragraphContentStyle}>{`  المجالات التي تؤدي إليها روابط النص التشعبي على الموقع ليست من مسؤولية ناشر `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` ، الذي لا يتحكم في هذه الروابط.`}</Text>
+                      <Text style={styles.paragraphContentStyle}>{`  المجالات التي تؤدي إليها روابط النص التشعبي على الموقع ليست من مسؤولية ناشر `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` ، الذي لا يتحكم في هذه الروابط.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                     </>
                   },
                   en: () => {
@@ -763,7 +764,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
               {
                   ar: () => {
                     return <>
-                      <Text style={styles.paragraphContentStyle}>{`  من الممكن لطرف ثالث إنشاء رابط لصفحة على الموقع `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` بدون إذن صريح من الناشر.`}</Text>
+                      <Text style={styles.paragraphContentStyle}>{`  من الممكن لطرف ثالث إنشاء رابط لصفحة على الموقع `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` بدون إذن صريح من الناشر.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                     </>
                   },
                   en: () => {
@@ -789,7 +790,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
               {
                   ar: () => {
                     return <>
-                      <Text style={styles.paragraphContentStyle}>{`  يحتفظ الموقع `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` بالحق في تعديل بنود هذه الشروط العامة للاستخدام في أي وقت وبدون مبرر.`}</Text>
+                      <Text style={styles.paragraphContentStyle}>{`  يحتفظ الموقع `}{render_term_service_link(data.site_url || "site_url", data.site_url || "site_url", handleOpenUrl, styles.linkStyle)}{` بالحق في تعديل بنود هذه الشروط العامة للاستخدام في أي وقت وبدون مبرر.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                     </>
                   },
                   en: () => {
@@ -815,7 +816,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
               {
                   ar: () => {
                     return <>
-                      <Text style={styles.paragraphContentStyle}>{`  مدة هذا العقد غير محددة. ينتج عن العقد آثاره فيما يتعلق بالمستخدم من بداية استخدام الخدمة.`}</Text>
+                      <Text style={styles.paragraphContentStyle}>{`  مدة هذا العقد غير محددة. ينتج عن العقد آثاره فيما يتعلق بالمستخدم من بداية استخدام الخدمة.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                     </>
                   },
                   en: () => {
@@ -841,7 +842,7 @@ export const get_terms_of_services_articles = (data, handleOpenUrl) => {
               {
                   ar: () => {
                     return <>
-                      <Text style={styles.paragraphContentStyle}>{`  هذا العقد يعتمد على التشريع المغربي. في حالة وجود نزاع لم يتم حله وديًا بين المستخدم والناشر ، فإن المحاكم المغربية هي المختصة بتسوية النزاع.`}</Text>
+                      <Text style={styles.paragraphContentStyle}>{`  هذا العقد يعتمد على التشريع المغربي. في حالة وجود نزاع لم يتم حله وديًا بين المستخدم والناشر ، فإن المحاكم المغربية هي المختصة بتسوية النزاع.`}{render_transparent_text(styles.transparentText, 100, is_portrait)}</Text>
                     </>
                   },
                   en: () => {
@@ -945,6 +946,10 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'flex-start',
     textAlign: 'justify',
+    width: '100%',
+  },
+  paragraphContentStyleAlign: {
+    textAlign: 'left',
   },
   registrationLabelStyle: {
     color: "#777",
@@ -957,5 +962,8 @@ const styles = StyleSheet.create({
     color: "#004eff",
     marginLeft: 5,
     marginRight: 5,
+  },
+  transparentText: {
+    color: 'transparent',
   },
 });
