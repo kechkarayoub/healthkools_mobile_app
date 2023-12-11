@@ -75,7 +75,7 @@ class SignIn extends React.Component {
           <ImageBackground source={logos.logo} style={styles.background}/>
           <ScrollView contentContainerStyle={styles.scrollView}>
             <View style={{marginTop: 70}}></View>
-            <LanguagePicker />
+            <LanguagePicker list_mode="SCROLLVIEW" />
             <CustomInputText placeholder={t("Username or email")} underlineColorAndroid='transparent'
               onChangeText={username_or_email => this.setState({username_or_email: username_or_email})}
               icon_url={icons.emailIcon} value={username_or_email}  iconStyle={{height:26, width: 25, marginRight: 18}}

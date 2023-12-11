@@ -171,7 +171,7 @@ class SignUp extends React.Component {
         <ImageBackground source={logos.logo} style={styles.background}/>
         <ScrollView contentContainerStyle={styles.scrollView}>
           <View style={{marginTop: 70}}></View>
-          <LanguagePicker />
+          <LanguagePicker list_mode="SCROLLVIEW" />
           {/* <InitialsColor initials={(last_name ? last_name.charAt(0) : "") + (first_name ? first_name.charAt(0) : "")} bg_color={initials_bg_color}
           /> */}
 
