@@ -3,6 +3,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 class InitialsColor extends React.Component {
+  // This component represents initials letters when there is no image or avatar.
   constructor(props) {
     super(props);
     this.state = {
@@ -35,8 +36,8 @@ class InitialsColor extends React.Component {
   }
 
   render() {
-    var containerStyle = this.props.containerStyle || {};
-    var style = this.props.style || {};
+    let containerStyle = this.props.containerStyle || {};
+    let style = this.props.style || {};
     style.backgroundColor = this.state.bg_color || "gray";
     const { disabled } = this.state;
     return(

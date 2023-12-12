@@ -11,12 +11,14 @@ const BORDER_WIDTH = 1; // This variable will be used in styling
 const BUTTON_SIZE = 25; // This variable will be used in styling
 
 class CloseButton extends React.Component {
+  // This component represents a button to close other interfaces
   constructor(props) {
     super(props);
   }
 
   static propTypes = {
     alignItems: PropTypes.string,
+    color: PropTypes.string,
     current_language: PropTypes.string,
     disabled: PropTypes.bool,
     elevation: PropTypes.number,
@@ -32,6 +34,7 @@ class CloseButton extends React.Component {
 
   static defaultProps = {
     alignItems: "flex-end",
+    color: COLORS.default_color,
     current_language: "en",
     disabled: false,
     elevation: 2,
@@ -47,6 +50,7 @@ class CloseButton extends React.Component {
 
   render() {
     const { current_language } = this.props;
+    let button_style = {borderColor: this.props.color, ...styles.button};
     return(
       <Stack
         alignItems={reverse_property(current_language == "ar", "alignItems", this.props.alignItems || "flex-end")[1]}
@@ -61,9 +65,9 @@ class CloseButton extends React.Component {
         zIndex={this.props.zIndex || 2}
       >
         <IconButton 
-          icon={props => <Icon name="close" color={COLORS.default_color} size={BUTTON_SIZE/2} {...props} />}
+          icon={props => <Icon name="close" size={BUTTON_SIZE/2} {...props}  color={this.props.color} />}
           onPress={this.props.disabled ? () => {} : this.props.onPress}
-          style={[reverse_style(current_language, styles.button), this.props.disabled ? styles.disabledStyle : {}]} 
+          style={[reverse_style(current_language, button_style), this.props.disabled ? styles.disabledStyle : {}]} 
           testID={this.props.test_id || 'test_id'}
         />
       </Stack>

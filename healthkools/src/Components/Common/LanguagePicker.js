@@ -4,11 +4,13 @@ import React from 'react';
 import { COLORS } from "src/variables/colors";
 import { connect } from 'react-redux'
 import { flags } from "src/_ressources";
-import { Image, PixelRatio, StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
+import { reverse_style } from 'src/utils/rtl_layout';
 import { set } from 'src/Store/locale';
 import { t } from 'src/i18n';
 
 class LanguagePicker extends React.Component {
+  // This component represents supported languages dropdown picker.
   constructor(props) {
     super(props);
     this.state = {
@@ -145,19 +147,21 @@ class LanguagePicker extends React.Component {
     const { current_language, disabled, items, list_mode, open, test_id } = this.state;
     return(
       <View style={[this.props.main_container_style || styles.main_container_style]}>
-        <View style={[this.props.container_style || styles.container_style]}>
+        <View style={[this.props.container_style || reverse_style(current_language, styles.container_style)]}>
           <DropDownPicker
             disabled={disabled}
             dropDownContainerStyle={{...styles.dropDownContainerStyle}}
+            iconContainerStyle={reverse_style(current_language, styles.iconContainerStyle)}
             items={items}
             listMode={list_mode}
             open={open}
-            selectedItemContainerStyle={styles.selectedItemContainerStyle}
+            listItemContainerStyle={reverse_style(current_language, styles.listItemContainerStyle)}
+            selectedItemContainerStyle={reverse_style(current_language, styles.selectedItemContainerStyle)}
             selectedItemLabelStyle={styles.selectedItemLabelStyle}
             setItems={this.setItems}
             setOpen={this.setOpen}
             setValue={this.setValue}
-            style={{...styles.style, ...(disabled ? styles.disabledStyle : {})}}
+            style={{...reverse_style(current_language, styles.style), ...(disabled ? styles.disabledStyle : {})}}
             testID={test_id}
             value={current_language}
           />
@@ -197,9 +201,16 @@ const styles = StyleSheet.create({
       borderColor: COLORS.default_color,
       zIndex: 5,
     },
+    iconContainerStyle: {
+      marginRight: 10,
+    },
     iconStyle: {
       height: 20,
       width: 36,
+    },
+    listItemContainerStyle: {
+      display: 'flex',
+      flexDirection: "row",
     },
     main_container_style: {
       alignItems: 'center',
@@ -207,6 +218,8 @@ const styles = StyleSheet.create({
       zIndex: 5,
     },
     selectedItemContainerStyle: {
+      display: 'flex',
+      flexDirection: "row"
     },
     selectedItemLabelStyle: {
       color: COLORS.default_color,
@@ -218,6 +231,8 @@ const styles = StyleSheet.create({
       borderLeftWidth: 0,
       borderRadius: 30,
       borderRightWidth: 0,
+      display: 'flex',
+      flexDirection: "row",
     },
 });
 

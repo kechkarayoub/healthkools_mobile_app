@@ -9,11 +9,12 @@ import { get_data } from "src/Components/terms_of_service/data";
 import { get_data_use_policy_articles } from 'src/Components/terms_of_service/data_use_policy';
 import { get_terms_service_notice, get_terms_of_services_articles } from 'src/Components/terms_of_service/terms_of_service';
 import { handleOpenUrl } from 'src/utils';
-import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { reverse_style } from 'src/utils/rtl_layout';
+import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { t } from 'src/i18n';
 
 class CustomTSNotice extends React.Component {
+  // This component represents the articles of terms of services, data use policy and cookies policy.
   constructor(props) {
     super(props);
     this.data = get_data(),  // Site information
@@ -39,6 +40,7 @@ class CustomTSNotice extends React.Component {
       return_new_state = true;
     }
     if(props.is_portrait !== state.is_portrait) {
+      // If orientation change, I update articles to adapt them with new dimentions (Adding hidden points to justify and align rtl text).
       new_state.is_portrait = props.is_portrait;
       new_state.cookies_policy_articles = get_cookies_policy_articles(state.data, (url) => handleOpenUrl(url), new_state.current_language || state.current_language, new_state.is_portrait);
       new_state.data_use_policy_articles = get_data_use_policy_articles(state.data, (url) => handleOpenUrl(url), new_state.current_language || state.current_language, new_state.is_portrait);
@@ -59,6 +61,7 @@ class CustomTSNotice extends React.Component {
       set_state = true;
     }
     if(prevState.is_portrait !== this.state.is_portrait){
+      // If orientation change, I update articles to adapt them with new dimentions (Adding hidden points to justify and align rtl text).
       new_state.is_portrait = this.state.is_portrait;
       new_state.cookies_policy_articles = get_cookies_policy_articles(prevState.data, (url) => handleOpenUrl(url), new_state.current_language || prevState.current_language, new_state.is_portrait);
       new_state.data_use_policy_articles = get_data_use_policy_articles(prevState.data, (url) => handleOpenUrl(url), new_state.current_language || prevState.current_language, new_state.is_portrait);

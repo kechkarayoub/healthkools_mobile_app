@@ -70,17 +70,23 @@ export const reverse_property = (convert, property, value, only_value, reversed_
               break;
           }
           break;
-        case "paddingLeft":
-          reversed_property = "paddingRight"
-          break;
-        case "paddingRight": 
-          reversed_property = "paddingLeft"
+        case "left":
+          reversed_property = "right"
           break;
         case "marginLeft":
           reversed_property = "marginRight"
           break;
         case "marginRight": 
           reversed_property = "marginLeft"
+          break;
+        case "paddingLeft":
+          reversed_property = "paddingRight"
+          break;
+        case "paddingRight": 
+          reversed_property = "paddingLeft"
+          break;
+        case "right":
+          reversed_property = "left"
           break;
         case "textAlign":
           switch(value){
@@ -118,21 +124,21 @@ export const reverse_style = (current_language, style, force_convertion, to_not_
   //  - style: Style to reverse
   // Returns:
   //  - reversed_style: Reversed style
-  let reverse_style = {};
+  let reversed_style = {};
   style = style || {};
   to_not_convert = to_not_convert || [];
   // console.log("current_language: ", current_language)
   let convert = force_convertion || current_language == "ar";
   Object.keys(style).map(property => {
     if(to_not_convert.indexOf(property) !== -1){
-      reverse_style[property] = style[property];
+      reversed_style[property] = style[property];
     }
     else{
       let reversed_property_value = reverse_property(convert, property, style[property]);
-      reverse_style[reversed_property_value[0]] = reversed_property_value[1];
+      reversed_style[reversed_property_value[0]] = reversed_property_value[1];
     }
   });
   // console.log("style: ", style)
-  // console.log("reverse_style: ", reverse_style)
-  return reverse_style;
+  // console.log("reversed_style: ", reversed_style)
+  return reversed_style;
 };
