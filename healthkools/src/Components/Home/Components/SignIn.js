@@ -128,6 +128,7 @@ const styles = StyleSheet.create({
   scrollView: {
     alignItems: 'center',
     flexGrow: 1,
+    justifyContent: 'center',
     width: '100%',
     paddingTop: 10,
   },
