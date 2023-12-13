@@ -32,6 +32,7 @@ class CustomTSNotice extends React.Component {
     };
   }
 
+  // Get derived state from props to handle changes
   static getDerivedStateFromProps(props, state) {
     var new_state = {};
     var return_new_state = false;
@@ -54,6 +55,7 @@ class CustomTSNotice extends React.Component {
     return return_new_state ? new_state : null;
   }
 
+  // Component did update to handle state changes
   componentDidUpdate(prevProps, prevState){
     var new_state = {}, set_state = false;
     if(prevState.current_language !== this.state.current_language){
@@ -104,6 +106,7 @@ class CustomTSNotice extends React.Component {
     textStyle: null,
   }
 
+  // Handle item clicked to open the respective overlay
   handleItemClicked = clicked_item => {
     this.setState({
       open_cookie_policy: clicked_item === "cookie_policy",
@@ -112,6 +115,7 @@ class CustomTSNotice extends React.Component {
     });
   }
 
+  // Close the overlay
   closeOverlay = () => {
     this.setState({
       open_cookie_policy: false,
@@ -120,6 +124,7 @@ class CustomTSNotice extends React.Component {
     });
   }
 
+  // Render Terms of Service articles
   renderTermsOfService = () => {
     const {current_language, terms_of_services_articles} = this.state;
     return <View style={styles.TSContainerStyle}>
@@ -150,6 +155,7 @@ class CustomTSNotice extends React.Component {
     </View>
   }
 
+  // Render Cookie Policy articles
   renderCookiePolicy = () => {
     const {current_language, cookies_policy_articles} = this.state;
     return <View style={styles.TSContainerStyle}>
@@ -199,6 +205,7 @@ class CustomTSNotice extends React.Component {
     </View>
   }
 
+  // Render Data Use Policy articles
   renderDataUsePolicy = () => {
     const {current_language, data_use_policy_articles} = this.state;
     return <View style={styles.TSContainerStyle}>
@@ -249,7 +256,8 @@ class CustomTSNotice extends React.Component {
   }
   
   render() {
-    const { current_language, is_portrait, open_cookie_policy, open_data_use_policy, open_terms_of_service, registration_label } = this.state;
+    const { current_language, open_cookie_policy, open_data_use_policy, open_terms_of_service, registration_label } = this.state;
+    // Get notice depending on current_language
     var terms_service_notice = get_terms_service_notice({registration_label: registration_label}, current_language)
     return (
       <>
@@ -292,6 +300,7 @@ class CustomTSNotice extends React.Component {
   }
 }
 
+// Styles for the CustomTSNotice component
 const styles = StyleSheet.create({
   articleStyle: {},
   articleTitleStyle: {
@@ -421,6 +430,7 @@ const styles = StyleSheet.create({
   }
 });
 
+// Map the current_language and is_portrait from Redux state to component props
 const mapStateToProps = (state) => {
   return {
     current_language: state.current_language,
@@ -428,4 +438,5 @@ const mapStateToProps = (state) => {
   }
 }
 
+// Connect the component to the Redux store
 export default connect(mapStateToProps)(CustomTSNotice);

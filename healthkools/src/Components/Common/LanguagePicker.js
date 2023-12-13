@@ -81,6 +81,7 @@ class LanguagePicker extends React.Component {
     test_id: 'test_id',
   }
 
+  // Get derived state from props to handle changes
   static getDerivedStateFromProps(props, state) {
     var new_state = {};
     var return_new_state = false;
@@ -95,6 +96,7 @@ class LanguagePicker extends React.Component {
     return return_new_state ? new_state : null;
   }
 
+  // Component did update to handle state changes
   componentDidUpdate(prevProps, prevState){
     // if current_language is changed, we translating languages labels
     if(prevState.current_language !== this.state.current_language){
@@ -125,9 +127,10 @@ class LanguagePicker extends React.Component {
     }
   }
 
-  setOpen = (open)=> {
+  // Handle open dropdown
+  setOpen = (open) => {
     this.setState({
-      open: open
+      open: open,
     });
   }
 
@@ -153,9 +156,9 @@ class LanguagePicker extends React.Component {
             dropDownContainerStyle={{...styles.dropDownContainerStyle}}
             iconContainerStyle={reverse_style(current_language, styles.iconContainerStyle)}
             items={items}
+            listItemContainerStyle={reverse_style(current_language, styles.listItemContainerStyle)}
             listMode={list_mode}
             open={open}
-            listItemContainerStyle={reverse_style(current_language, styles.listItemContainerStyle)}
             selectedItemContainerStyle={reverse_style(current_language, styles.selectedItemContainerStyle)}
             selectedItemLabelStyle={styles.selectedItemLabelStyle}
             setItems={this.setItems}
@@ -171,6 +174,7 @@ class LanguagePicker extends React.Component {
   }
 }
 
+// Styles for the LanguagePicker component
 const styles = StyleSheet.create({
     container_style: {
       alignItems: 'center',
@@ -236,10 +240,12 @@ const styles = StyleSheet.create({
     },
 });
 
+// Map the current_language from Redux state to component props
 const mapStateToProps = (state) => {
   return {
     current_language: state.current_language,
   }
 }
 
+// Connect the component to the Redux store
 export default connect(mapStateToProps)(LanguagePicker);

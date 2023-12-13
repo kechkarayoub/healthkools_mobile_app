@@ -30,6 +30,7 @@ class ErrorComponent extends React.Component {
     test_id: "",
   }
 
+  // Get derived state from props to handle changes
   static getDerivedStateFromProps(props, state) {
     var new_state = {};
     var return_new_state = false;
@@ -56,6 +57,7 @@ class ErrorComponent extends React.Component {
   }
 }
 
+// Styles for the ErrorComponent component
 const styles = StyleSheet.create({
   errorStyle:{
     bottom: 0,
@@ -73,10 +75,12 @@ const styles = StyleSheet.create({
   },
 });
 
+// Map the current_language from Redux state to component props
 const mapStateToProps = (state) => {
   return {
     current_language: state.current_language,
   }
 }
 
+// Connect the component to the Redux store
 export default connect(mapStateToProps)(ErrorComponent);

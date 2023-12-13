@@ -50,6 +50,7 @@ class CloseButton extends React.Component {
 
   render() {
     const { current_language } = this.props;
+    // Style for the button
     let button_style = {borderColor: this.props.color, ...styles.button};
     return(
       <Stack
@@ -75,6 +76,7 @@ class CloseButton extends React.Component {
   }
 }
 
+// Styles for the CloseButton component
 const styles = StyleSheet.create({
   button:{
     alignItems: 'flex-end',
@@ -85,15 +87,18 @@ const styles = StyleSheet.create({
     width: BUTTON_SIZE + BORDER_WIDTH,
     marginRight: -10,
   },
+  // Styles for the disabled state
   disabledStyle: {
     opacity: 0.3,
   },
 });
 
+// Map the current_language from Redux state to component props
 const mapStateToProps = (state) => {
   return {
     current_language: state.current_language,
   }
 }
 
+// Connect the component to the Redux store
 export default connect(mapStateToProps)(CloseButton);

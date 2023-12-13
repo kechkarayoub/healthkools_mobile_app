@@ -48,6 +48,7 @@ class InitialsColor extends React.Component {
   }
 }
 
+// Styles for the InitialsColor component
 const styles = StyleSheet.create({
   container: {
     height: 130,
