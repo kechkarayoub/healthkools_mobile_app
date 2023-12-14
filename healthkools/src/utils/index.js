@@ -13,7 +13,7 @@ export const get_date_format = (moment_obj) => {
   //  - moment_obj (object): A moment.js object representing a date
   // Returns:
   //  - (string): Formatted date string in the "DD/MM/YYYY" format
-  return moment_obj.format("DD/MM/YYYY");
+  return toStrRegularNumerals(moment_obj.format("DD/MM/YYYY"));
 };
 
 export const line_return = (nbr_line_return) => {
@@ -135,3 +135,12 @@ export const handleOpenUrl = async (url) => {
   // decodeURIComponent(url): Decode the URL before opening it asynchronously using Linking API
   await Linking.openURL(decodeURIComponent(url));
 }
+
+export const toStrRegularNumerals = numerals_str => {
+  // Function to convert arabic numbers to standars numbers. 
+  // Params:
+  //  - numerals_str (string): The arabic numbers string to convert.
+  // Returns:
+  //  - (string): The converted string with the standars numbers
+  return (numerals_str || "").replace(/[٠-٩]/g, (d) => '٠١٢٣٤٥٦٧٨٩'.indexOf(d));  
+};

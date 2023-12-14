@@ -4,8 +4,10 @@ import ErrorComponent from "src/Components/Common/ErrorComponent";
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 import { get_date_format } from "src/utils/index";
 import { Image, StyleSheet, View } from 'react-native';
+import { reverse_style } from 'src/utils/rtl_layout';
 
 class CustomDatePicker extends React.Component {
   constructor(props) {
@@ -83,6 +85,7 @@ class CustomDatePicker extends React.Component {
     value: null,
   }
 
+  // Get derived state from props to handle changes
   static getDerivedStateFromProps(props, state) {
     var new_state = {};
     var return_new_state = false;
@@ -114,6 +117,9 @@ class CustomDatePicker extends React.Component {
     return return_new_state ? new_state : null;
   }
 
+  componentWillUnmount(){
+  }
+
   handleDateTimeChange = (date) => {
     if(!date){
       this.setState({
@@ -134,23 +140,34 @@ class CustomDatePicker extends React.Component {
   }
 
   render() {
-    const { darkMode, disabled, form_error, icon_url, maximumDate, minimumDate, minuteInterval, mode, open_datetime_picker, 
+    const { current_language, darkMode, disabled, form_error, icon_url, maximumDate, minimumDate, minuteInterval, mode, open_datetime_picker, 
       placeholder, test_id, value} = this.state;
-    var value_str = value ? get_date_format(moment(value)) : placeholder;
+    let value_str = value ? get_date_format(moment(value)) : placeholder;
+    let datePickerContainerPlatformStyle = {
+      flexDirection: 'row',
+    },
+    inputIconPlatformStyle = {
+      marginRight: 15,
+    };
+    if(Platform.OS === 'ios'){
+      // Unexpected behavior on ios; I need to reverse direction value to work normally
+      datePickerContainerPlatformStyle = reverse_style(current_language, datePickerContainerPlatformStyle, true);
+      inputIconPlatformStyle = reverse_style(current_language, inputIconPlatformStyle, true);
+    }
     return (
-      <View style={[this.props.containerStyle || styles.datePickerContainer, form_error ? styles.errorStyle : {}]}>
+      <View style={[this.props.containerStyle || reverse_style(current_language, styles.datePickerContainer), reverse_style(current_language, datePickerContainerPlatformStyle), form_error ? styles.errorStyle : {}]}>
         <CustomTouchableOpacity onPress={() => {
             if(!disabled){
               this.setState({open_datetime_picker: true});
             }
           }}
-          style={styles.dateTextContainerStyle}
+          style={reverse_style(current_language, styles.dateTextContainerStyle)}
           test_id={test_id + "_date_btn"}
           text={value_str} 
           textStyle={[value ? styles.dateTimeStyle : styles.placeholderStyle, disabled ? styles.disabledStyle : {}]}
         />
         {icon_url &&
-          <Image style={[styles.datePickerIcon, this.props.iconStyle, disabled ? styles.disabledIconStyle : {}]} source={icon_url}/>
+          <Image style={[reverse_style(current_language, styles.datePickerIcon), reverse_style(current_language, inputIconPlatformStyle), reverse_style(current_language, this.props.iconStyle), disabled ? styles.disabledIconStyle : {}]} source={icon_url}/>
         }
         {form_error &&
           <ErrorComponent error={form_error} />
@@ -172,6 +189,7 @@ class CustomDatePicker extends React.Component {
   }
 }
 
+// Styles for the CustomDatePicker component
 const styles = StyleSheet.create({
   datePickerContainer: {
     alignItems: 'center',
@@ -219,10 +237,21 @@ const styles = StyleSheet.create({
     height: 60,
     paddingBottom: 10,
   },
+  iconContainerStyle: {
+    marginRight: 10,
+  },
   placeholderStyle: {
     color: "grey",
     opacity: 0.8,
   },
 });
 
-export default CustomDatePicker;
+// Map the current_language from Redux state to component props
+const mapStateToProps = (state) => {
+  return {
+    current_language: state.current_language,
+  }
+}
+
+// Connect the component to the Redux store
+export default connect(mapStateToProps)(CustomDatePicker);
