@@ -23,4 +23,8 @@
 #endif
 }
 
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+
 @end
